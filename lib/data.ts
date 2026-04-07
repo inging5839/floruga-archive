@@ -21,18 +21,18 @@ export interface Byeongpung {
 
 // 새로 업로드된 이미지 URL들 (심청전 시리즈)
 export const panelImages = {
-  panel1: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1.png-Gk4JKaa3Qy0xwsHl4E28ut6TJtTqxO.jpeg",
-  panel2: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2.png-42CKyEfg4qEuNaRrZwMWSnewOGYJCQ.jpeg",
-  panel3: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/3.png-GliMNNJJ42pBOgUFE6lX0Liu3OJvLG.jpeg",
-  panel4: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/4.png-aAZeTg5RfZm6liibBMqsDVqF0NtkUK.jpeg",
-  panel5: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/5.png-Qt1yAlQoERuIv2ZqX4HgZKncV7gbtw.jpeg",
-  panel6: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/6.png-6ymvsAUG60F7FPLTa3GsV2xZbmeEKy.jpeg",
+  panel1: "/images/sample_result-1.png",
+  panel2: "/images/sample_result-2.png",
+  panel3: "/images/sample_result-3.png",
+  panel4: "/images/sample_result-4.png",
+  panel5: "/images/sample_result-5.png",
+  panel6: "/images/sample_result-6.png",
 }
 
 // 현재 진행 중인 병풍 데이터 (첫 번째 릴레이 병풍 - 심청전 테마) - 6폭 모두 완성
 export const currentByeongpung: Byeongpung = {
   id: 1,
-  title: "첫 번째 릴레이 병풍",
+  title: "방금 제작된 따끈따끈한 병풍",
   theme: "심청전 - 효녀 심청의 이야기",
   totalParticipants: 5,
   panels: [
@@ -98,11 +98,11 @@ export const archiveByeongpungs: Byeongpung[] = [
   // 첫 번째 릴레이 병풍 - 완성됨
   {
     id: 1,
-    title: "첫 번째 릴레이 병풍",
+    title: "첫 번째 이야기",
     theme: "심청전 - 효녀의 여정",
-    totalParticipants: 5,
+    totalParticipants: 4,
     completedAt: "2024-01-20",
-    thumbnailImage: panelImages.panel3,
+    thumbnailImage: panelImages.panel5,
     panels: [
       { id: 1, title: "제1폭", story: "가난한 심 봉사와 어린 심청의 시작", image: panelImages.panel1, status: 'complete' as const },
       { id: 2, title: "제2폭", story: "인당수로 향하는 심청", image: panelImages.panel2, status: 'complete' as const },
@@ -115,81 +115,116 @@ export const archiveByeongpungs: Byeongpung[] = [
   // 두 번째 릴레이 병풍 - 진행 중 (3폭까지 완성)
   {
     id: 2,
-    title: "두 번째 릴레이 병풍",
-    theme: "흥부와 놀부",
+    title: "두 번째 이야기",
+    theme: "심청전 - 용왕과 사랑에 빠진 심청",
     totalParticipants: 3,
-    thumbnailImage: null,
+    thumbnailImage: panelImages.panel5,
     panels: [
-      { id: 1, title: "제1폭", story: "착한 흥부와 욕심 많은 놀부", image: null, status: 'waiting' as const },
-      { id: 2, title: "제2폭", story: null, image: null, status: 'waiting' as const },
-      { id: 3, title: "제3폭", story: null, image: null, status: 'waiting' as const },
-      { id: 4, title: "제4폭", story: null, image: null, status: 'waiting' as const },
-      { id: 5, title: "제5폭", story: null, image: null, status: 'waiting' as const },
-      { id: 6, title: "제6폭", story: null, image: null, status: 'waiting' as const },
+      { id: 1, title: "제1폭", story: "가난한 심 봉사와 어린 심청의 시작", image: panelImages.panel1, status: 'complete' as const },
+      { id: 2, title: "제2폭", story: "인당수로 향하는 심청", image: panelImages.panel2, status: 'complete' as const },
+      { id: 3, title: "제3폭", story: "용궁에서의 만남", image: panelImages.panel3, status: 'complete' as const },
+      { id: 4, title: "제4폭", story: "용왕의 축복", image: panelImages.panel4, status: 'complete' as const },
+      { id: 5, title: "제5폭", story: "왕비가 된 심청", image: panelImages.panel5, status: 'complete' as const },
+      { id: 6, title: "제6폭", story: "부녀의 감동 재회", image: panelImages.panel6, status: 'complete' as const },
     ]
   },
   // 세 번째 릴레이 병풍 - 대기 중
   {
     id: 3,
-    title: "세 번째 릴레이 병풍",
-    theme: "콩쥐팥쥐",
+    title: "세 번째 이야기",
+    theme: "심청전 - 꽃충이가 된 심청",
     totalParticipants: 0,
     thumbnailImage: null,
     panels: [
-      { id: 1, title: "제1폭", story: null, image: null, status: 'waiting' as const },
-      { id: 2, title: "제2폭", story: null, image: null, status: 'waiting' as const },
-      { id: 3, title: "제3폭", story: null, image: null, status: 'waiting' as const },
-      { id: 4, title: "제4폭", story: null, image: null, status: 'waiting' as const },
-      { id: 5, title: "제5폭", story: null, image: null, status: 'waiting' as const },
-      { id: 6, title: "제6폭", story: null, image: null, status: 'waiting' as const },
+      { id: 1, title: "제1폭", story: "가난한 심 봉사와 어린 심청의 시작", image: panelImages.panel1, status: 'complete' as const },
+      { id: 2, title: "제2폭", story: "인당수로 향하는 심청", image: panelImages.panel2, status: 'complete' as const },
+      { id: 3, title: "제3폭", story: "용궁에서의 만남", image: panelImages.panel3, status: 'complete' as const },
+      { id: 4, title: "제4폭", story: "용왕의 축복", image: panelImages.panel4, status: 'complete' as const },
+      { id: 5, title: "제5폭", story: "왕비가 된 심청", image: panelImages.panel5, status: 'complete' as const },
+      { id: 6, title: "제6폭", story: "부녀의 감동 재회", image: panelImages.panel6, status: 'complete' as const },
     ]
   },
   // 네 번째 릴레이 병풍 - 대기 중
   {
     id: 4,
-    title: "네 번째 릴레이 병풍",
-    theme: "해와 달이 된 오누이",
+    title: "네 번째 이야기",
+    theme: "심청전 - 배고픈 심청",
     totalParticipants: 0,
     thumbnailImage: null,
     panels: [
-      { id: 1, title: "제1폭", story: null, image: null, status: 'waiting' as const },
-      { id: 2, title: "제2폭", story: null, image: null, status: 'waiting' as const },
-      { id: 3, title: "제3폭", story: null, image: null, status: 'waiting' as const },
-      { id: 4, title: "제4폭", story: null, image: null, status: 'waiting' as const },
-      { id: 5, title: "제5폭", story: null, image: null, status: 'waiting' as const },
-      { id: 6, title: "제6폭", story: null, image: null, status: 'waiting' as const },
+      { id: 1, title: "제1폭", story: "가난한 심 봉사와 어린 심청의 시작", image: panelImages.panel1, status: 'complete' as const },
+      { id: 2, title: "제2폭", story: "인당수로 향하는 심청", image: panelImages.panel2, status: 'complete' as const },
+      { id: 3, title: "제3폭", story: "용궁에서의 만남", image: panelImages.panel3, status: 'complete' as const },
+      { id: 4, title: "제4폭", story: "용왕의 축복", image: panelImages.panel4, status: 'complete' as const },
+      { id: 5, title: "제5폭", story: "왕비가 된 심청", image: panelImages.panel5, status: 'complete' as const },
+      { id: 6, title: "제6폭", story: "부녀의 감동 재회", image: panelImages.panel6, status: 'complete' as const },
     ]
   },
   // 다섯 번째 릴레이 병풍 - 대기 중
   {
     id: 5,
-    title: "다섯 번째 릴레이 병풍",
-    theme: "선녀와 나무꾼",
+    title: "다섯 번째 이야기",
+    theme: "심청전 - 장미꽃을 찾은 심청",
     totalParticipants: 0,
     thumbnailImage: null,
     panels: [
-      { id: 1, title: "제1폭", story: null, image: null, status: 'waiting' as const },
-      { id: 2, title: "제2폭", story: null, image: null, status: 'waiting' as const },
-      { id: 3, title: "제3폭", story: null, image: null, status: 'waiting' as const },
-      { id: 4, title: "제4폭", story: null, image: null, status: 'waiting' as const },
-      { id: 5, title: "제5폭", story: null, image: null, status: 'waiting' as const },
-      { id: 6, title: "제6폭", story: null, image: null, status: 'waiting' as const },
+      { id: 1, title: "제1폭", story: "가난한 심 봉사와 어린 심청의 시작", image: panelImages.panel1, status: 'complete' as const },
+      { id: 2, title: "제2폭", story: "인당수로 향하는 심청", image: panelImages.panel2, status: 'complete' as const },
+      { id: 3, title: "제3폭", story: "용궁에서의 만남", image: panelImages.panel3, status: 'complete' as const },
+      { id: 4, title: "제4폭", story: "용왕의 축복", image: panelImages.panel4, status: 'complete' as const },
+      { id: 5, title: "제5폭", story: "왕비가 된 심청", image: panelImages.panel5, status: 'complete' as const },
+      { id: 6, title: "제6폭", story: "부녀의 감동 재회", image: panelImages.panel6, status: 'complete' as const },
     ]
   },
   // 여섯 번째 릴레이 병풍 - 대기 중
   {
     id: 6,
-    title: "여섯 번째 릴레이 병풍",
-    theme: "금도끼 은도끼",
+    title: "여섯 번째 이야기",
+    theme: "심청전 - 용왕이된 심청",
     totalParticipants: 0,
     thumbnailImage: null,
     panels: [
-      { id: 1, title: "제1폭", story: null, image: null, status: 'waiting' as const },
-      { id: 2, title: "제2폭", story: null, image: null, status: 'waiting' as const },
-      { id: 3, title: "제3폭", story: null, image: null, status: 'waiting' as const },
-      { id: 4, title: "제4폭", story: null, image: null, status: 'waiting' as const },
-      { id: 5, title: "제5폭", story: null, image: null, status: 'waiting' as const },
-      { id: 6, title: "제6폭", story: null, image: null, status: 'waiting' as const },
+      { id: 1, title: "제1폭", story: "가난한 심 봉사와 어린 심청의 시작", image: panelImages.panel1, status: 'complete' as const },
+      { id: 2, title: "제2폭", story: "인당수로 향하는 심청", image: panelImages.panel2, status: 'complete' as const },
+      { id: 3, title: "제3폭", story: "용궁에서의 만남", image: panelImages.panel3, status: 'complete' as const },
+      { id: 4, title: "제4폭", story: "용왕의 축복", image: panelImages.panel4, status: 'complete' as const },
+      { id: 5, title: "제5폭", story: "왕비가 된 심청", image: panelImages.panel5, status: 'complete' as const },
+      { id: 6, title: "제6폭", story: "부녀의 감동 재회", image: panelImages.panel6, status: 'complete' as const },
     ]
   }
 ]
+
+/** 아카이브 id 1번을 상세 데이터(currentByeongpung)와 합친 목록 */
+export function mergeArchiveWithCurrent(): Byeongpung[] {
+  return archiveByeongpungs.map((bp) =>
+    bp.id === 1
+      ? {
+          ...bp,
+          title: currentByeongpung.title,
+          theme: currentByeongpung.theme,
+          totalParticipants: currentByeongpung.totalParticipants,
+          panels: currentByeongpung.panels,
+          thumbnailImage:
+            currentByeongpung.panels.find((p) => p.image)?.image ?? bp.thumbnailImage,
+        }
+      : bp
+  )
+}
+
+function relayActivityScore(bp: Byeongpung): number {
+  const complete = bp.panels.filter((p) => p.status === "complete").length
+  const inProgress = bp.panels.some((p) => p.status === "in-progress")
+  return (inProgress ? 1000 : 0) + complete * 10 + bp.id / 1000
+}
+
+/**
+ * 메인 페이지: 활동량이 가장 높은 릴레이를 featured로,
+ * 나머지는 id 내림차순(최근 번호가 위쪽)으로 정렬
+ */
+export function getRelaysForMainPage(): { featured: Byeongpung; others: Byeongpung[] } {
+  const merged = mergeArchiveWithCurrent()
+  const sorted = [...merged].sort((a, b) => b.id - a.id)
+  const featured = sorted[0]
+  const others = sorted.slice(1)
+  return { featured, others }
+}

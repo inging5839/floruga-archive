@@ -4,12 +4,14 @@ import { useRef, useState, useEffect } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { ByeongpungPanel } from "./panel"
 import type { Byeongpung } from "@/lib/data"
+import { cn } from "@/lib/utils"
 
 interface ByeongpungViewerProps {
   byeongpung: Byeongpung
+  className?: string
 }
 
-export function ByeongpungViewer({ byeongpung }: ByeongpungViewerProps) {
+export function ByeongpungViewer({ byeongpung, className }: ByeongpungViewerProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const [activeIndex, setActiveIndex] = useState(0)
   const [isMobile, setIsMobile] = useState(false)
@@ -54,7 +56,7 @@ export function ByeongpungViewer({ byeongpung }: ByeongpungViewerProps) {
   }, [isMobile])
 
   return (
-    <div className="relative w-full">
+    <div className={cn("relative w-full", className)}>
       {/* Panel indicators for mobile */}
       <div className="lg:hidden flex justify-center gap-2 mb-4">
         {byeongpung.panels.map((_, idx) => (
@@ -118,9 +120,6 @@ export function ByeongpungViewer({ byeongpung }: ByeongpungViewerProps) {
             style={{ width: progressWidth }}
           />
         </div>
-        <p className="text-center text-xs text-muted-foreground/60 mt-3 tracking-wider">
-          마우스 휠로 탐색하세요
-        </p>
       </div>
 
       {/* Swipe hint for mobile */}

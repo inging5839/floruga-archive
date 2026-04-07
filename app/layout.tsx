@@ -21,21 +21,21 @@ const notoSerifKR = Noto_Serif_KR({
 })
 
 export const metadata: Metadata = {
-  title: '릴레이 병풍 아카이브 | Relay Byeongpung Archive',
-  description: '전래동화와 현대 미디어아트가 만나는 릴레이 병풍 전시 아카이브',
+  title: '꽃충이',
+  description: '릴레이 소설 병풍 아카이브',
   generator: 'v0.app',
   icons: {
     icon: [
       {
-        url: '/icon-light-32x32.png',
+        url: '/floruga_favicon.png',
         media: '(prefers-color-scheme: light)',
       },
       {
-        url: '/icon-dark-32x32.png',
+        url: '/floruga_favicon.png',
         media: '(prefers-color-scheme: dark)',
       },
       {
-        url: '/icon.svg',
+        url: 'floruga_favicon.png',
         type: 'image/svg+xml',
       },
     ],

@@ -16,7 +16,7 @@ export function ArchiveGallery({ byeongpungs }: ArchiveGalleryProps) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 lg:gap-6"
+        className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-6 gap-4 lg:gap-12 max-w-7xl mx-auto"
       >
         {byeongpungs.map((byeongpung, index) => (
           <ArchiveCard

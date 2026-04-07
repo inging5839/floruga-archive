@@ -32,7 +32,7 @@ export function ArchiveCard({ byeongpung, index }: ArchiveCardProps) {
         onClick={(e) => !isComplete && e.preventDefault()}
       >
         {/* Thumbnail Container - Wide aspect ratio for folding screen */}
-        <div className="relative aspect-[3/1] lg:aspect-[4/1] overflow-hidden">
+        <div className="relative aspect-[9/16] lg:aspect-[9/16] overflow-hidden">
           {thumbnailImage ? (
             <Image
               src={thumbnailImage}
@@ -60,15 +60,7 @@ export function ArchiveCard({ byeongpung, index }: ArchiveCardProps) {
           
           {/* Subtle border frame */}
           <div className="absolute inset-0 border border-border/30 rounded-md group-hover:border-border/50 transition-colors duration-300" />
-
-          {/* Incomplete badge */}
-          {!isComplete && (
-            <div className="absolute top-3 right-3">
-              <span className="px-2 py-1 text-xs bg-muted/80 text-muted-foreground rounded-sm backdrop-blur-sm">
-                {completedPanels}/6 폭
-              </span>
-            </div>
-          )}
+          
         </div>
 
         {/* Info overlay */}
@@ -84,21 +76,6 @@ export function ArchiveCard({ byeongpung, index }: ArchiveCardProps) {
               >
                 {byeongpung.title}
               </h3>
-            </div>
-            
-            <div className="flex-shrink-0 text-right">
-              <p className="text-xs text-muted-foreground/50 font-mono">
-                {byeongpung.totalParticipants > 0 ? `${byeongpung.totalParticipants}명 참여` : '참여 대기'}
-              </p>
-              {byeongpung.completedAt ? (
-                <p className="text-xs text-muted-foreground/40 font-mono mt-0.5">
-                  {byeongpung.completedAt}
-                </p>
-              ) : (
-                <p className="text-xs text-accent/60 font-mono mt-0.5">
-                  진행 중
-                </p>
-              )}
             </div>
           </div>
         </div>
