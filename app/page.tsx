@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import Link from "next/link"
+import Image from "next/image"
 import { ByeongpungViewer } from "@/components/byeongpung/viewer"
 import { getRelaysForMainPage, type Byeongpung } from "@/lib/data"
 import { ArrowRight } from "lucide-react"
@@ -41,26 +42,47 @@ export default function ByeongpungDetailPage() {
       {/* Header — 최신(강조) 릴레이 기준 */}
       <header className="relative z-10">
         <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5, duration: 0.8 }}
+          className="absolute top-8 right-6 lg:top-12 lg:right-16 z-20 hidden sm:block">
+            <div className="relative w-32 h-16 lg:w-60 lg:h-60 hover:opacity-100 transition-opacity duration-300">
+              <Image
+                src="/qrcode.png"
+                alt="QR Code"
+                fill
+                className="object-contain rounded-md"
+                />
+            </div>
+          </motion.div>
+        <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="px-4 lg:px-8 pt-8 lg:pt-12 pb-6 lg:pb-10"
         >
-          <div className="flex items-center justify-between mb-8 lg:mb-12">
-            <span className="text-xs tracking-[0.3em] text-muted-foreground uppercase">
-              Relay Byeongpung
-            </span>
-            <span className="text-xs text-muted-foreground/60 font-mono">
-              {completedPanels}/6 완성
-            </span>
-          </div>
-
           <div className="text-center max-w-2xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.1, duration: 0.6 }}
+              className="flex justify-center mb-6 lg:mb-8"
+              >
+              <div className="relative w-12 h-12 sm:w-16 sm:h-16 opacity-90">
+                <Image
+                  src="floruga_favicon.png"
+                  alt="병풍연화 아이콘"
+                  fill
+                  className="object-contain"
+                />
+              </div>
+            </motion.div>
+            
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3, duration: 0.6 }}
-              className="text-[10px] sm:text-2xl tracking-[0.25em] text-accent/90 mb-3 uppercase"
+              className="text-[24px] sm:text-5xl tracking-[0.25em] text-foreground/90 mb-3 uppercase"
             >
                병풍연화
             </motion.p>
@@ -76,7 +98,7 @@ export default function ByeongpungDetailPage() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.8 }}
-              className="text-2xl sm:text-3xl lg:text-5xl font-serif tracking-tight text-foreground text-balance"
+              className="text-1xl sm:text-2xl lg:text-3xl font-serif tracking-tight text-foreground text-balance"
               style={{ fontFamily: "var(--font-noto-serif-kr), serif" }}
             >
               {featured.title}
@@ -132,7 +154,7 @@ export default function ByeongpungDetailPage() {
             </h2>
 
             <div className="space-y-16 lg:space-y-24">
-              {others.map((bp, sectionIdx) => (
+              {others.slice(0, 2).map((bp, sectionIdx) => (
                 <motion.article
                   key={bp.id}
                   initial={{ opacity: 0, y: 24 }}
@@ -153,7 +175,6 @@ export default function ByeongpungDetailPage() {
                   <div className="rounded-xl border border-border/30 bg-card/10 p-2 lg:p-5">
                     <ByeongpungViewer
                       byeongpung={bp}
-                      className="max-w-5xl mx-auto opacity-[0.97]"
                     />
                   </div>
 
@@ -175,18 +196,18 @@ export default function ByeongpungDetailPage() {
 
           <Link
             href="/archive"
-            className="group flex items-center gap-3 px-6 py-3 rounded-full border border-border/50 hover:border-foreground/30 transition-all duration-300 hover:bg-card/50"
+            className="group flex items-center gap-3 px-16 py-6 rounded-full border border-border/50 hover:border-foreground/30 transition-all duration-300 hover:bg-card/50"
           >
-            <span className="text-sm tracking-wider text-foreground/80 group-hover:text-foreground transition-colors">
-              모두의 아카이브 보기
+            <span className="text-2xl tracking-wider text-foreground/80 group-hover:text-foreground transition-colors">
+              모든 병풍 아카이브 보러가기
             </span>
             <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-foreground group-hover:translate-x-1 transition-all duration-300" />
           </Link>
 
           <p className="mt-8 text-xs text-muted-foreground/40 text-center">
-            릴레이 병풍 아카이브
+            병풍 아카이브
             <br />
-            <span className="tracking-wider">2024</span>
+            <span className="tracking-wider">Team 꽃충이</span>
           </p>
         </div>
       </motion.footer>
