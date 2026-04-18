@@ -3,112 +3,82 @@
 import { motion } from "framer-motion"
 import Link from "next/link"
 import { ArchiveGallery } from "@/components/archive/archive-gallery"
-import { archiveByeongpungs, currentByeongpung } from "@/lib/data"
-import { ArrowLeft, Sparkles } from "lucide-react"
+import { archiveByeongpungs } from "@/lib/data"
+import { ArrowLeft } from "lucide-react"
 
 export default function ArchivePage() {
   return (
-    <main className="min-h-screen bg-background grain-texture hanji-texture">
+    <main className="min-h-screen bg-white">
       {/* Header */}
-      <header className="relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="px-4 lg:px-8 pt-8 lg:pt-12 pb-8 lg:pb-12"
-        >
-          {/* Top bar */}
-          <div className="flex items-center justify-between mb-8 lg:mb-16">
+      <header className="border-b border-neutral-200">
+        <div className="px-6 lg:px-12 py-4">
+          <div className="flex items-center justify-between">
             <Link
               href="/"
-              className="group flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+              className="text-sm font-medium text-neutral-900 tracking-wide"
             >
-              <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-              <span className="text-xs tracking-wider">진행 중인 병풍</span>
+              FLORUGA ARCHIVE
             </Link>
-          </div>
-
-          {/* Title */}
-          <div className="max-w-4xl mx-auto">
-            <motion.h1
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.8 }}
-              className="text-3xl sm:text-4xl lg:text-6xl font-serif tracking-tight text-foreground text-center lg:text-left text-balance"
-              style={{ fontFamily: "var(--font-noto-serif-kr), serif" }}
-            >
-              병풍 아카이브
-            </motion.h1>
-            
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-              className="mt-4 lg:mt-6 text-sm lg:text-base text-muted-foreground/70 text-center lg:text-left max-w-xl"
-            >
-              다른 관람객들이 완성한 병풍을 감상해보세요.
-              <br className="hidden lg:block" />
-              각각의 병풍은 네 명의 이야기가 모여 하나의 서사가 됩니다.
-            </motion.p>
-
-            {/* Stats */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5, duration: 0.6 }}
-              className="flex items-center justify-center lg:justify-start gap-8 mt-8"
-            >
-              <div className="flex items-center gap-4 text-center lg:text-left">
-                
-                <p className="text-xl text-muted-foreground/60 tracking-wider mt-1">
-                  완성된 병풍
-                </p>
-                <p className="text-2xl lg:text-3xl font-serif text-foreground">
-                  {archiveByeongpungs.length}개
-                </p>
-              </div>
-              <div className="w-px h-8 bg-border/50" />
-              
-            </motion.div>
-          </div>
-        </motion.div>
-      </header>
-
-     
-
-      {/* Divider */}
-      <div className="px-4 lg:px-8 py-4">
-        <div className="max-w-4xl mx-auto">
-          <div className="flex items-center gap-4">
-            <div className="flex-1 h-px bg-border/90" />
-            <span className="text-xl text-muted-foreground/90 tracking-widest uppercase">완성된 작품</span>
-            <div className="flex-1 h-px bg-border/90" />
+            <nav className="hidden md:flex items-center gap-8">
+              <Link href="/" className="text-sm text-neutral-600 hover:text-neutral-900 transition-colors">
+                Home
+              </Link>
+              <Link href="/archive" className="text-sm text-neutral-900 font-medium">
+                Archive
+              </Link>
+            </nav>
           </div>
         </div>
-      </div>
+      </header>
+
+      {/* Hero Title */}
+      <section className="px-6 lg:px-12 pt-12 lg:pt-20 pb-8 lg:pb-12">
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-[12vw] lg:text-[10vw] font-black text-neutral-900 leading-none tracking-tighter"
+        >
+          ARCHIVE
+        </motion.h1>
+      </section>
+
+      {/* Categories */}
+      <section className="px-6 lg:px-12 pb-8 lg:pb-12">
+        <div className="flex items-center justify-between flex-wrap gap-4">
+          <p className="text-xs text-neutral-500 tracking-widest uppercase">
+            Categories
+          </p>
+          <div className="flex items-center gap-2 flex-wrap">
+            <button className="px-4 py-1.5 text-xs border border-neutral-900 bg-neutral-900 text-white rounded-full transition-colors">
+              All
+            </button>
+            <button className="px-4 py-1.5 text-xs border border-neutral-300 text-neutral-700 rounded-full hover:border-neutral-900 transition-colors">
+              Complete
+            </button>
+            <button className="px-4 py-1.5 text-xs border border-neutral-300 text-neutral-700 rounded-full hover:border-neutral-900 transition-colors">
+              In Progress
+            </button>
+          </div>
+        </div>
+      </section>
 
       {/* Gallery */}
-      <section className="relative z-10 py-8 lg:py-12">
+      <section className="px-6 lg:px-12 py-8 lg:py-12">
         <ArchiveGallery byeongpungs={archiveByeongpungs} />
       </section>
 
       {/* Footer */}
-      <motion.footer
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1, duration: 0.8 }}
-        className="relative z-10 px-4 lg:px-8 py-12 lg:py-20"
-      >
-        <div className="max-w-4xl mx-auto flex flex-col items-center">
-          <div className="w-16 h-px bg-border mb-8" />
-          
-          <p className="text-xs text-muted-foreground/40 text-center">
-            병풍 아카이브
-            <br />
-            <span className="tracking-wider">Team 꽃충이</span>
+      <footer className="px-6 lg:px-12 py-12 lg:py-16 border-t border-neutral-200">
+        <div className="flex items-center justify-between">
+          <p className="text-xs text-neutral-500">
+            Floruga Archive
+          </p>
+          <p className="text-xs text-neutral-500">
+            Team Floruga
           </p>
         </div>
-      </motion.footer>
+      </footer>
     </main>
   )
 }
