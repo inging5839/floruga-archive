@@ -21,60 +21,71 @@ export default function HomePage() {
               href="/"
               className="text-sm font-medium text-neutral-900 tracking-wide"
             >
-              FLORUGA
+              병풍연화
             </Link>
             <nav className="hidden md:flex items-center gap-8">
               <Link href="/" className="text-sm text-neutral-900 font-medium">
-                Home
+                병풍 전시관
               </Link>
               <Link href="/archive" className="text-sm text-neutral-600 hover:text-neutral-900 transition-colors">
-                Archive
+                전체보기
               </Link>
             </nav>
-            <div className="flex items-center gap-4">
-              <div className="relative w-10 h-10 lg:w-12 lg:h-12">
-                <Image
-                  src="/qrcode.png"
-                  alt="QR Code"
-                  fill
-                  className="object-contain"
-                />
-              </div>
-            </div>
+            <Link 
+              href="/archive"
+              className="md:hidden text-sm text-neutral-600 hover:text-neutral-900 transition-colors"
+            >
+              전체보기
+            </Link>
           </div>
         </div>
       </header>
 
       {/* Hero Title */}
       <section className="px-6 lg:px-12 pt-12 lg:pt-20 pb-8 lg:pb-12">
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-[12vw] lg:text-[10vw] font-black text-neutral-900 leading-none tracking-tighter"
-        >
-          BYEONGPUNG
-        </motion.h1>
+        <div className="flex items-center justify-between gap-6">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-[12vw] lg:text-[10vw] font-black text-neutral-900 leading-none tracking-tighter"
+          >
+            병풍연화 전시관
+          </motion.h1>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
+            className="relative w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 flex-shrink-0"
+          >
+            <Image
+              src="/qrcode.png"
+              alt="QR Code"
+              fill
+              className="object-contain"
+            />
+          </motion.div>
+        </div>
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3, duration: 0.6 }}
-          className="mt-6 flex flex-col md:flex-row md:items-end md:justify-between gap-4"
+          className="mt-6 flex flex-col md:flex-row md:items-end md:justify-between gap-4 px-5"
         >
           <div>
-            <p className="text-xs text-neutral-500 tracking-widest uppercase mb-2">
-              {featured.theme}
-            </p>
+            {/* <p className="text-xs text-neutral-500 tracking-widest uppercase mb-2">
+              심청이 이야기
+            </p> */}
             <h2 className="text-xl lg:text-2xl text-neutral-800 font-serif">
-              {featured.title}
+              심청전
             </h2>
           </div>
           <div className="flex items-center gap-6 text-xs text-neutral-500">
             <span>
-              <span className="text-neutral-900 font-medium">{completedPanels}</span> Panels Complete
+              완성된 병풍 <span className="text-neutral-900 font-medium">{completedPanels}</span>개
             </span>
             <span>
-              <span className="text-neutral-900 font-medium">{featured.totalParticipants}</span> Participants
+              총 참여인원 <span className="text-neutral-900 font-medium">{featured.totalParticipants}</span>명
             </span>
           </div>
         </motion.div>
@@ -117,7 +128,7 @@ export default function HomePage() {
                         {bp.theme}
                       </p>
                     </div>
-                    <Link 
+                    <Link
                       href={`/byeongpung/${bp.id}`}
                       className="text-xs text-neutral-600 hover:text-neutral-900 transition-colors flex items-center gap-1"
                     >
