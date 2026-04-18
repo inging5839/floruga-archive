@@ -31,7 +31,7 @@ export default function HomePage() {
                 전체보기
               </Link>
             </nav>
-            <Link 
+            <Link
               href="/archive"
               className="md:hidden text-sm text-neutral-600 hover:text-neutral-900 transition-colors"
             >
@@ -56,10 +56,10 @@ export default function HomePage() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.3, duration: 0.5 }}
-            className="relative w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 flex-shrink-0"
+            className="relative w-16 h-16 md:w-24 md:h-24 lg:w-60 lg:h-60 flex-shrink-0"
           >
             <Image
-              src="/qrcode.png"
+              src="/qr_v2.png"
               alt="QR Code"
               fill
               className="object-contain"
