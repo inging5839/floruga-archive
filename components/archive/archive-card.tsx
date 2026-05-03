@@ -17,9 +17,9 @@ export function ArchiveCard({ byeongpung, index }: ArchiveCardProps) {
 
   // Format date
   const formatDate = (dateString?: string) => {
-    if (!dateString) return "In Progress"
+    if (!dateString) return "진행 중"
     const date = new Date(dateString)
-    return date.toLocaleDateString('en-US', { 
+    return date.toLocaleDateString("ko-KR", {
       day: 'numeric',
       month: 'long',
       year: 'numeric'
@@ -35,7 +35,7 @@ export function ArchiveCard({ byeongpung, index }: ArchiveCardProps) {
         duration: 0.5, 
         ease: "easeOut" 
       }}
-      className="group"
+      className="group border border-neutral-200 p-4"
     >
       <Link
         href={isComplete ? `/byeongpung/${byeongpung.id}` : "#"}
@@ -47,13 +47,13 @@ export function ArchiveCard({ byeongpung, index }: ArchiveCardProps) {
           <p className="text-xs text-neutral-500">
             {formatDate(byeongpung.completedAt)}
           </p>
-          <span className={`px-3 py-1 text-xs border rounded-full ${
+          {/* <span className={`px-3 py-1 text-xs border rounded-full ${
             isComplete 
               ? 'border-neutral-900 text-neutral-900' 
               : 'border-neutral-300 text-neutral-500'
           }`}>
             {isComplete ? 'Complete' : 'In Progress'}
-          </span>
+          </span> */}
         </div>
 
         {/* Image */}
@@ -74,7 +74,7 @@ export function ArchiveCard({ byeongpung, index }: ArchiveCardProps) {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                   </svg>
                 </div>
-                <p className="text-xs text-neutral-400">Waiting for stories...</p>
+                <p className="text-xs text-neutral-400">이야기를 기다리고 있어요...</p>
               </div>
             </div>
           )}
@@ -91,16 +91,7 @@ export function ArchiveCard({ byeongpung, index }: ArchiveCardProps) {
         </p>
 
         {/* Footer - Author and Duration */}
-        <div className="flex items-center gap-4 text-xs text-neutral-500">
-          <div className="flex items-center gap-1">
-            <span className="font-medium text-neutral-700">Panels</span>
-            <span>{completedPanels}/6</span>
-          </div>
-          <div className="flex items-center gap-1">
-            <span className="font-medium text-neutral-700">Participants</span>
-            <span>{byeongpung.totalParticipants}</span>
-          </div>
-        </div>
+        
       </Link>
     </motion.article>
   )

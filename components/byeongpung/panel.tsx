@@ -46,7 +46,7 @@ export function ByeongpungPanel({ panel, index, isActive = false, totalPanels = 
           {/* Top section with small text */}
           <div className="p-4 lg:p-6">
             <p className="text-[10px] lg:text-xs text-neutral-500 tracking-wider uppercase">
-              {panel.createdAt || `Panel ${index + 1}`}
+              {panel.createdAt || `${index + 1}번째 패널`}
             </p>
           </div>
 
@@ -74,7 +74,7 @@ export function ByeongpungPanel({ panel, index, isActive = false, totalPanels = 
             </p>
             {panel.author && (
               <p className="mt-3 text-[10px] text-neutral-400 tracking-wide">
-                <span className="text-neutral-500">Text</span> {panel.author}
+                <span className="text-neutral-500">글</span> {panel.author}
               </p>
             )}
           </div>
@@ -84,7 +84,7 @@ export function ByeongpungPanel({ panel, index, isActive = false, totalPanels = 
           {/* Top section */}
           <div className="p-4 lg:p-6">
             <p className="text-[10px] lg:text-xs text-neutral-400 tracking-wider uppercase">
-              {isInProgress ? "In Progress" : "Coming Soon"}
+              {isInProgress ? "진행 중" : "곧 공개"}
             </p>
           </div>
 
@@ -104,7 +104,7 @@ export function ByeongpungPanel({ panel, index, isActive = false, totalPanels = 
                   />
                 </div>
                 <p className="text-xs text-neutral-500 tracking-wide">
-                  Creating...
+                  제작 중...
                 </p>
               </motion.div>
             ) : (
@@ -114,7 +114,7 @@ export function ByeongpungPanel({ panel, index, isActive = false, totalPanels = 
                     <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1" strokeDasharray="4 2" />
                   </svg>
                 </div>
-                <p className="text-xs text-neutral-400">Waiting</p>
+                <p className="text-xs text-neutral-400">대기 중</p>
               </div>
             )}
           </div>

@@ -28,15 +28,26 @@ export default function HomePage() {
                 병풍 전시관
               </Link>
               <Link href="/archive" className="text-sm text-neutral-600 hover:text-neutral-900 transition-colors">
-                전체보기
+                모든 병풍 한 눈에 보기
+              </Link>
+              <Link href="/about" className="text-sm text-neutral-600 hover:text-neutral-900 transition-colors">
+                프로젝트 소개
               </Link>
             </nav>
-            <Link
-              href="/archive"
-              className="md:hidden text-sm text-neutral-600 hover:text-neutral-900 transition-colors"
-            >
-              전체보기
-            </Link>
+            <div className="md:hidden flex items-center gap-3">
+              <Link
+                href="/archive"
+                className="text-sm text-neutral-600 hover:text-neutral-900 transition-colors"
+              >
+                전체보기
+              </Link>
+              <Link
+                href="/about"
+                className="text-sm text-neutral-600 hover:text-neutral-900 transition-colors"
+              >
+                프로젝트 소개
+              </Link>
+            </div>
           </div>
         </div>
       </header>
@@ -50,7 +61,7 @@ export default function HomePage() {
             transition={{ duration: 0.6 }}
             className="text-[12vw] lg:text-[10vw] font-black text-neutral-900 leading-none tracking-tighter"
           >
-            병풍연화 전시관
+            병풍연화
           </motion.h1>
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -60,7 +71,7 @@ export default function HomePage() {
           >
             <Image
               src="/qr_v2.png"
-              alt="QR Code"
+              alt="QR 코드"
               fill
               className="object-contain"
             />
@@ -73,10 +84,7 @@ export default function HomePage() {
           className="mt-6 flex flex-col md:flex-row md:items-end md:justify-between gap-4 px-5"
         >
           <div>
-            {/* <p className="text-xs text-neutral-500 tracking-widest uppercase mb-2">
-              심청이 이야기
-            </p> */}
-            <h2 className="text-xl lg:text-2xl text-neutral-800 font-serif">
+            <h2 className="text-2xl lg:text-3xl text-neutral-800 font-serif pl-2">
               심청전
             </h2>
           </div>
@@ -92,13 +100,20 @@ export default function HomePage() {
       </section>
 
       {/* Featured Byeongpung */}
-      <section className="py-8 lg:py-12">
+      <section className="py-8 lg:py-12 bg-neutral-50 border-t border-neutral-200">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.7 }}
         >
-          <ByeongpungViewer byeongpung={featured} />
+          <div className="px-6 lg:px-12 py-12 lg:py-20">
+            <h2 className="text-3xl lg:text-4xl text-neutral-900 tracking-widest uppercase mb-10 lg:mb-14 font-black">
+              제작중인 병풍
+            </h2>
+            <ByeongpungViewer
+              byeongpung={featured}
+            />
+          </div>
         </motion.div>
       </section>
 
@@ -106,8 +121,8 @@ export default function HomePage() {
       {others.length > 0 && (
         <section className="border-t border-neutral-200 bg-neutral-50">
           <div className="px-6 lg:px-12 py-12 lg:py-20">
-            <h2 className="text-xs text-neutral-500 tracking-widest uppercase mb-10 lg:mb-14">
-              Previous Works
+            <h2 className="text-xl text-neutral-500 tracking-widest uppercase mb-10 lg:mb-14">
+              완성된 병풍
             </h2>
 
             <div className="space-y-16 lg:space-y-24">
@@ -132,7 +147,7 @@ export default function HomePage() {
                       href={`/byeongpung/${bp.id}`}
                       className="text-xs text-neutral-600 hover:text-neutral-900 transition-colors flex items-center gap-1"
                     >
-                      View Details
+                      자세히 보기
                       <ArrowRight className="w-3 h-3" />
                     </Link>
                   </div>
@@ -152,17 +167,17 @@ export default function HomePage() {
             className="group flex items-center gap-3 px-8 py-4 border border-neutral-900 text-neutral-900 hover:bg-neutral-900 hover:text-white rounded-full transition-all duration-300"
           >
             <span className="text-sm tracking-wider uppercase">
-              View All Archive
+              모든 병풍 한 눈에 보기
             </span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
 
           <div className="flex items-center justify-between w-full pt-8 border-t border-neutral-100">
             <p className="text-xs text-neutral-400">
-              Floruga Archive
+              병풍연화
             </p>
             <p className="text-xs text-neutral-400">
-              Team Floruga
+              팀 꽃충이
             </p>
           </div>
         </div>

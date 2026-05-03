@@ -21,8 +21,8 @@ const notoSerifKR = Noto_Serif_KR({
 })
 
 export const metadata: Metadata = {
-  title: '꽃충이',
-  description: '릴레이 소설 병풍 아카이브',
+  title: '병풍연화 디지털 전시관',
+  description: '릴레이 소설 병풍 디지털 전시관',
   generator: 'v0.app',
   icons: {
     icon: [

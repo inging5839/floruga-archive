@@ -5,6 +5,7 @@ import { motion } from "framer-motion"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { ByeongpungViewer } from "@/components/byeongpung/viewer"
+import { SiteHeader } from "@/components/layout/site-header"
 import { archiveByeongpungs } from "@/lib/data"
 import { ArrowLeft, ArrowRight } from "lucide-react"
 
@@ -29,23 +30,7 @@ export default function ByeongpungDetailPage({ params }: PageProps) {
 
   return (
     <main className="min-h-screen bg-white">
-      {/* Header */}
-      <header className="border-b border-neutral-200">
-        <div className="px-6 lg:px-12 py-4">
-          <div className="flex items-center justify-between">
-            <Link
-              href="/archive"
-              className="group flex items-center gap-2 text-sm text-neutral-600 hover:text-neutral-900 transition-colors"
-            >
-              <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-              <span>Archive</span>
-            </Link>
-            <span className="text-xs text-neutral-400 font-mono">
-              #{String(byeongpung.id).padStart(2, '0')}
-            </span>
-          </div>
-        </div>
-      </header>
+      <SiteHeader />
 
       {/* Title Section */}
       <section className="px-6 lg:px-12 pt-12 lg:pt-20 pb-8 lg:pb-12">
@@ -63,14 +48,14 @@ export default function ByeongpungDetailPage({ params }: PageProps) {
           <div className="flex flex-wrap items-center gap-6 text-xs text-neutral-500">
             {byeongpung.completedAt && (
               <span>
-                <span className="text-neutral-400">Completed</span> {byeongpung.completedAt}
+                <span className="text-neutral-400">완료일</span> {byeongpung.completedAt}
               </span>
             )}
             <span>
-              <span className="text-neutral-900 font-medium">{completedPanels}</span> Panels
+              <span className="text-neutral-900 font-medium">{completedPanels}</span>개 패널
             </span>
             <span>
-              <span className="text-neutral-900 font-medium">{byeongpung.totalParticipants}</span> Participants
+              <span className="text-neutral-900 font-medium">{byeongpung.totalParticipants}</span>명 참여
             </span>
           </div>
         </motion.div>
@@ -97,7 +82,7 @@ export default function ByeongpungDetailPage({ params }: PageProps) {
             >
               <ArrowLeft className="w-5 h-5 text-neutral-400 group-hover:text-neutral-900 group-hover:-translate-x-1 transition-all" />
               <div>
-                <p className="text-xs text-neutral-400 uppercase tracking-wider mb-1">Previous</p>
+                <p className="text-xs text-neutral-400 uppercase tracking-wider mb-1">이전</p>
                 <p className="text-sm font-medium text-neutral-900">
                   {prevByeongpung.theme}
                 </p>
@@ -113,7 +98,7 @@ export default function ByeongpungDetailPage({ params }: PageProps) {
               className="group flex-1 flex items-center justify-end gap-4 p-6 border border-neutral-200 hover:border-neutral-900 rounded-lg transition-colors text-right"
             >
               <div>
-                <p className="text-xs text-neutral-400 uppercase tracking-wider mb-1">Next</p>
+                <p className="text-xs text-neutral-400 uppercase tracking-wider mb-1">다음</p>
                 <p className="text-sm font-medium text-neutral-900">
                   {nextByeongpung.theme}
                 </p>
@@ -134,16 +119,16 @@ export default function ByeongpungDetailPage({ params }: PageProps) {
             className="group flex items-center gap-3 px-8 py-4 border border-neutral-900 text-neutral-900 hover:bg-neutral-900 hover:text-white rounded-full transition-all duration-300"
           >
             <span className="text-sm tracking-wider uppercase">
-              Back to Archive
+              전체보기로 돌아가기
             </span>
           </Link>
 
           <div className="flex items-center justify-between w-full pt-8 border-t border-neutral-100">
             <p className="text-xs text-neutral-400">
-              Floruga Archive
+              병풍연화
             </p>
             <p className="text-xs text-neutral-400">
-              Team Floruga
+              팀 꽃충이
             </p>
           </div>
         </div>

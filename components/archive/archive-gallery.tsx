@@ -16,7 +16,7 @@ export function ArchiveGallery({ byeongpungs }: ArchiveGalleryProps) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12"
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-x-4 gap-y-12"
       >
         {byeongpungs.map((byeongpung, index) => (
           <ArchiveCard
@@ -45,9 +45,9 @@ export function ArchiveGallery({ byeongpungs }: ArchiveGalleryProps) {
             </svg>
           </div>
           <p className="text-sm text-neutral-500 text-center">
-            No completed byeongpungs yet
+            아직 완성된 병풍이 없습니다
             <br />
-            <span className="text-xs">Be the first to participate in a relay byeongpung</span>
+            <span className="text-xs">첫 번째 릴레이 병풍의 참여자가 되어보세요</span>
           </p>
         </motion.div>
       )}

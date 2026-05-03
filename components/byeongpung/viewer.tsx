@@ -9,9 +9,10 @@ import { cn } from "@/lib/utils"
 interface ByeongpungViewerProps {
   byeongpung: Byeongpung
   className?: string
+  title?: string
 }
 
-export function ByeongpungViewer({ byeongpung, className }: ByeongpungViewerProps) {
+export function ByeongpungViewer({ byeongpung, className, title }: ByeongpungViewerProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const [activeIndex, setActiveIndex] = useState(0)
   const [isMobile, setIsMobile] = useState(false)
@@ -44,8 +45,21 @@ export function ByeongpungViewer({ byeongpung, className }: ByeongpungViewerProp
     if (!container || isMobile) return
 
     const handleWheel = (e: WheelEvent) => {
+      const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY
+      if (delta === 0) return
+
+      const maxScrollLeft = container.scrollWidth - container.clientWidth
+      if (maxScrollLeft <= 0) return
+
+      const nextScrollLeft = container.scrollLeft + delta * 2
+      const isTryingToScrollBeyondStart = delta < 0 && container.scrollLeft <= 0
+      const isTryingToScrollBeyondEnd = delta > 0 && container.scrollLeft >= maxScrollLeft
+
+      // Let the page keep scrolling vertically when horizontal scroll hits either edge.
+      if (isTryingToScrollBeyondStart || isTryingToScrollBeyondEnd) return
+
       e.preventDefault()
-      container.scrollLeft += e.deltaY * 2
+      container.scrollLeft = Math.max(0, Math.min(nextScrollLeft, maxScrollLeft))
     }
 
     container.addEventListener("wheel", handleWheel, { passive: false })
@@ -54,6 +68,14 @@ export function ByeongpungViewer({ byeongpung, className }: ByeongpungViewerProp
 
   return (
     <div className={cn("relative w-full", className)}>
+      {title && (
+        <div className="border border-b-0 border-neutral-200 px-6 lg:px-12 py-4">
+          <h2 className="text-xs text-neutral-500 tracking-widest uppercase">
+            {title}
+          </h2>
+        </div>
+      )}
+
       {/* Panel indicators for mobile */}
       <div className="lg:hidden flex justify-center gap-2 mb-4 px-4">
         {byeongpung.panels.map((_, idx) => (
@@ -74,7 +96,7 @@ export function ByeongpungViewer({ byeongpung, className }: ByeongpungViewerProp
                 : "bg-neutral-300 w-2 hover:bg-neutral-400"
               }
             `}
-            aria-label={`Panel ${idx + 1}`}
+            aria-label={`${idx + 1}번째 패널`}
           />
         ))}
       </div>
@@ -89,6 +111,7 @@ export function ByeongpungViewer({ byeongpung, className }: ByeongpungViewerProp
           snap-x snap-mandatory lg:snap-none
           scroll-smooth
           border border-neutral-200
+          ${title ? "border-t-0" : ""}
         `}
         style={{
           scrollSnapType: isMobile ? "x mandatory" : "none"
@@ -127,7 +150,7 @@ export function ByeongpungViewer({ byeongpung, className }: ByeongpungViewerProp
         className="lg:hidden text-center mt-3"
       >
         <p className="text-xs text-neutral-400 tracking-wider uppercase">
-          Swipe to explore
+          좌우로 밀어 감상해보세요
         </p>
       </motion.div>
     </div>
