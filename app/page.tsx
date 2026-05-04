@@ -68,7 +68,7 @@ export default function HomePage() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.3, duration: 0.5 }}
-              className="relative w-16 h-16 md:w-24 md:h-24 lg:w-60 lg:h-60 flex-shrink-0"
+              className="relative w-32 h-32 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-90 lg:h-90 flex-shrink-0"
             >
               <Image
                 src="/qr_v2.png"
@@ -81,7 +81,7 @@ export default function HomePage() {
               initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.35, duration: 0.5 }}
-              className="text-[10px] leading-snug text-neutral-600 text-center sm:text-xs md:text-sm lg:text-base max-w-[9rem] sm:max-w-[11rem] md:max-w-[13rem] lg:max-w-[15rem]"
+              className="text-[10px] leading-snug text-neutral-600 text-center sm:text-xs md:text-sm lg:text-xl max-w-[9rem] sm:max-w-[11rem] md:max-w-[13rem] lg:max-w-[15rem]"
             >
               QR코드를 스캔하여
               <br />
@@ -96,7 +96,7 @@ export default function HomePage() {
           className="mt-6 flex flex-col md:flex-row md:items-end md:justify-between gap-4 px-5"
         >
           <div>
-            <h2 className="text-1xl lg:text-2xl text-neutral-800 font-serif pl-2">
+            <h2 className="text-1xl lg:text-2xl text-neutral-800 font-serif">
               행동으로 이야기를 바꾸어 나가는 <br></br>릴레이 방식의 인터랙티브 전시
             </h2>
           </div>
