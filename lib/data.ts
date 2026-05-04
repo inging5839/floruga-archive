@@ -39,11 +39,11 @@ export const currentByeongpung: Byeongpung = {
     {
       id: 1,
       title: "제1폭",
-      story: "가난한 심 봉사와 어린 심청. 어머니를 일찍 여의고 눈 먼 아버지를 정성껏 모시는 효녀 심청의 고단한 삶이 시작됩니다.",
+      story: "옛날 옛적, 앞을 보지 못하는 심봉사가 개천에 빠지고 말았습니다. 그를 구해준 스님은 “공양미 삼백 석을 바치면 눈을 뜰 수 있을 것이오.”라고 말했습니다.",
       image: panelImages.panel1,
       status: 'complete',
       author: "전시 기획자",
-      createdAt: "2024-01-15"
+      createdAt: "2026-05-04"
     },
     {
       id: 2,
@@ -104,7 +104,7 @@ export const archiveByeongpungs: Byeongpung[] = [
     completedAt: "2024-01-20",
     thumbnailImage: panelImages.panel5,
     panels: [
-      { id: 1, title: "제1폭", story: "가난한 심 봉사와 어린 심청. 어머니를 일찍 여의고 눈 먼 아버지를 정성껏 모시는 효녀 심청의 고단한 삶이 시작됩니다.", image: panelImages.panel1, status: 'complete' as const },
+      { id: 1, title: "제1폭", story: "옛날 옛적, 앞을 보지 못하는 심봉사가 개천에 빠지고 말았습니다. 그를 구해준 스님은 “공양미 삼백 석을 바치면 눈을 뜰 수 있을 것이오.”라고 말했습니다.", image: panelImages.panel1, status: 'complete' as const },
       { id: 2, title: "제2폭", story: "가난한 심 봉사와 어린 심청. 어머니를 일찍 여의고 눈 먼 아버지를 정성껏 모시는 효녀 심청의 고단한 삶이 시작됩니다.", image: panelImages.panel2, status: 'complete' as const },
       { id: 3, title: "제3폭", story: "가난한 심 봉사와 어린 심청. 어머니를 일찍 여의고 눈 먼 아버지를 정성껏 모시는 효녀 심청의 고단한 삶이 시작됩니다.", image: panelImages.panel3, status: 'complete' as const },
       { id: 4, title: "제4폭", story: "가난한 심 봉사와 어린 심청. 어머니를 일찍 여의고 눈 먼 아버지를 정성껏 모시는 효녀 심청의 고단한 삶이 시작됩니다.", image: panelImages.panel4, status: 'complete' as const },
@@ -120,7 +120,7 @@ export const archiveByeongpungs: Byeongpung[] = [
     totalParticipants: 3,
     thumbnailImage: panelImages.panel5,
     panels: [
-      { id: 1, title: "제1폭", story: "가난한 심 봉사와 어린 심청. 어머니를 일찍 여의고 눈 먼 아버지를 정성껏 모시는 효녀 심청의 고단한 삶이 시작됩니다.", image: panelImages.panel1, status: 'complete' as const },
+      { id: 1, title: "제1폭", story: "흠흠", image: panelImages.panel1, status: 'complete' as const },
       { id: 2, title: "제2폭", story: "가난한 심 봉사와 어린 심청. 어머니를 일찍 여의고 눈 먼 아버지를 정성껏 모시는 효녀 심청의 고단한 삶이 시작됩니다.", image: panelImages.panel2, status: 'complete' as const },
       { id: 3, title: "제3폭", story: "가난한 심 봉사와 어린 심청. 어머니를 일찍 여의고 눈 먼 아버지를 정성껏 모시는 효녀 심청의 고단한 삶이 시작됩니다.", image: panelImages.panel3, status: 'complete' as const },
       { id: 4, title: "제4폭", story: "가난한 심 봉사와 어린 심청. 어머니를 일찍 여의고 눈 먼 아버지를 정성껏 모시는 효녀 심청의 고단한 삶이 시작됩니다.", image: panelImages.panel4, status: 'complete' as const },

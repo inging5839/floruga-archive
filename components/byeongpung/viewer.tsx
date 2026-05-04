@@ -106,11 +106,12 @@ export function ByeongpungViewer({ byeongpung, className, title }: ByeongpungVie
         ref={containerRef}
         onScroll={handleScroll}
         className={`
-          flex
+          flex gap-0
           overflow-x-auto hide-scrollbar
           snap-x snap-mandatory lg:snap-none
           scroll-smooth
           border border-neutral-200
+          bg-stone-100
           ${title ? "border-t-0" : ""}
         `}
         style={{
@@ -118,17 +119,17 @@ export function ByeongpungViewer({ byeongpung, className, title }: ByeongpungVie
         }}
       >
         {byeongpung.panels.map((panel, index) => (
-          <div
+          <ByeongpungPanel
             key={panel.id}
-            className="snap-center"
-          >
-            <ByeongpungPanel
-              panel={panel}
-              index={index}
-              isActive={isMobile && index === activeIndex}
-              totalPanels={byeongpung.panels.length}
-            />
-          </div>
+            panel={panel}
+            index={index}
+            isActive={isMobile && index === activeIndex}
+            totalPanels={byeongpung.panels.length}
+            className={cn(
+              "snap-center shrink-0 min-w-0",
+              "lg:border-r lg:border-neutral-300 lg:last:border-r-0",
+            )}
+          />
         ))}
       </div>
 

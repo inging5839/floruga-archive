@@ -3,15 +3,23 @@
 import { motion } from "framer-motion"
 import Image from "next/image"
 import type { Panel } from "@/lib/data"
+import { cn } from "@/lib/utils"
 
 interface ByeongpungPanelProps {
   panel: Panel
   index: number
   isActive?: boolean
   totalPanels?: number
+  className?: string
 }
 
-export function ByeongpungPanel({ panel, index, isActive = false, totalPanels = 6 }: ByeongpungPanelProps) {
+export function ByeongpungPanel({
+  panel,
+  index,
+  isActive = false,
+  totalPanels = 6,
+  className,
+}: ByeongpungPanelProps) {
   const isComplete = panel.status === "complete"
   const isInProgress = panel.status === "in-progress"
 
@@ -28,36 +36,37 @@ export function ByeongpungPanel({ panel, index, isActive = false, totalPanels = 
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.08, duration: 0.5, ease: "easeOut" }}
-      className={`
-        relative flex-shrink-0 
-        w-[75vw] md:w-[40vw] lg:w-auto lg:flex-1
-        min-h-[500px] lg:min-h-[600px]
-        overflow-hidden
-        ${bgColor}
-        ${isActive ? "ring-2 ring-neutral-900" : ""}
-        border-r border-neutral-300 last:border-r-0
-      `}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: index * 0.06, duration: 0.4, ease: "easeOut" }}
+      aria-current={isActive ? "true" : undefined}
+      className={cn(
+        "relative flex-shrink-0",
+        "w-[75vw] md:w-[40vw] lg:w-auto lg:flex-1",
+        "min-h-[500px] lg:min-h-[600px]",
+        "overflow-hidden",
+        "md:py-5 lg:py-5",
+        bgColor,
+        className,
+      )}
     >
       {isComplete && panel.image ? (
         <div className="relative h-full flex flex-col">
           {/* Top section with small text */}
-          <div className="p-4 lg:p-6">
+          {/* <div className="p-4 lg:p-6">
             <p className="text-[10px] lg:text-xs text-neutral-500 tracking-wider uppercase">
               {panel.createdAt || `${index + 1}번째 패널`}
             </p>
-          </div>
+          </div> */}
 
           {/* Image section - centered */}
-          <div className="flex-1 relative px-4 lg:px-6 flex items-center justify-center">
-            <div className="relative w-full aspect-[3/4] max-h-[350px] overflow-hidden">
+          <div className="flex-1 relative px-10 lg:px-6 py-4 lg:py-12 flex items-center justify-center">
+            <div className="relative w-full max-w-full aspect-[9/16] max-h-[min(52vh,420px)] overflow-hidden ">
               <Image
                 src={panel.image}
                 alt={panel.title}
                 fill
-                className="object-cover"
+                className="object-contain"
                 sizes="(max-width: 768px) 75vw, (max-width: 1024px) 40vw, 16vw"
                 priority={index < 2}
               />
@@ -65,7 +74,7 @@ export function ByeongpungPanel({ panel, index, isActive = false, totalPanels = 
           </div>
 
           {/* Bottom section with title and story */}
-          <div className="p-4 lg:p-6 mt-auto">
+          <div className="px-4 py-4 lg:p-6 mt-auto">
             <h3 className="text-lg lg:text-xl font-bold text-neutral-900 tracking-tight mb-2 uppercase">
               {panel.title}
             </h3>
@@ -84,7 +93,7 @@ export function ByeongpungPanel({ panel, index, isActive = false, totalPanels = 
           {/* Top section */}
           <div className="p-4 lg:p-6">
             <p className="text-[10px] lg:text-xs text-neutral-400 tracking-wider uppercase">
-              {isInProgress ? "진행 중" : "곧 공개"}
+              {isInProgress ? "병풍 제작 중" : "곧 공개"}
             </p>
           </div>
 

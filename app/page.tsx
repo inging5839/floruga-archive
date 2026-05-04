@@ -63,7 +63,7 @@ export default function HomePage() {
           >
             병풍연화
           </motion.h1>
-          <div className="flex flex-col items-center gap-2 md:gap-2.5 lg:gap-3 flex-shrink-0 max-w-[40vw] sm:max-w-none">
+          <div className="hidden md:flex flex-col items-center gap-2 md:gap-2.5 lg:gap-3 flex-shrink-0 max-w-[40vw] sm:max-w-none">
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -93,11 +93,11 @@ export default function HomePage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3, duration: 0.6 }}
-          className="mt-6 flex flex-col md:flex-row md:items-end md:justify-between gap-4 px-5"
+          className="mt-6 flex flex-col md:flex-row md:items-end md:justify-between gap-4 px-1"
         >
           <div>
             <h2 className="text-1xl lg:text-2xl text-neutral-800 font-serif">
-              행동으로 이야기를 바꾸어 나가는 <br></br>릴레이 방식의 인터랙티브 전시
+              행동으로 이야기를 바꾸어 나가는 <br></br>릴레이 소설 인터랙티브 전시
             </h2>
           </div>
           <div className="flex items-center gap-6 text-xs text-neutral-500">
@@ -112,14 +112,14 @@ export default function HomePage() {
       </section>
 
       {/* Featured Byeongpung */}
-      <section className="py-8 lg:py-12 bg-neutral-50 border-t border-neutral-200">
+      <section className="md: py-0 lg:py-12 bg-neutral-50 border-t border-neutral-200">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.7 }}
         >
           <div className="px-6 lg:px-12 py-12 lg:py-20">
-            <h2 className="text-3xl lg:text-4xl text-neutral-900 tracking-widest uppercase mb-10 lg:mb-14 font-black">
+            <h2 className="text-3xl lg:text-4xl text-neutral-900 uppercase mb-10 lg:mb-14 font-black">
               제작중인 병풍
             </h2>
             <ByeongpungViewer
@@ -133,7 +133,7 @@ export default function HomePage() {
       {others.length > 0 && (
         <section className="border-t border-neutral-200 bg-neutral-50">
           <div className="px-6 lg:px-12 py-12 lg:py-20">
-            <h2 className="text-xl text-neutral-500 tracking-widest uppercase mb-10 lg:mb-14">
+            <h2 className="text-3xl lg:text-4xl text-neutral-900 uppercase mb-10 lg:mb-14 font-black">
               완성된 병풍
             </h2>
 
@@ -148,12 +148,9 @@ export default function HomePage() {
                 >
                   <div className="mb-6 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
                     <div>
-                      <p className="text-sm text-neutral-400 font-mono mb-1">
+                      {/* <p className="text-sm text-neutral-400 font-mono mb-1">
                         #{String(bp.id).padStart(2, '0')}
-                      </p>
-                      <p className="text-xs text-neutral-500 tracking-widest uppercase">
-                        {bp.theme}
-                      </p>
+                      </p> */}
                     </div>
                     <Link
                       href={`/byeongpung/${bp.id}`}
