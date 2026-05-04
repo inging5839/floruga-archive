@@ -19,9 +19,9 @@ export function ByeongpungPanel({ panel, index, isActive = false, totalPanels = 
   const bgColors = [
     "bg-stone-100",
     "bg-stone-200",
-    "bg-neutral-100",
     "bg-stone-100",
-    "bg-neutral-200",
+    "bg-stone-200",
+    "bg-stone-100",
     "bg-stone-200",
   ]
   const bgColor = bgColors[index % bgColors.length]

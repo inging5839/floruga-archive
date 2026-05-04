@@ -63,19 +63,31 @@ export default function HomePage() {
           >
             병풍연화
           </motion.h1>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.3, duration: 0.5 }}
-            className="relative w-16 h-16 md:w-24 md:h-24 lg:w-60 lg:h-60 flex-shrink-0"
-          >
-            <Image
-              src="/qr_v2.png"
-              alt="QR 코드"
-              fill
-              className="object-contain"
-            />
-          </motion.div>
+          <div className="flex flex-col items-center gap-2 md:gap-2.5 lg:gap-3 flex-shrink-0 max-w-[40vw] sm:max-w-none">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.3, duration: 0.5 }}
+              className="relative w-16 h-16 md:w-24 md:h-24 lg:w-60 lg:h-60 flex-shrink-0"
+            >
+              <Image
+                src="/qr_v2.png"
+                alt="QR 코드 — 스캔 시 본인·타인 병풍 확인"
+                fill
+                className="object-contain"
+              />
+            </motion.div>
+            <motion.p
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.35, duration: 0.5 }}
+              className="text-[10px] leading-snug text-neutral-600 text-center sm:text-xs md:text-sm lg:text-base max-w-[9rem] sm:max-w-[11rem] md:max-w-[13rem] lg:max-w-[15rem]"
+            >
+              QR코드를 스캔하여
+              <br />
+              다양한 병풍을 확인해보세요!
+            </motion.p>
+          </div>
         </div>
         <motion.div
           initial={{ opacity: 0 }}
@@ -84,8 +96,8 @@ export default function HomePage() {
           className="mt-6 flex flex-col md:flex-row md:items-end md:justify-between gap-4 px-5"
         >
           <div>
-            <h2 className="text-2xl lg:text-3xl text-neutral-800 font-serif pl-2">
-              심청전
+            <h2 className="text-1xl lg:text-2xl text-neutral-800 font-serif pl-2">
+              행동으로 이야기를 바꾸어 나가는 <br></br>릴레이 방식의 인터랙티브 전시
             </h2>
           </div>
           <div className="flex items-center gap-6 text-xs text-neutral-500">
