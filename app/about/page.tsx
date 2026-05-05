@@ -7,21 +7,21 @@ import { ArrowLeft, ArrowRight } from "lucide-react"
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-dvh min-h-screen bg-white">
       <SiteHeader />
 
-      <section className="px-6 lg:px-12 pt-12 lg:pt-20 pb-10 lg:pb-14">
+      <section className="px-6 lg:px-12 pt-12 lg:pt-20 pb-10 lg:pb-14 expo-tland-section-md">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-[12vw] lg:text-[7vw] font-black text-neutral-900 leading-none tracking-tighter"
+          className="text-[12vw] lg:text-[7vw] font-black text-neutral-900 leading-none tracking-tighter expo-tland-page-title"
         >
           프로젝트 소개
         </motion.h1>
       </section>
 
-      <section className="px-6 lg:px-12 pb-14 lg:pb-20">
+      <section className="px-6 lg:px-12 pb-14 lg:pb-20 expo-tland-section-md">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -40,8 +40,8 @@ export default function AboutPage() {
         </motion.div>
       </section>
 
-      <section className="border-t border-neutral-200 bg-neutral-50">
-        <div className="px-6 lg:px-12 py-12 lg:py-16">
+      <section className="border-t border-neutral-200 bg-neutral-50 expo-tland-section">
+        <div className="px-6 lg:px-12 py-12 lg:py-16 expo-tland-section-md">
           <div className="grid md:grid-cols-3 gap-8 lg:gap-10">
             <div>
               <p className="text-xs text-neutral-500 tracking-widest uppercase mb-3">01</p>

@@ -29,11 +29,11 @@ export default function ByeongpungDetailPage({ params }: PageProps) {
   const completedPanels = byeongpung.panels.filter(p => p.status === "complete").length
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-dvh min-h-screen bg-white">
       <SiteHeader />
 
       {/* Title Section */}
-      <section className="px-6 lg:px-12 pt-12 lg:pt-20 pb-8 lg:pb-12">
+      <section className="px-6 lg:px-12 pt-12 lg:pt-20 pb-8 lg:pb-12 expo-tland-section-md">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -42,7 +42,7 @@ export default function ByeongpungDetailPage({ params }: PageProps) {
           <p className="text-xs text-neutral-500 tracking-widest uppercase mb-4">
             {byeongpung.theme}
           </p>
-          <h1 className="text-4xl lg:text-6xl font-black text-neutral-900 leading-none tracking-tight mb-6">
+          <h1 className="text-4xl lg:text-6xl font-black text-neutral-900 leading-none tracking-tight mb-6 expo-tland-page-title">
             {byeongpung.title}
           </h1>
           <div className="flex flex-wrap items-center gap-6 text-xs text-neutral-500">
@@ -62,7 +62,7 @@ export default function ByeongpungDetailPage({ params }: PageProps) {
       </section>
 
       {/* Byeongpung Viewer */}
-      <section className="py-8 lg:py-12">
+      <section className="py-8 lg:py-12 expo-tland-section">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -73,7 +73,7 @@ export default function ByeongpungDetailPage({ params }: PageProps) {
       </section>
 
       {/* Navigation */}
-      <section className="px-6 lg:px-12 py-12 lg:py-16 border-t border-neutral-200">
+      <section className="px-6 lg:px-12 py-12 lg:py-16 border-t border-neutral-200 expo-tland-section-md">
         <div className="flex items-stretch justify-between gap-4">
           {prevByeongpung ? (
             <Link
@@ -112,7 +112,7 @@ export default function ByeongpungDetailPage({ params }: PageProps) {
       </section>
 
       {/* Footer */}
-      <footer className="px-6 lg:px-12 py-12 lg:py-16 border-t border-neutral-200">
+      <footer className="px-6 lg:px-12 py-12 lg:py-16 border-t border-neutral-200 expo-tland-section-md">
         <div className="flex flex-col items-center gap-8">
           <Link
             href="/archive"

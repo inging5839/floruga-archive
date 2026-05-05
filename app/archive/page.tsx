@@ -7,7 +7,7 @@ import { archiveByeongpungs } from "@/lib/data"
 
 export default function ArchivePage() {
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-dvh min-h-screen bg-white">
       <SiteHeader />
 
       {/* Hero Title */}
@@ -43,12 +43,12 @@ export default function ArchivePage() {
       </section> */}
 
       {/* Gallery */}
-      <section className="px-6 lg:px-12 py-8 lg:py-12">
+      <section className="px-6 lg:px-12 py-8 lg:py-12 expo-tland-section-md">
         <ArchiveGallery byeongpungs={archiveByeongpungs} />
       </section>
 
       {/* Footer */}
-      <footer className="px-6 lg:px-12 py-12 lg:py-16 border-t border-neutral-200">
+      <footer className="px-6 lg:px-12 py-12 lg:py-16 border-t border-neutral-200 expo-tland-section-md">
         <div className="flex items-center justify-between">
           <p className="text-xs text-neutral-500">
             병풍연화

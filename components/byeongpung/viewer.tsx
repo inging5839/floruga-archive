@@ -18,7 +18,7 @@ export function ByeongpungViewer({ byeongpung, className, title }: ByeongpungVie
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 1024)
+    const checkMobile = () => setIsMobile(window.innerWidth < 1280)
     checkMobile()
     window.addEventListener("resize", checkMobile)
     return () => window.removeEventListener("resize", checkMobile)
@@ -77,7 +77,7 @@ export function ByeongpungViewer({ byeongpung, className, title }: ByeongpungVie
       )}
 
       {/* Panel indicators for mobile */}
-      <div className="lg:hidden flex justify-center gap-2 mb-4 px-4">
+      <div className="xl:hidden flex justify-center gap-2 mb-4 px-4">
         {byeongpung.panels.map((_, idx) => (
           <button
             key={idx}
@@ -108,7 +108,7 @@ export function ByeongpungViewer({ byeongpung, className, title }: ByeongpungVie
         className={`
           flex gap-0
           overflow-x-auto hide-scrollbar
-          snap-x snap-mandatory lg:snap-none
+          snap-x snap-mandatory xl:snap-none
           scroll-smooth
           border border-neutral-200
           bg-stone-100
@@ -127,14 +127,14 @@ export function ByeongpungViewer({ byeongpung, className, title }: ByeongpungVie
             totalPanels={byeongpung.panels.length}
             className={cn(
               "snap-center shrink-0 min-w-0",
-              "lg:border-r lg:border-neutral-300 lg:last:border-r-0",
+              "xl:border-r xl:border-neutral-300 xl:last:border-r-0",
             )}
           />
         ))}
       </div>
 
       {/* Desktop scroll progress indicator */}
-      <div className="hidden lg:block mt-6">
+      <div className="hidden xl:block mt-6">
         <div className="relative h-px bg-neutral-200 w-full max-w-md mx-auto">
           <motion.div
             className="absolute top-0 left-0 h-full bg-neutral-900"
@@ -148,7 +148,7 @@ export function ByeongpungViewer({ byeongpung, className, title }: ByeongpungVie
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 0.5 }}
-        className="lg:hidden text-center mt-3"
+        className="xl:hidden text-center mt-3"
       >
         <p className="text-xs text-neutral-400 tracking-wider uppercase">
           좌우로 밀어 감상해보세요

@@ -42,10 +42,11 @@ export function ByeongpungPanel({
       aria-current={isActive ? "true" : undefined}
       className={cn(
         "relative flex-shrink-0",
-        "w-[75vw] md:w-[40vw] lg:w-auto lg:flex-1",
-        "min-h-[500px] lg:min-h-[600px]",
+        "w-[75vw] md:w-[45vw] max-xl:border-r max-xl:border-neutral-300",
+        "lg:w-auto lg:flex-1",
+        "min-h-[500px] lg:min-h-[600px] expo-tland-panel",
         "overflow-hidden",
-        "md:py-5 lg:py-5",
+        "md:py-4 lg:py-5",
         bgColor,
         className,
       )}
@@ -61,7 +62,7 @@ export function ByeongpungPanel({
 
           {/* Image section - centered */}
           <div className="flex-1 relative px-10 lg:px-6 py-4 lg:py-12 flex items-center justify-center">
-            <div className="relative w-full max-w-full aspect-[9/16] max-h-[min(52vh,420px)] overflow-hidden ">
+            <div className="relative w-full max-w-full aspect-[9/16] max-h-[min(52vh,420px)] expo-tland-panel-media overflow-hidden ">
               <Image
                 src={panel.image}
                 alt={panel.title}

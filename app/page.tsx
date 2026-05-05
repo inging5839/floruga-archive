@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import Link from "next/link"
 import Image from "next/image"
 import { ByeongpungViewer } from "@/components/byeongpung/viewer"
+import { SiteHeader } from "@/components/layout/site-header"
 import { getRelaysForMainPage } from "@/lib/data"
 import { ArrowRight } from "lucide-react"
 
@@ -12,54 +13,17 @@ export default function HomePage() {
   const completedPanels = featured.panels.filter((p) => p.status === "complete").length
 
   return (
-    <main className="min-h-screen bg-white">
-      {/* Header */}
-      <header className="border-b border-neutral-200">
-        <div className="px-6 lg:px-12 py-4">
-          <div className="flex items-center justify-between">
-            <Link
-              href="/"
-              className="text-sm font-medium text-neutral-900 tracking-wide"
-            >
-              병풍연화
-            </Link>
-            <nav className="hidden md:flex items-center gap-8">
-              <Link href="/" className="text-sm text-neutral-900 font-medium">
-                병풍 전시관
-              </Link>
-              <Link href="/archive" className="text-sm text-neutral-600 hover:text-neutral-900 transition-colors">
-                모든 병풍 한 눈에 보기
-              </Link>
-              <Link href="/about" className="text-sm text-neutral-600 hover:text-neutral-900 transition-colors">
-                프로젝트 소개
-              </Link>
-            </nav>
-            <div className="md:hidden flex items-center gap-3">
-              <Link
-                href="/archive"
-                className="text-sm text-neutral-600 hover:text-neutral-900 transition-colors"
-              >
-                전체보기
-              </Link>
-              <Link
-                href="/about"
-                className="text-sm text-neutral-600 hover:text-neutral-900 transition-colors"
-              >
-                프로젝트 소개
-              </Link>
-            </div>
-          </div>
-        </div>
-      </header>
+    <main className="min-h-dvh min-h-screen bg-white">
+      <SiteHeader />
 
       {/* Hero Title */}
-      <section className="px-6 lg:px-12 pt-12 lg:pt-20 pb-8 lg:pb-12">
-        <div className="flex items-center justify-between gap-6">
+      <section className="px-6 lg:px-12 pt-12 lg:pt-20 pb-8 lg:pb-12 expo-tland-section-md">
+        <div className="flex items-center justify-between gap-4 md:gap-6">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-[12vw] lg:text-[10vw] font-black text-neutral-900 leading-none tracking-tighter"
+            className="text-[12vw] lg:text-[10vw] font-black text-neutral-900 leading-none tracking-tighter expo-tland-hero-title"
           >
             병풍연화
           </motion.h1>
@@ -68,7 +32,7 @@ export default function HomePage() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.3, duration: 0.5 }}
-              className="relative w-32 h-32 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-90 lg:h-90 flex-shrink-0"
+              className="relative w-32 h-32 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-36 lg:h-36 xl:w-44 xl:h-44 flex-shrink-0 expo-tland-hero-qr"
             >
               <Image
                 src="/qr_v2.png"
@@ -96,7 +60,7 @@ export default function HomePage() {
           className="mt-6 flex flex-col md:flex-row md:items-end md:justify-between gap-4 px-1"
         >
           <div>
-            <h2 className="text-1xl lg:text-2xl text-neutral-800 font-serif">
+            <h2 className="text-lg md:text-xl lg:text-2xl text-neutral-800 font-serif">
               행동으로 이야기를 바꾸어 나가는 <br></br>릴레이 소설 인터랙티브 전시
             </h2>
           </div>
@@ -112,14 +76,14 @@ export default function HomePage() {
       </section>
 
       {/* Featured Byeongpung */}
-      <section className="md: py-0 lg:py-12 bg-neutral-50 border-t border-neutral-200">
+      <section className="md:py-6 lg:py-12 bg-neutral-50 border-t border-neutral-200 expo-tland-section">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.7 }}
         >
-          <div className="px-6 lg:px-12 py-12 lg:py-20">
-            <h2 className="text-3xl lg:text-4xl text-neutral-900 uppercase mb-10 lg:mb-14 font-black">
+          <div className="px-6 lg:px-12 py-12 lg:py-20 expo-tland-section-lg">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl text-neutral-900 uppercase mb-8 lg:mb-14 font-black">
               제작중인 병풍
             </h2>
             <ByeongpungViewer
@@ -131,13 +95,13 @@ export default function HomePage() {
 
       {/* Past Relays */}
       {others.length > 0 && (
-        <section className="border-t border-neutral-200 bg-neutral-50">
-          <div className="px-6 lg:px-12 py-12 lg:py-20">
-            <h2 className="text-3xl lg:text-4xl text-neutral-900 uppercase mb-10 lg:mb-14 font-black">
+        <section className="border-t border-neutral-200 bg-neutral-50 expo-tland-section">
+          <div className="px-6 lg:px-12 py-12 lg:py-20 expo-tland-section-lg">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl text-neutral-900 uppercase mb-8 lg:mb-14 font-black">
               완성된 병풍
             </h2>
 
-            <div className="space-y-16 lg:space-y-24">
+            <div className="space-y-12 lg:space-y-24 expo-tland-stack">
               {others.slice(0, 2).map((bp, sectionIdx) => (
                 <motion.article
                   key={bp.id}
@@ -169,7 +133,7 @@ export default function HomePage() {
       )}
 
       {/* Footer */}
-      <footer className="px-6 lg:px-12 py-12 lg:py-16 border-t border-neutral-200">
+      <footer className="px-6 lg:px-12 py-12 lg:py-16 border-t border-neutral-200 expo-tland-section-md">
         <div className="flex flex-col items-center gap-8">
           <Link
             href="/archive"

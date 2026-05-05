@@ -176,3 +176,78 @@
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+/*
+ * 가로 태블릿·키오스크: 랜드스케이프이면서 뷰포트 높이가 제한될 때
+ * 세로 패딩·히어로 크기·패널 최소 높이를 줄여 한 화면에 맞춤
+ */
+@media (orientation: landscape) and (max-height: 900px) and (min-width: 768px) {
+  .expo-tland-header-inner {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .expo-tland-tight-nav {
+    gap: 0.75rem;
+  }
+
+  .expo-tland-hero-title {
+    font-size: clamp(2.25rem, 6vw, 3.75rem);
+    line-height: 0.95;
+  }
+
+  .expo-tland-hero-qr {
+    width: 5.5rem !important;
+    height: 5.5rem !important;
+    max-width: 22vw;
+    max-height: 22vw;
+  }
+
+  .expo-tland-page-title {
+    font-size: clamp(2rem, 5.5vw, 3.25rem);
+    line-height: 0.95;
+  }
+
+  .expo-tland-section {
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+  }
+
+  .expo-tland-section-md {
+    padding-top: 1.75rem;
+    padding-bottom: 1.75rem;
+  }
+
+  .expo-tland-section-lg {
+    padding-top: 2.25rem;
+    padding-bottom: 2.25rem;
+  }
+
+  .expo-tland-panel {
+    min-height: min(360px, 68dvh) !important;
+  }
+
+  .expo-tland-panel-media {
+    max-height: min(38dvh, 300px) !important;
+  }
+
+  @media (min-width: 1024px) {
+    .expo-tland-panel {
+      min-height: min(400px, 70dvh) !important;
+    }
+
+    .expo-tland-panel-media {
+      max-height: min(42dvh, 340px) !important;
+    }
+  }
+
+  .expo-tland-stack > :not([hidden]) ~ :not([hidden]) {
+    margin-top: 2.5rem !important;
+  }
+
+  @media (min-width: 1024px) {
+    .expo-tland-stack > :not([hidden]) ~ :not([hidden]) {
+      margin-top: 3.5rem !important;
+    }
+  }
+}
