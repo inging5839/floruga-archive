@@ -64,8 +64,6 @@ export default function ExperiencePage() {
           transition={{ delay: 0.2, duration: 0.5 }}
           className="mt-6 max-w-4xl text-sm lg:text-base text-neutral-600 leading-relaxed"
         >
-          현장에서 병풍연화 작품을 몸으로 체험할 때의 흐름을 안내합니다. 순서대로 진행되며, 각 단계마다
-          스태프 안내가 있을 수 있습니다.
         </motion.p>
       </section>
 
