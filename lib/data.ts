@@ -43,7 +43,7 @@ export const currentByeongpung: Byeongpung = {
       image: panelImages.panel1,
       status: 'complete',
       author: "전시 기획자",
-      createdAt: "2026-05-04"
+      createdAt: "2026-05-04, 17:30"
     },
     {
       id: 2,
@@ -52,7 +52,7 @@ export const currentByeongpung: Byeongpung = {
       image: panelImages.panel2,
       status: 'complete',
       author: "관람객 A",
-      createdAt: "2024-01-16"
+      createdAt: "2026-05-04, 17:30"
     },
     {
       id: 3,
@@ -61,7 +61,7 @@ export const currentByeongpung: Byeongpung = {
       image: panelImages.panel3,
       status: 'complete',
       author: "관람객 B",
-      createdAt: "2024-01-17"
+      createdAt: "2026-05-04, 17:30"
     },
     {
       id: 4,
@@ -70,7 +70,7 @@ export const currentByeongpung: Byeongpung = {
       image: panelImages.panel4,
       status: 'complete',
       author: "관람객 C",
-      createdAt: "2024-01-18"
+      createdAt: "2026-05-04, 17:30"
     },
     {
       id: 5,
@@ -79,7 +79,7 @@ export const currentByeongpung: Byeongpung = {
       image: panelImages.panel5,
       status: 'complete',
       author: "관람객 D",
-      createdAt: "2024-01-19"
+      createdAt: "2026-05-04"
     },
     {
       id: 6,
@@ -88,7 +88,7 @@ export const currentByeongpung: Byeongpung = {
       image: panelImages.panel6,
       status: 'complete',
       author: "AI 자동 생성",
-      createdAt: "2024-01-20"
+      createdAt: "2026-05-04, 17:30"
     }
   ]
 }
@@ -101,15 +101,15 @@ export const archiveByeongpungs: Byeongpung[] = [
     title: "첫 번째 이야기",
     theme: "심청전 - 효녀의 여정",
     totalParticipants: 4,
-    completedAt: "2024-01-20",
+    completedAt: "2026-05-04, 17:30",
     thumbnailImage: panelImages.panel5,
     panels: [
       { id: 1, title: "제1폭", story: "옛날 옛적, 앞을 보지 못하는 심봉사가 개천에 빠지고 말았습니다. 그를 구해준 스님은 “공양미 삼백 석을 바치면 눈을 뜰 수 있을 것이오.”라고 말했습니다.", image: panelImages.panel1, status: 'complete' as const },
-      { id: 2, title: "제2폭", story: "가난한 심 봉사와 어린 심청. 어머니를 일찍 여의고 눈 먼 아버지를 정성껏 모시는 효녀 심청의 고단한 삶이 시작됩니다.", image: panelImages.panel2, status: 'complete' as const },
-      { id: 3, title: "제3폭", story: "가난한 심 봉사와 어린 심청. 어머니를 일찍 여의고 눈 먼 아버지를 정성껏 모시는 효녀 심청의 고단한 삶이 시작됩니다.", image: panelImages.panel3, status: 'complete' as const },
-      { id: 4, title: "제4폭", story: "가난한 심 봉사와 어린 심청. 어머니를 일찍 여의고 눈 먼 아버지를 정성껏 모시는 효녀 심청의 고단한 삶이 시작됩니다.", image: panelImages.panel4, status: 'complete' as const },
-      { id: 5, title: "제5폭", story: "가난한 심 봉사와 어린 심청. 어머니를 일찍 여의고 눈 먼 아버지를 정성껏 모시는 효녀 심청의 고단한 삶이 시작됩니다.", image: panelImages.panel5, status: 'complete' as const },
-      { id: 6, title: "제6폭", story: "가난한 심 봉사와 어린 심청. 어머니를 일찍 여의고 눈 먼 아버지를 정성껏 모시는 효녀 심청의 고단한 삶이 시작됩니다.", image: panelImages.panel6, status: 'complete' as const },
+      { id: 2, title: "제2폭", story: "심청이는 아버지를 위해 공양미 삼백 석에 몸을 팔기로 한 심청. 인당수로 향하는 배 위에서 거친 파도가 그녀를 기다립니다.", image: panelImages.panel2, status: 'complete' as const },
+      { id: 3, title: "제3폭", story: "인당수에 몸을 던진 심청. 용궁에 이른 그녀는 용왕님 앞에 나아가 자신의 효심을 이야기합니다.", image: panelImages.panel3, status: 'complete' as const },
+      { id: 4, title: "제4폭", story: "심청이 지극한 효성에 감동한 용왕은 그녀에게 호감을 갖게 되어 사랑을 표현합니다. 하지만 심청이 이를 받아주지 않자 용왕은 화가나 심청을 가두려 합니다.", image: panelImages.panel4, status: 'complete' as const },
+      { id: 5, title: "제5폭", story: "이를 지켜보면 심청의 엄마는 용왕을 공격합니다. 결국 용왕을 물리치고 심청을 구해냅니다.", image: panelImages.panel5, status: 'complete' as const },
+      { id: 6, title: "제6폭", story: "심청은 용왕의 자리에 오르게 되고 심봉사를 용궁으로 데려옵니다. 세 사람은 재회하여, 함께 행복하게 살아갑니다.", image: panelImages.panel6, status: 'complete' as const },
     ]
   },
   // 두 번째 릴레이 병풍 - 진행 중 (3폭까지 완성)
@@ -144,54 +144,7 @@ export const archiveByeongpungs: Byeongpung[] = [
       { id: 6, title: "제6폭", story: "가난한 심 봉사와 어린 심청. 어머니를 일찍 여의고 눈 먼 아버지를 정성껏 모시는 효녀 심청의 고단한 삶이 시작됩니다.", image: panelImages.panel6, status: 'complete' as const },
     ]
   },
-  // 네 번째 릴레이 병풍 - 대기 중
-  {
-    id: 4,
-    title: "네 번째 이야기",
-    theme: "심청전 - 배고픈 심청",
-    totalParticipants: 0,
-    thumbnailImage: null,
-    panels: [
-      { id: 1, title: "제1폭", story: "가난한 심 봉사와 어린 심청. 어머니를 일찍 여의고 눈 먼 아버지를 정성껏 모시는 효녀 심청의 고단한 삶이 시작됩니다.", image: panelImages.panel1, status: 'complete' as const },
-      { id: 2, title: "제2폭", story: "가난한 심 봉사와 어린 심청. 어머니를 일찍 여의고 눈 먼 아버지를 정성껏 모시는 효녀 심청의 고단한 삶이 시작됩니다.", image: panelImages.panel2, status: 'complete' as const },
-      { id: 3, title: "제3폭", story: "가난한 심 봉사와 어린 심청. 어머니를 일찍 여의고 눈 먼 아버지를 정성껏 모시는 효녀 심청의 고단한 삶이 시작됩니다.", image: panelImages.panel3, status: 'complete' as const },
-      { id: 4, title: "제4폭", story: "가난한 심 봉사와 어린 심청. 어머니를 일찍 여의고 눈 먼 아버지를 정성껏 모시는 효녀 심청의 고단한 삶이 시작됩니다.", image: panelImages.panel4, status: 'complete' as const },
-      { id: 5, title: "제5폭", story: "가난한 심 봉사와 어린 심청. 어머니를 일찍 여의고 눈 먼 아버지를 정성껏 모시는 효녀 심청의 고단한 삶이 시작됩니다.", image: panelImages.panel5, status: 'complete' as const },
-      { id: 6, title: "제6폭", story: "가난한 심 봉사와 어린 심청. 어머니를 일찍 여의고 눈 먼 아버지를 정성껏 모시는 효녀 심청의 고단한 삶이 시작됩니다.", image: panelImages.panel6, status: 'complete' as const },
-    ]
-  },
-  // 다섯 번째 릴레이 병풍 - 대기 중
-  {
-    id: 5,
-    title: "다섯 번째 이야기",
-    theme: "심청전 - 장미꽃을 찾은 심청",
-    totalParticipants: 0,
-    thumbnailImage: null,
-    panels: [
-      { id: 1, title: "제1폭", story: "가난한 심 봉사와 어린 심청. 어머니를 일찍 여의고 눈 먼 아버지를 정성껏 모시는 효녀 심청의 고단한 삶이 시작됩니다.", image: panelImages.panel1, status: 'complete' as const },
-      { id: 2, title: "제2폭", story: "가난한 심 봉사와 어린 심청. 어머니를 일찍 여의고 눈 먼 아버지를 정성껏 모시는 효녀 심청의 고단한 삶이 시작됩니다.", image: panelImages.panel2, status: 'complete' as const },
-      { id: 3, title: "제3폭", story: "가난한 심 봉사와 어린 심청. 어머니를 일찍 여의고 눈 먼 아버지를 정성껏 모시는 효녀 심청의 고단한 삶이 시작됩니다.", image: panelImages.panel3, status: 'complete' as const },
-      { id: 4, title: "제4폭", story: "가난한 심 봉사와 어린 심청. 어머니를 일찍 여의고 눈 먼 아버지를 정성껏 모시는 효녀 심청의 고단한 삶이 시작됩니다.", image: panelImages.panel4, status: 'complete' as const },
-      { id: 5, title: "제5폭", story: "가난한 심 봉사와 어린 심청. 어머니를 일찍 여의고 눈 먼 아버지를 정성껏 모시는 효녀 심청의 고단한 삶이 시작됩니다.", image: panelImages.panel5, status: 'complete' as const },
-      { id: 6, title: "제6폭", story: "가난한 심 봉사와 어린 심청. 어머니를 일찍 여의고 눈 먼 아버지를 정성껏 모시는 효녀 심청의 고단한 삶이 시작됩니다.", image: panelImages.panel6, status: 'complete' as const },
-    ]
-  },
-  // 여섯 번째 릴레이 병풍 - 대기 중
-  {
-    id: 6,
-    title: "여섯 번째 이야기",
-    theme: "심청전 - 용왕이된 심청",
-    totalParticipants: 0,
-    thumbnailImage: null,
-    panels: [
-      { id: 1, title: "제1폭", story: "가난한 심 봉사와 어린 심청. 어머니를 일찍 여의고 눈 먼 아버지를 정성껏 모시는 효녀 심청의 고단한 삶이 시작됩니다.", image: panelImages.panel1, status: 'complete' as const },
-      { id: 2, title: "제2폭", story: "가난한 심 봉사와 어린 심청. 어머니를 일찍 여의고 눈 먼 아버지를 정성껏 모시는 효녀 심청의 고단한 삶이 시작됩니다.", image: panelImages.panel2, status: 'complete' as const },
-      { id: 3, title: "제3폭", story: "가난한 심 봉사와 어린 심청. 어머니를 일찍 여의고 눈 먼 아버지를 정성껏 모시는 효녀 심청의 고단한 삶이 시작됩니다.", image: panelImages.panel3, status: 'complete' as const },
-      { id: 4, title: "제4폭", story: "가난한 심 봉사와 어린 심청. 어머니를 일찍 여의고 눈 먼 아버지를 정성껏 모시는 효녀 심청의 고단한 삶이 시작됩니다.", image: panelImages.panel4, status: 'complete' as const },
-      { id: 5, title: "제5폭", story: "가난한 심 봉사와 어린 심청. 어머니를 일찍 여의고 눈 먼 아버지를 정성껏 모시는 효녀 심청의 고단한 삶이 시작됩니다.", image: panelImages.panel5, status: 'complete' as const },
-      { id: 6, title: "제6폭", story: "가난한 심 봉사와 어린 심청. 어머니를 일찍 여의고 눈 먼 아버지를 정성껏 모시는 효녀 심청의 고단한 삶이 시작됩니다.", image: panelImages.panel6, status: 'complete' as const },
-    ]
-  }
+  
 ]
 
 /** 아카이브 id 1번을 상세 데이터(currentByeongpung)와 합친 목록 */
