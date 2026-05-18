@@ -16,7 +16,7 @@ export interface Byeongpung {
   panels: Panel[]
   completedAt?: string
   totalParticipants: number
-  thumbnailImage?: string
+  thumbnailImage?: string | null
 }
 
 // 새로 업로드된 이미지 URL들 (심청전 시리즈)

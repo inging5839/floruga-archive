@@ -5,6 +5,7 @@ __v0_jsx-dev-runtime.ts
 .snowflake/
 .v0-trash/
 .vercel/
+.wrangler/
 next.user-config.*
 
 # Environment variables
@@ -13,6 +14,7 @@ next.user-config.*
 # Common ignores
 node_modules
 .next/
+tsconfig.tsbuildinfo
 .DS_Store
 
 # pnpm content-addressable store (must never be committed)
