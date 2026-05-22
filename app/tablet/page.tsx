@@ -17,6 +17,11 @@ const WEIGHT_EXAMPLES = [
   { src: "/images/tablet_weight_example_face_100.png", label: "100%" },
 ] as const
 
+/** 같은 LAN의 GPU FastAPI. Vercel env에 NEXT_PUBLIC_ 접두사로 설정 */
+const GPU_BASE_URL = (
+  process.env.NEXT_PUBLIC_WIGGLER_GPU_URL ?? "http://165.194.161.35:10001"
+).replace(/\/$/, "")
+
 export default function TabletExperiencePage() {
   const videoRef = useRef<HTMLVideoElement>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -24,7 +29,15 @@ export default function TabletExperiencePage() {
   const [capturedUrl, setCapturedUrl] = useState<string | null>(null)
   const [cameraError, setCameraError] = useState<string | null>(null)
   const [intensity, setIntensity] = useState([55])
-  const [submitStatus, setSubmitStatus] = useState<"idle" | "loading" | "done">("idle")
+  const [submitStatus, setSubmitStatus] = useState<
+    "idle" | "loading" | "done" | "error"
+  >("idle")
+  const [submitError, setSubmitError] = useState<string | null>(null)
+  const visitorIdRef = useRef<string>(
+    typeof crypto !== "undefined" && crypto.randomUUID
+      ? crypto.randomUUID().replace(/-/g, "").slice(0, 12)
+      : `v${Date.now()}`,
+  )
 
   const stopStream = useCallback(() => {
     setStream((prev) => {
@@ -96,19 +109,57 @@ export default function TabletExperiencePage() {
   const retake = useCallback(() => {
     setCapturedUrl(null)
     setSubmitStatus("idle")
+    setSubmitError(null)
   }, [])
 
   const submitPhoto = useCallback(async () => {
     if (!capturedUrl) return
     setSubmitStatus("loading")
+    setSubmitError(null)
     try {
-      // TODO: 서버/전시 장비 API로 이미지·강도 전송
-      await new Promise((r) => setTimeout(r, 900))
+      const res = await fetch(`${GPU_BASE_URL}/sendFace`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          image: capturedUrl,
+          strength: intensity[0] ?? 0,
+          user_id: visitorIdRef.current,
+        }),
+      })
+
+      const body = (await res.json().catch(() => ({}))) as {
+        error?: string
+        detail?: string | { msg?: string }
+      }
+
+      if (!res.ok) {
+        const detail =
+          typeof body.detail === "string"
+            ? body.detail
+            : body.detail?.msg
+        throw new Error(
+          detail || body.error || `제출 실패 (${res.status})`,
+        )
+      }
+
       setSubmitStatus("done")
-    } catch {
-      setSubmitStatus("idle")
+    } catch (err) {
+      setSubmitStatus("error")
+      const message =
+        err instanceof Error ? err.message : "제출에 실패했습니다."
+      const mixedContentBlock =
+        typeof window !== "undefined" &&
+        window.location.protocol === "https:" &&
+        GPU_BASE_URL.startsWith("http:")
+      setSubmitError(
+        mixedContentBlock
+          ? "HTTPS(wigglerbook.art) 페이지에서는 HTTP GPU 주소로 전송할 수 없습니다. 전시장에서는 HTTP로 접속한 태블릿 전용 URL을 쓰거나, GPU에 HTTPS를 설정해 주세요."
+          : message === "Failed to fetch"
+            ? "GPU 서버에 연결할 수 없습니다. 태블릿이 전시장 Wi‑Fi(같은 네트워크)에 연결되어 있는지, GPU 서버가 실행 중인지 확인해 주세요."
+            : message || "제출에 실패했습니다. 잠시 후 다시 시도해 주세요.",
+      )
     }
-  }, [capturedUrl])
+  }, [capturedUrl, intensity])
 
   const strength = intensity[0] ?? 0
 
@@ -314,6 +365,14 @@ export default function TabletExperiencePage() {
                 {submitStatus === "done" && (
                   <p className="text-xs sm:text-sm text-neutral-700 text-center leading-snug" role="status">
                     제출이 완료되었습니다. Step 1에서「다시 찍기」로 새로 시작할 수 있습니다.
+                  </p>
+                )}
+                {submitStatus === "error" && submitError && (
+                  <p
+                    className="text-xs sm:text-sm text-red-700 text-center leading-snug"
+                    role="alert"
+                  >
+                    {submitError}
                   </p>
                 )}
               </div>
