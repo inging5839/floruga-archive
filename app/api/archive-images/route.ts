@@ -99,8 +99,8 @@ export async function GET() {
       SELECT id, image_url AS imageUrl, filename, scene_id AS sceneId,
              action_name AS actionName, created_at AS createdAt
       FROM archive_images
-      ORDER BY created_at DESC, id DESC
-      LIMIT 100
+      ORDER BY created_at ASC, id ASC
+      LIMIT 500
     `)
 
     const rows = result.result?.[0]?.results ?? result.result?.results ?? []

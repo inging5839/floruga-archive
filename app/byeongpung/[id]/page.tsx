@@ -6,7 +6,7 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 import { ByeongpungViewer } from "@/components/byeongpung/viewer"
 import { SiteHeader } from "@/components/layout/site-header"
-import { archiveByeongpungs } from "@/lib/data"
+import { useArchiveImages } from "@/hooks/use-archive-images"
 import { ArrowLeft, ArrowRight } from "lucide-react"
 
 interface PageProps {
@@ -16,15 +16,28 @@ interface PageProps {
 export default function ByeongpungDetailPage({ params }: PageProps) {
   const { id } = use(params)
   const byeongpungId = parseInt(id, 10)
-  const byeongpung = archiveByeongpungs.find(b => b.id === byeongpungId)
+  const { completed, loading } = useArchiveImages()
 
+  if (loading && completed.length === 0) {
+    return (
+      <main className="min-h-dvh min-h-screen bg-white">
+        <SiteHeader />
+        <div className="flex items-center justify-center py-32 text-sm text-neutral-500">
+          병풍 데이터를 불러오는 중…
+        </div>
+      </main>
+    )
+  }
+
+  const byeongpung = completed.find((b) => b.id === byeongpungId)
   if (!byeongpung) {
     notFound()
   }
 
-  const currentIndex = archiveByeongpungs.findIndex(b => b.id === byeongpungId)
-  const prevByeongpung = currentIndex > 0 ? archiveByeongpungs[currentIndex - 1] : null
-  const nextByeongpung = currentIndex < archiveByeongpungs.length - 1 ? archiveByeongpungs[currentIndex + 1] : null
+  const currentIndex = completed.findIndex((b) => b.id === byeongpungId)
+  const prevByeongpung = currentIndex > 0 ? completed[currentIndex - 1] : null
+  const nextByeongpung =
+    currentIndex < completed.length - 1 ? completed[currentIndex + 1] : null
 
   const completedPanels = byeongpung.panels.filter(p => p.status === "complete").length
 

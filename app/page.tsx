@@ -5,12 +5,15 @@ import Link from "next/link"
 import Image from "next/image"
 import { ByeongpungViewer } from "@/components/byeongpung/viewer"
 import { SiteHeader } from "@/components/layout/site-header"
-import { getRelaysForMainPage } from "@/lib/data"
+import { useArchiveImages } from "@/hooks/use-archive-images"
 import { ArrowRight } from "lucide-react"
 
 export default function HomePage() {
-  const { featured, others } = getRelaysForMainPage()
-  const completedPanels = featured.panels.filter((p) => p.status === "complete").length
+  const { inProgress, completed, loading, error } = useArchiveImages()
+  const featured = inProgress
+  const others = completed
+  const completedPanels = featured?.panels.filter((p) => p.status === "complete").length ?? 0
+  const totalParticipants = featured?.totalParticipants ?? 0
 
   return (
     <main className="min-h-dvh min-h-screen bg-white">
@@ -66,10 +69,13 @@ export default function HomePage() {
           </div>
           <div className="flex items-center gap-6 text-xs text-neutral-500">
             <span>
-              완성된 병풍 <span className="text-neutral-900 font-medium">{completedPanels}</span>개
+              완성된 병풍 <span className="text-neutral-900 font-medium">{completed.length}</span>개
             </span>
             <span>
-              총 참여인원 <span className="text-neutral-900 font-medium">{featured.totalParticipants}</span>명
+              현재 병풍 채워진 칸 <span className="text-neutral-900 font-medium">{completedPanels}</span>/6
+            </span>
+            <span>
+              총 참여인원 <span className="text-neutral-900 font-medium">{totalParticipants}</span>명
             </span>
           </div>
         </motion.div>
@@ -86,9 +92,17 @@ export default function HomePage() {
             <h2 className="text-2xl md:text-3xl lg:text-4xl text-neutral-900 uppercase mb-8 lg:mb-14 font-black">
               제작중인 병풍
             </h2>
-            <ByeongpungViewer
-              byeongpung={featured}
-            />
+            {loading && !featured ? (
+              <div className="flex items-center justify-center py-32 text-sm text-neutral-500">
+                병풍 데이터를 불러오는 중…
+              </div>
+            ) : featured ? (
+              <ByeongpungViewer byeongpung={featured} />
+            ) : (
+              <div className="flex items-center justify-center py-32 text-sm text-neutral-500">
+                {error ?? "표시할 병풍이 없습니다"}
+              </div>
+            )}
           </div>
         </motion.div>
       </section>
