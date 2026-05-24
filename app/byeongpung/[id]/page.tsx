@@ -64,12 +64,6 @@ export default function ByeongpungDetailPage({ params }: PageProps) {
                 <span className="text-neutral-400">완료일</span> {byeongpung.completedAt}
               </span>
             )}
-            <span>
-              <span className="text-neutral-900 font-medium">{completedPanels}</span>개 패널
-            </span>
-            <span>
-              <span className="text-neutral-900 font-medium">{byeongpung.totalParticipants}</span>명 참여
-            </span>
           </div>
         </motion.div>
       </section>

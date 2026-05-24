@@ -21,7 +21,7 @@ export function ByeongpungPanel({
   className,
 }: ByeongpungPanelProps) {
   const isComplete = panel.status === "complete"
-  const isInProgress = panel.status === "in-progress"
+  const showImage = Boolean(panel.image)
 
   // Alternating background colors for magazine style
   const bgColors = [
@@ -51,85 +51,56 @@ export function ByeongpungPanel({
         className,
       )}
     >
-      {isComplete && panel.image ? (
+      {showImage ? (
         <div className="relative h-full flex flex-col">
-          {/* Top section with small text */}
-          {/* <div className="p-4 lg:p-6">
-            <p className="text-[10px] lg:text-xs text-neutral-500 tracking-wider uppercase">
-              {panel.createdAt || `${index + 1}번째 패널`}
-            </p>
-          </div> */}
-
-          {/* Image section - centered */}
-          <div className="flex-1 relative p-0 flex items-center justify-center">
-            <div className="relative w-full max-w-full aspect-[9/16] max-h-[min(68vh,540px)] expo-tland-panel-media overflow-hidden ">
-              <Image
-                src={panel.image}
-                alt={panel.title}
-                fill
-                className="object-contain"
-                sizes="(max-width: 768px) 75vw, (max-width: 1024px) 40vw, 16vw"
-                priority={index < 2}
-              />
-            </div>
-          </div>
-
-          {/* Bottom section with title and story */}
-          {/* <div className="px-4 py-4 lg:p-6 mt-auto">
-            <h3 className="text-lg lg:text-xl font-bold text-neutral-900 tracking-tight mb-2 uppercase">
-              {panel.title}
-            </h3>
-            <p className="text-xs lg:text-sm text-neutral-600 leading-relaxed line-clamp-3">
-              {panel.story}
-            </p>
-          </div> */}
-        </div>
-      ) : (
-        <div className="h-full flex flex-col">
-          {/* Top section */}
-          <div className="p-2 lg:p-3">
-            {/* <p className="text-[10px] lg:text-xs text-neutral-400 tracking-wider uppercase">
-              {isInProgress ? "병풍 제작 중" : "곧 공개"}
-            </p> */}
-          </div>
-
-          {/* Center content */}
-          <div className="flex-1 flex items-center justify-center px-3">
-            {isInProgress ? (
-              <motion.div 
-                className="text-center"
-                animate={{ opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+          <div className="flex-1 relative p-10 flex items-center justify-center">
+            {isComplete ? (
+              <a
+                href={panel.image!}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative block w-full max-w-full aspect-[9/16] max-h-[min(68vh,540px)] lg:max-h-[min(72vh,580px)] expo-tland-panel-media overflow-hidden cursor-pointer transition-opacity hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-400"
+                aria-label={`${panel.title} 이미지 원본 보기`}
               >
-                <div className="w-12 h-12 mx-auto mb-4 border border-neutral-400 rounded-full flex items-center justify-center">
-                  <motion.div 
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-                    className="w-6 h-6 border-t border-r border-neutral-500 rounded-full"
-                  />
-                </div>
-                <p className="text-xs text-neutral-500 tracking-wide">
-                  제작 중...
-                </p>
-              </motion.div>
+                <Image
+                  src={panel.image!}
+                  alt={panel.title}
+                  fill
+                  className="object-contain pointer-events-none"
+                  sizes="(max-width: 768px) 75vw, (max-width: 1024px) 40vw, 16vw"
+                  priority={index < 2}
+                  draggable={false}
+                />
+              </a>
             ) : (
-              <div className="text-center">
-                <div className="w-10 h-10 mx-auto mb-3 opacity-30">
-                  <svg viewBox="0 0 24 24" fill="none" className="w-full h-full text-neutral-500">
-                    <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1" strokeDasharray="4 2" />
-                  </svg>
-                </div>
-                <p className="text-xs text-neutral-400">제작 중</p>
+              <div
+                className="relative block w-full max-w-full aspect-[9/16] max-h-[min(68vh,540px)] lg:max-h-[min(72vh,580px)] expo-tland-panel-media overflow-hidden"
+                aria-label="제작 중"
+              >
+                <Image
+                  src={panel.image!}
+                  alt="제작 중"
+                  fill
+                  className="object-contain"
+                  sizes="(max-width: 768px) 75vw, (max-width: 1024px) 40vw, 16vw"
+                  draggable={false}
+                />
               </div>
             )}
           </div>
-
-          {/* Bottom section with title */}
-          {/* <div className="p-4 lg:p-6 mt-auto">
-            <h3 className="text-lg lg:text-xl font-bold text-neutral-400 tracking-tight uppercase">
-              {panel.title}
-            </h3>
-          </div> */}
+        </div>
+      ) : (
+        <div className="h-full flex flex-col">
+          <div className="flex-1 flex items-center justify-center px-3">
+            <div className="text-center">
+              <div className="w-10 h-10 mx-auto mb-3 opacity-30">
+                <svg viewBox="0 0 24 24" fill="none" className="w-full h-full text-neutral-500">
+                  <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1" strokeDasharray="4 2" />
+                </svg>
+              </div>
+              <p className="text-xs text-neutral-400">제작 중</p>
+            </div>
+          </div>
         </div>
       )}
     </motion.div>

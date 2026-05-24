@@ -28,11 +28,11 @@ export function SiteHeader() {
             <Link href="/archive" className={getLinkClass(pathname, "/archive")}>
               모든 병풍 한 눈에 보기
             </Link>
+            <Link href="/experience" className={getLinkClass(pathname, "/experience")}>
+              체험 안내
+            </Link>
             <Link href="/about" className={getLinkClass(pathname, "/about")}>
               프로젝트 소개
-            </Link>
-            <Link href="/experience" className={getLinkClass(pathname, "/experience")}>
-              작품 체험
             </Link>
           </nav>
 

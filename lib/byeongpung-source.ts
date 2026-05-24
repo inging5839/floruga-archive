@@ -18,6 +18,13 @@ export const FIRST_PANEL_D1_ID = Number(
 export const FIRST_PANEL_FILENAME =
   process.env.NEXT_PUBLIC_BYEONGPUNG_FIRST_PANEL_FILENAME ?? "I-1.png"
 
+/** D1 archive_images — 제작 중(빈 폭) 플레이스홀더 */
+export const WAIT_PANEL_D1_ID = Number(
+  process.env.NEXT_PUBLIC_BYEONGPUNG_WAIT_PANEL_D1_ID ?? "7",
+)
+export const WAIT_PANEL_FILENAME =
+  process.env.NEXT_PUBLIC_BYEONGPUNG_WAIT_PANEL_FILENAME ?? "WAIT.png"
+
 /**
  * 제6폭: 5번째 칸(group[3])의 sceneId → E 이미지 파일명 매핑.
  * D1에서 해당 filename의 imageUrl을 찾아 사용한다.
@@ -84,9 +91,16 @@ function isFirstPanelRecord(row: ArchiveImage): boolean {
   return filename === FIRST_PANEL_FILENAME
 }
 
-/** I-1 또는 E*-1 처럼 고정 폭에 쓰이는 row인지 여부 */
+function isWaitPanelRecord(row: ArchiveImage): boolean {
+  if (row.id === WAIT_PANEL_D1_ID) return true
+  return row.filename?.trim() === WAIT_PANEL_FILENAME
+}
+
+/** I-1, WAIT, E*-1 처럼 고정·플레이스홀더 row인지 여부 */
 function isFixedPanelRecord(row: ArchiveImage): boolean {
-  return isFirstPanelRecord(row) || isEPanelRecord(row)
+  return (
+    isFirstPanelRecord(row) || isWaitPanelRecord(row) || isEPanelRecord(row)
+  )
 }
 
 function resolveFirstPanelImage(rows: ArchiveImage[]): string {
@@ -94,6 +108,13 @@ function resolveFirstPanelImage(rows: ArchiveImage[]): string {
     rows.find((row) => row.id === FIRST_PANEL_D1_ID) ??
     rows.find((row) => row.filename?.trim() === FIRST_PANEL_FILENAME)
   return match?.imageUrl ?? FIRST_PANEL_IMAGE
+}
+
+function resolveWaitPanelImage(rows: ArchiveImage[]): string | null {
+  const match =
+    rows.find((row) => row.id === WAIT_PANEL_D1_ID) ??
+    rows.find((row) => row.filename?.trim() === WAIT_PANEL_FILENAME)
+  return match?.imageUrl ?? null
 }
 
 /**
@@ -105,6 +126,7 @@ export function groupArchiveImages(rows: ArchiveImage[]): {
   completed: Byeongpung[]
 } {
   const firstPanelImage = resolveFirstPanelImage(rows)
+  const waitPanelImage = resolveWaitPanelImage(rows)
   const eImageMap = buildEImageMap(rows)
   const participantRows = rows.filter((row) => !isFixedPanelRecord(row))
 
@@ -122,7 +144,13 @@ export function groupArchiveImages(rows: ArchiveImage[]): {
   let inProgress: Byeongpung | null = null
 
   groups.forEach((group, idx) => {
-    const byeongpung = buildByeongpung(group, idx + 1, firstPanelImage, eImageMap)
+    const byeongpung = buildByeongpung(
+      group,
+      idx + 1,
+      firstPanelImage,
+      waitPanelImage,
+      eImageMap,
+    )
     if (group.length >= IMAGES_PER_BYEONGPUNG) {
       completed.push(byeongpung)
     } else {
@@ -132,7 +160,13 @@ export function groupArchiveImages(rows: ArchiveImage[]): {
 
   // 모든 그룹이 완성됐다면 새 빈 병풍을 다음 슬롯으로 보여준다
   if (!inProgress) {
-    inProgress = buildByeongpung([], groups.length + 1, firstPanelImage, eImageMap)
+    inProgress = buildByeongpung(
+      [],
+      groups.length + 1,
+      firstPanelImage,
+      waitPanelImage,
+      eImageMap,
+    )
   }
 
   return { inProgress, completed: completed.reverse() }
@@ -142,6 +176,7 @@ function buildByeongpung(
   group: ArchiveImage[],
   sequence: number,
   firstPanelImage: string,
+  waitPanelImage: string | null,
   eImageMap: Map<string, string>,
 ): Byeongpung {
   const middle: Panel[] = Array.from({ length: IMAGES_PER_BYEONGPUNG }).map(
@@ -151,7 +186,7 @@ function buildByeongpung(
         id: i + 2,
         title: `제${i + 2}폭`,
         story: null,
-        image: row?.imageUrl ?? null,
+        image: row?.imageUrl ?? waitPanelImage,
         status: row ? "complete" : "waiting",
         author: row?.sceneId ? `Scene ${row.sceneId}` : undefined,
         createdAt: row?.createdAt,
@@ -174,7 +209,7 @@ function buildByeongpung(
         id: 6,
         title: "제6폭",
         story: null,
-        image: null,
+        image: waitPanelImage,
         status: "waiting",
       }
 

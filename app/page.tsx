@@ -22,14 +22,24 @@ export default function HomePage() {
       {/* Hero Title */}
       <section className="px-6 lg:px-12 pt-12 lg:pt-20 pb-8 lg:pb-12 expo-tland-section-md">
         <div className="flex items-center justify-between gap-4 md:gap-6">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-[12vw] lg:text-[10vw] font-black text-neutral-900 leading-none tracking-tighter expo-tland-hero-title"
-          >
-            병풍연화
-          </motion.h1>
+          <div>
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="text-[6vw] lg:text-[6vw] font-black text-neutral-900 leading-none tracking-tighter expo-tland-hero-title"
+            >
+              병풍연화
+            </motion.h1>
+            <motion.h2
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.15, duration: 0.6 }}
+              className="m-5 text-lg md:text-2xl lg:text-3xl text-neutral-800 font-serif leading-none"
+            >
+              아카이브 갤러리
+            </motion.h2>
+          </div>
           <div className="hidden md:flex flex-col items-center gap-2 md:gap-2.5 lg:gap-3 flex-shrink-0 max-w-[40vw] sm:max-w-none">
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
@@ -60,20 +70,15 @@ export default function HomePage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3, duration: 0.6 }}
-          className="mt-6 flex flex-col md:flex-row md:items-end md:justify-between gap-4 px-1"
+          className="mt-6 flex flex-col md:flex-row md:items-end md:justify-end gap-4"
         >
-          <div>
-            <h2 className="text-lg md:text-xl lg:text-2xl text-neutral-800 font-serif">
-              행동으로 이야기를 바꾸어 나가는 <br></br>릴레이 소설 인터랙티브 전시
-            </h2>
-          </div>
-          <div className="flex items-center gap-6 text-xs text-neutral-500">
+          <div className="flex items-center gap-6 px-6 text-xs text-neutral-500">
             <span>
               완성된 병풍 <span className="text-neutral-900 font-medium">{completed.length}</span>개
             </span>
-            <span>
+            {/* <span>
               현재 병풍 채워진 칸 <span className="text-neutral-900 font-medium">{completedPanels}</span>/6
-            </span>
+            </span> */}
             <span>
               총 참여인원 <span className="text-neutral-900 font-medium">{totalParticipants}</span>명
             </span>
