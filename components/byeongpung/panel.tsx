@@ -26,11 +26,11 @@ export function ByeongpungPanel({
   // Alternating background colors for magazine style
   const bgColors = [
     "bg-stone-100",
-    "bg-stone-200",
     "bg-stone-100",
-    "bg-stone-200",
     "bg-stone-100",
-    "bg-stone-200",
+    "bg-stone-100",
+    "bg-stone-100",
+    "bg-stone-100",
   ]
   const bgColor = bgColors[index % bgColors.length]
 
@@ -46,7 +46,7 @@ export function ByeongpungPanel({
         "lg:w-auto lg:flex-1",
         "min-h-[500px] lg:min-h-[600px] expo-tland-panel",
         "overflow-hidden",
-        "md:py-4 lg:py-5",
+        "py-0",
         bgColor,
         className,
       )}
@@ -61,8 +61,8 @@ export function ByeongpungPanel({
           </div> */}
 
           {/* Image section - centered */}
-          <div className="flex-1 relative px-10 lg:px-6 py-4 lg:py-12 flex items-center justify-center">
-            <div className="relative w-full max-w-full aspect-[9/16] max-h-[min(52vh,420px)] expo-tland-panel-media overflow-hidden ">
+          <div className="flex-1 relative p-0 flex items-center justify-center">
+            <div className="relative w-full max-w-full aspect-[9/16] max-h-[min(68vh,540px)] expo-tland-panel-media overflow-hidden ">
               <Image
                 src={panel.image}
                 alt={panel.title}
@@ -75,31 +75,26 @@ export function ByeongpungPanel({
           </div>
 
           {/* Bottom section with title and story */}
-          <div className="px-4 py-4 lg:p-6 mt-auto">
+          {/* <div className="px-4 py-4 lg:p-6 mt-auto">
             <h3 className="text-lg lg:text-xl font-bold text-neutral-900 tracking-tight mb-2 uppercase">
               {panel.title}
             </h3>
             <p className="text-xs lg:text-sm text-neutral-600 leading-relaxed line-clamp-3">
               {panel.story}
             </p>
-            {panel.author && (
-              <p className="mt-3 text-[10px] text-neutral-400 tracking-wide">
-                <span className="text-neutral-500">글</span> {panel.author}
-              </p>
-            )}
-          </div>
+          </div> */}
         </div>
       ) : (
         <div className="h-full flex flex-col">
           {/* Top section */}
-          <div className="p-4 lg:p-6">
-            <p className="text-[10px] lg:text-xs text-neutral-400 tracking-wider uppercase">
+          <div className="p-2 lg:p-3">
+            {/* <p className="text-[10px] lg:text-xs text-neutral-400 tracking-wider uppercase">
               {isInProgress ? "병풍 제작 중" : "곧 공개"}
-            </p>
+            </p> */}
           </div>
 
           {/* Center content */}
-          <div className="flex-1 flex items-center justify-center px-6">
+          <div className="flex-1 flex items-center justify-center px-3">
             {isInProgress ? (
               <motion.div 
                 className="text-center"
@@ -124,17 +119,17 @@ export function ByeongpungPanel({
                     <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1" strokeDasharray="4 2" />
                   </svg>
                 </div>
-                <p className="text-xs text-neutral-400">대기 중</p>
+                <p className="text-xs text-neutral-400">제작 중</p>
               </div>
             )}
           </div>
 
           {/* Bottom section with title */}
-          <div className="p-4 lg:p-6 mt-auto">
+          {/* <div className="p-4 lg:p-6 mt-auto">
             <h3 className="text-lg lg:text-xl font-bold text-neutral-400 tracking-tight uppercase">
               {panel.title}
             </h3>
-          </div>
+          </div> */}
         </div>
       )}
     </motion.div>

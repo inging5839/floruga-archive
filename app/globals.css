@@ -228,7 +228,7 @@
   }
 
   .expo-tland-panel-media {
-    max-height: min(38dvh, 300px) !important;
+    max-height: min(68dvh, 540px) !important;
   }
 
   @media (min-width: 1024px) {
@@ -237,7 +237,7 @@
     }
 
     .expo-tland-panel-media {
-      max-height: min(42dvh, 340px) !important;
+      max-height: min(72dvh, 580px) !important;
     }
   }
 
