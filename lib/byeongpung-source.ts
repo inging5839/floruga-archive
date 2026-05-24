@@ -159,6 +159,25 @@ function buildByeongpung(
     },
   )
 
+  const isComplete = group.length >= IMAGES_PER_BYEONGPUNG
+
+  // 제6폭: 2~5폭이 모두 채워진 경우에만 E 이미지 표시
+  const lastPanel: Panel = isComplete
+    ? {
+        id: 6,
+        title: "제6폭",
+        story: null,
+        image: resolveLastPanelImage(group, eImageMap),
+        status: "complete",
+      }
+    : {
+        id: 6,
+        title: "제6폭",
+        story: null,
+        image: null,
+        status: "waiting",
+      }
+
   const panels: Panel[] = [
     {
       id: 1,
@@ -168,16 +187,8 @@ function buildByeongpung(
       status: "complete",
     },
     ...middle,
-    {
-      id: 6,
-      title: "제6폭",
-      story: null,
-      image: resolveLastPanelImage(group, eImageMap),
-      status: "complete",
-    },
+    lastPanel,
   ]
-
-  const isComplete = group.length >= IMAGES_PER_BYEONGPUNG
   const latest = group[group.length - 1]
   const thumbnailImage =
     [...group].reverse().find((row) => row.imageUrl)?.imageUrl ?? null
