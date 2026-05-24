@@ -28,7 +28,7 @@ export default function TabletExperiencePage() {
   const [stream, setStream] = useState<MediaStream | null>(null)
   const [capturedUrl, setCapturedUrl] = useState<string | null>(null)
   const [cameraError, setCameraError] = useState<string | null>(null)
-  const [intensity, setIntensity] = useState([55])
+  const [intensity, setIntensity] = useState([100])
   const [submitStatus, setSubmitStatus] = useState<
     "idle" | "loading" | "done" | "error"
   >("idle")
