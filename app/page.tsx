@@ -131,9 +131,9 @@ export default function HomePage() {
                 >
                   <div className="mb-6 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
                     <div>
-                      {/* <p className="text-sm text-neutral-400 font-mono mb-1">
-                        #{String(bp.id).padStart(2, '0')}
-                      </p> */}
+                      <p className="text-xs text-neutral-600 tracking-[0.08em]">
+                        {bp.id}번째 이야기
+                      </p>
                     </div>
                     <Link
                       href={`/byeongpung/${bp.id}`}
