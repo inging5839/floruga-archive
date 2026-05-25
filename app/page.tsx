@@ -27,7 +27,7 @@ export default function HomePage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-[6vw] lg:text-[6vw] font-black text-neutral-900 leading-none tracking-tighter expo-tland-hero-title"
+              className="text-[14vw] sm:text-4xl md:text-[3vw] lg:text-[6vw] font-black text-neutral-900 leading-none tracking-tighter expo-tland-hero-title"
             >
               병풍연화
             </motion.h1>
@@ -35,7 +35,7 @@ export default function HomePage() {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.15, duration: 0.6 }}
-              className="m-5 text-lg md:text-2xl lg:text-3xl text-neutral-800 font-serif leading-none"
+              className="mt-3 mx-1 lg:m-2 sm:mt-2 sm:text-lg md:text-2xl lg:text-3xl text-neutral-800 font-serif leading-none"
             >
               아카이브 갤러리
             </motion.h2>
@@ -72,7 +72,7 @@ export default function HomePage() {
           transition={{ delay: 0.3, duration: 0.6 }}
           className="mt-6 flex flex-col md:flex-row md:items-end md:justify-end gap-4"
         >
-          <div className="flex items-center gap-6 px-6 text-xs text-neutral-500">
+          <div className="flex lg:items-center sm:items-start gap-6 lg:px-6 text-xs text-neutral-500">
             <span>
               완성된 병풍 <span className="text-neutral-900 font-medium">{completed.length}</span>개
             </span>

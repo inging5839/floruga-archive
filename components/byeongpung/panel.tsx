@@ -44,7 +44,7 @@ export function ByeongpungPanel({
         "relative flex-shrink-0",
         "w-[75vw] md:w-[45vw] max-xl:border-r max-xl:border-neutral-300",
         "lg:w-auto lg:flex-1",
-        "min-h-[500px] lg:min-h-[600px] expo-tland-panel",
+        "expo-tland-panel",
         "overflow-hidden",
         "py-0",
         bgColor,
