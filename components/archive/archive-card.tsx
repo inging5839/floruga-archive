@@ -47,13 +47,6 @@ export function ArchiveCard({ byeongpung, index }: ArchiveCardProps) {
           <p className="text-xs text-neutral-500">
             {formatDate(byeongpung.completedAt)}
           </p>
-          {/* <span className={`px-3 py-1 text-xs border rounded-full ${
-            isComplete 
-              ? 'border-neutral-900 text-neutral-900' 
-              : 'border-neutral-300 text-neutral-500'
-          }`}>
-            {isComplete ? 'Complete' : 'In Progress'}
-          </span> */}
         </div>
 
         {/* Image */}
@@ -80,15 +73,15 @@ export function ArchiveCard({ byeongpung, index }: ArchiveCardProps) {
           )}
         </div>
 
-        {/* Title */}
+        {/* Title
         <h3 className="text-lg font-bold text-neutral-900 mb-2 group-hover:underline underline-offset-2">
           {byeongpung.title}
-        </h3>
+        </h3> */}
 
         {/* Description */}
-        <p className="text-sm text-neutral-600 leading-relaxed mb-4 line-clamp-3">
+        {/* <p className="text-sm text-neutral-600 leading-relaxed mb-4 line-clamp-3">
           {byeongpung.theme}
-        </p>
+        </p> */}
 
         {/* Footer - Author and Duration */}
         
