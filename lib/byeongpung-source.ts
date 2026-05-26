@@ -81,7 +81,6 @@ export interface ArchiveImage {
   imageUrl: string
   filename?: string | null
   sceneId?: string | null
-  actionName?: string | null
   createdAt: string
 }
 

@@ -4,7 +4,6 @@ type ArchiveImagePayload = {
   imageUrl?: string
   filename?: string
   sceneId?: string | number
-  actionName?: string
 }
 
 function getRequiredEnv(name: string) {
@@ -64,18 +63,16 @@ export async function POST(request: Request) {
 
     await queryD1(
       `
-        INSERT INTO archive_images (image_url, filename, scene_id, action_name)
-        VALUES (?, ?, ?, ?)
+        INSERT INTO archive_images (image_url, filename, scene_id)
+        VALUES (?, ?, ?)
         ON CONFLICT(image_url) DO UPDATE SET
           filename = excluded.filename,
-          scene_id = excluded.scene_id,
-          action_name = excluded.action_name
+          scene_id = excluded.scene_id
       `,
       [
         imageUrl,
         payload.filename?.trim() || null,
         payload.sceneId == null ? null : String(payload.sceneId),
-        payload.actionName?.trim() || null,
       ],
     )
 
@@ -97,7 +94,7 @@ export async function GET() {
   try {
     const result = await queryD1(`
       SELECT id, image_url AS imageUrl, filename, scene_id AS sceneId,
-             action_name AS actionName, created_at AS createdAt
+             created_at AS createdAt
       FROM archive_images
       ORDER BY created_at ASC, id ASC
       LIMIT 500
