@@ -109,7 +109,7 @@ export function ByeongpungViewer({ byeongpung, className, title, variant = "defa
         onScroll={handleScroll}
         className={cn(
           "flex gap-0 overflow-x-auto hide-scrollbar snap-x snap-mandatory xl:snap-none scroll-smooth border",
-          isExhibition ? "border-[#c9a86a]/25 bg-transparent" : "border-neutral-200 bg-stone-100",
+          isExhibition ? "border-white/30 bg-transparent" : "border-neutral-200 bg-stone-100",
           title && "border-t-0",
         )}
         style={{
@@ -127,7 +127,7 @@ export function ByeongpungViewer({ byeongpung, className, title, variant = "defa
             className={cn(
               "snap-center shrink-0 min-w-0",
               isExhibition
-                ? "xl:border-r xl:border-[#c9a86a]/20 xl:last:border-r-0"
+                ? "xl:border-r xl:border-white/25 xl:last:border-r-0"
                 : "xl:border-r xl:border-neutral-300 xl:last:border-r-0",
             )}
           />
@@ -143,7 +143,7 @@ export function ByeongpungViewer({ byeongpung, className, title, variant = "defa
           <motion.div
             className={cn(
               "absolute top-0 left-0 h-full",
-              isExhibition ? "bg-[#c9a86a]" : "bg-neutral-900",
+              isExhibition ? "bg-white" : "bg-neutral-900",
             )}
             style={{ width: progressWidth }}
           />

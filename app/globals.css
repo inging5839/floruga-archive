@@ -197,10 +197,10 @@
   }
 
   .expo-tland-hero-qr {
-    width: 5.5rem !important;
-    height: 5.5rem !important;
-    max-width: 22vw;
-    max-height: 22vw;
+    width: min(18rem, 38vw) !important;
+    height: min(13.5rem, 28vw) !important;
+    max-width: 38vw;
+    max-height: 28vw;
   }
 
   .expo-tland-page-title {

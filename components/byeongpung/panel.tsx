@@ -30,8 +30,8 @@ export function ByeongpungPanel({
   const sidePanelWidth = 68 + Math.round(normalizedDepth * 8)
 
   const sharedMediaFrameClass = isExhibition
-    ? "relative block w-full max-w-full aspect-[9/16] max-h-[min(82vh,720px)] lg:max-h-[min(86vh,860px)] expo-tland-panel-media overflow-hidden border-[6px] border-[#c9a86a] bg-stone-50 shadow-[0_22px_46px_rgba(0,0,0,0.55),inset_0_0_0_1px_rgba(255,228,170,0.55),inset_0_22px_24px_-18px_rgba(255,236,184,0.7),inset_0_-18px_22px_-20px_rgba(120,82,32,0.55),inset_20px_0_22px_-20px_rgba(255,224,158,0.55),inset_-20px_0_22px_-20px_rgba(255,224,158,0.55)]"
-    : "relative block w-full max-w-full aspect-[9/16] max-h-[min(68vh,540px)] lg:max-h-[min(72vh,580px)] expo-tland-panel-media overflow-hidden border-[6px] border-[#0f0d0b] bg-stone-100 shadow-[0_18px_40px_rgba(0,0,0,0.38),inset_0_0_0_1px_rgba(255,241,214,0.26),inset_0_20px_22px_-18px_rgba(255,229,186,0.62),inset_0_-16px_20px_-20px_rgba(80,62,38,0.38),inset_18px_0_20px_-20px_rgba(255,224,178,0.42),inset_-18px_0_20px_-20px_rgba(255,224,178,0.38)]"
+    ? "relative block w-full max-w-full aspect-[9/16] max-h-[min(82vh,720px)] lg:max-h-[min(86vh,860px)] expo-tland-panel-media overflow-hidden border-[6px] border-white bg-stone-50 shadow-[0_22px_46px_rgba(0,0,0,0.55),inset_0_0_0_1px_rgba(255,228,170,0.55),inset_0_22px_24px_-18px_rgba(255,236,184,0.7),inset_0_-18px_22px_-20px_rgba(120,82,32,0.55),inset_20px_0_22px_-20px_rgba(255,224,158,0.55),inset_-20px_0_22px_-20px_rgba(255,224,158,0.55)]"
+    : "relative block w-full max-w-full aspect-[9/16] max-h-[min(68vh,540px)] lg:max-h-[min(72vh,580px)] expo-tland-panel-media overflow-hidden border-[6px] border-white bg-stone-100 shadow-[0_18px_40px_rgba(0,0,0,0.38),inset_0_0_0_1px_rgba(255,241,214,0.26),inset_0_20px_22px_-18px_rgba(255,229,186,0.62),inset_0_-16px_20px_-20px_rgba(80,62,38,0.38),inset_18px_0_20px_-20px_rgba(255,224,178,0.42),inset_-18px_0_20px_-20px_rgba(255,224,178,0.38)]"
 
   return (
     <motion.div
@@ -47,8 +47,8 @@ export function ByeongpungPanel({
         "overflow-hidden",
         "py-0",
         isExhibition
-          ? "border-r border-[#c9a86a]/25 bg-transparent"
-          : "border-r border-black/20 bg-[linear-gradient(to_bottom,#fefdfb_0%,#f5efe4_50%,#fffefc_100%)] before:pointer-events-none before:absolute before:inset-0 before:bg-[radial-gradient(circle_at_50%_52%,rgba(211,186,150,0.28)_0%,rgba(211,186,150,0.16)_28%,rgba(211,186,150,0.06)_46%,transparent_72%)]",
+          ? "border-r border-white/25 bg-transparent"
+          : "border-r border-white/50 bg-[linear-gradient(to_bottom,#fefdfb_0%,#f5efe4_50%,#fffefc_100%)] before:pointer-events-none before:absolute before:inset-0 before:bg-[radial-gradient(circle_at_50%_52%,rgba(211,186,150,0.28)_0%,rgba(211,186,150,0.16)_28%,rgba(211,186,150,0.06)_46%,transparent_72%)]",
         className,
       )}
     >
@@ -65,7 +65,7 @@ export function ByeongpungPanel({
                 "pointer-events-none absolute inset-y-[14%] left-[4%] border-[3px] shadow-[0_12px_24px_rgba(0,0,0,0.25),inset_0_8px_14px_-12px_rgba(255,223,176,0.42)]",
                 isExhibition
                   ? "border-[#c9a86a]/85 bg-gradient-to-b from-[#f5e3c3]/30 to-[#caa872]/10"
-                  : "border-[#100e0c]/95 bg-gradient-to-b from-[#f0e8de]/30 to-[#dccfbe]/10",
+                  : "border-[#c9a86a]/85 bg-gradient-to-b from-[#f0e8de]/30 to-[#dccfbe]/10",
               )}
               style={{ width: `${sidePanelWidth}%`, opacity: sidePanelOpacity }}
               aria-hidden="true"
@@ -75,7 +75,7 @@ export function ByeongpungPanel({
                 "pointer-events-none absolute inset-y-[13%] right-[4%] border-[3px] shadow-[0_12px_24px_rgba(0,0,0,0.25),inset_0_8px_14px_-12px_rgba(255,223,176,0.4)]",
                 isExhibition
                   ? "border-[#c9a86a]/85 bg-gradient-to-b from-[#f5e3c3]/26 to-[#caa872]/8"
-                  : "border-[#100e0c]/95 bg-gradient-to-b from-[#efe3d7]/26 to-[#d9cab7]/8",
+                  : "border-[#c9a86a]/85 bg-gradient-to-b from-[#efe3d7]/26 to-[#d9cab7]/8",
               )}
               style={{ width: `${sidePanelWidth}%`, opacity: sidePanelOpacity }}
               aria-hidden="true"
@@ -89,8 +89,8 @@ export function ByeongpungPanel({
                   sharedMediaFrameClass,
                   "cursor-pointer transition-all duration-300",
                   isExhibition
-                    ? "before:pointer-events-none before:absolute before:inset-[4.5%] before:border-[5px] before:border-[#c9a86a]/60"
-                    : "before:pointer-events-none before:absolute before:inset-[4.5%] before:border-[5px] before:border-black/45",
+                    ? "before:pointer-events-none before:absolute before:inset-[4.5%] before:border-[5px] before:border-white/60"
+                    : "before:pointer-events-none before:absolute before:inset-[4.5%] before:border-[5px] before:border-white/70",
                   "after:pointer-events-none after:absolute after:inset-0 after:bg-[radial-gradient(circle_at_50%_52%,transparent_48%,rgba(255,231,191,0.22)_68%,rgba(31,25,18,0.34)_100%)]",
                   "hover:-translate-y-0.5 hover:shadow-[0_20px_42px_rgba(0,0,0,0.4)]",
                   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-200",
@@ -113,8 +113,8 @@ export function ByeongpungPanel({
                 className={cn(
                   sharedMediaFrameClass,
                   isExhibition
-                    ? "before:pointer-events-none before:absolute before:inset-[4.5%] before:!border-[5px] before:border-[#c9a86a]/60"
-                    : "before:pointer-events-none before:absolute before:inset-[4.5%] before:!border-[5px] before:border-black/45",
+                    ? "before:pointer-events-none before:absolute before:inset-[4.5%] before:!border-[5px] before:border-white/60"
+                    : "before:pointer-events-none before:absolute before:inset-[4.5%] before:!border-[5px] before:border-white/70",
                   "after:pointer-events-none after:absolute after:inset-0 after:bg-[radial-gradient(circle_at_50%_52%,transparent_50%,rgba(255,231,191,0.16)_70%,rgba(31,25,18,0.26)_100%)]",
                 )}
                 aria-label="제작 중"

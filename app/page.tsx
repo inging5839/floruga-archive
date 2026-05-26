@@ -45,25 +45,15 @@ export default function HomePage() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.3, duration: 0.5 }}
-              className="relative w-32 h-32 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-36 lg:h-36 xl:w-44 xl:h-44 flex-shrink-0 expo-tland-hero-qr"
+              className="relative w-52 h-40 sm:w-60 sm:h-[11.5rem] md:w-72 md:h-56 lg:w-96 lg:h-72 xl:w-[28rem] xl:h-[21rem] flex-shrink-0 expo-tland-hero-qr"
             >
               <Image
-                src="/qr_v2.png"
-                alt="QR 코드 — 스캔 시 본인·타인 병풍 확인"
+                src="/images/floruga2.png"
+                alt="병풍연화 마스코트 일러스트"
                 fill
                 className="object-contain"
               />
             </motion.div>
-            <motion.p
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.35, duration: 0.5 }}
-              className="text-[10px] leading-snug text-neutral-600 text-center sm:text-xs md:text-sm lg:text-xl max-w-[9rem] sm:max-w-[11rem] md:max-w-[13rem] lg:max-w-[15rem]"
-            >
-              QR코드를 스캔하여
-              <br />
-              다양한 병풍을 확인해보세요!
-            </motion.p>
           </div>
         </div>
         <motion.div
