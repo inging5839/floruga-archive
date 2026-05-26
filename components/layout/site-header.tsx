@@ -22,15 +22,17 @@ export function SiteHeader() {
           </Link>
 
           <nav className="hidden md:flex items-center gap-8 expo-tland-tight-nav">
-            <Link href="/" className={getLinkClass(pathname, "/")}>
+            {/* <Link href="/" className={getLinkClass(pathname, "/")}>
               병풍 전시관
-            </Link>
+            </Link> */}
             <Link href="/archive" className={getLinkClass(pathname, "/archive")}>
               모든 병풍 한 눈에 보기
             </Link>
+            <span> | </span>
             <Link href="/experience" className={getLinkClass(pathname, "/experience")}>
               체험 안내
             </Link>
+            <span> | </span>
             <Link href="/about" className={getLinkClass(pathname, "/about")}>
               프로젝트 소개
             </Link>

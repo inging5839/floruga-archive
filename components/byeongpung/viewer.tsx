@@ -10,9 +10,11 @@ interface ByeongpungViewerProps {
   byeongpung: Byeongpung
   className?: string
   title?: string
+  variant?: "default" | "exhibition"
 }
 
-export function ByeongpungViewer({ byeongpung, className, title }: ByeongpungViewerProps) {
+export function ByeongpungViewer({ byeongpung, className, title, variant = "default" }: ByeongpungViewerProps) {
+  const isExhibition = variant === "exhibition"
   const containerRef = useRef<HTMLDivElement>(null)
   const [activeIndex, setActiveIndex] = useState(0)
   const [isMobile, setIsMobile] = useState(false)
@@ -105,15 +107,11 @@ export function ByeongpungViewer({ byeongpung, className, title }: ByeongpungVie
       <div
         ref={containerRef}
         onScroll={handleScroll}
-        className={`
-          flex gap-0
-          overflow-x-auto hide-scrollbar
-          snap-x snap-mandatory xl:snap-none
-          scroll-smooth
-          border border-neutral-200
-          bg-stone-100
-          ${title ? "border-t-0" : ""}
-        `}
+        className={cn(
+          "flex gap-0 overflow-x-auto hide-scrollbar snap-x snap-mandatory xl:snap-none scroll-smooth border",
+          isExhibition ? "border-[#c9a86a]/25 bg-transparent" : "border-neutral-200 bg-stone-100",
+          title && "border-t-0",
+        )}
         style={{
           scrollSnapType: isMobile ? "x mandatory" : "none"
         }}
@@ -125,9 +123,12 @@ export function ByeongpungViewer({ byeongpung, className, title }: ByeongpungVie
             index={index}
             isActive={isMobile && index === activeIndex}
             totalPanels={byeongpung.panels.length}
+            variant={variant}
             className={cn(
               "snap-center shrink-0 min-w-0",
-              "xl:border-r xl:border-neutral-300 xl:last:border-r-0",
+              isExhibition
+                ? "xl:border-r xl:border-[#c9a86a]/20 xl:last:border-r-0"
+                : "xl:border-r xl:border-neutral-300 xl:last:border-r-0",
             )}
           />
         ))}
@@ -135,9 +136,15 @@ export function ByeongpungViewer({ byeongpung, className, title }: ByeongpungVie
 
       {/* Desktop scroll progress indicator */}
       <div className="hidden xl:block mt-6">
-        <div className="relative h-px bg-neutral-200 w-full max-w-md mx-auto">
+        <div className={cn(
+          "relative h-px w-full max-w-md mx-auto",
+          isExhibition ? "bg-stone-700" : "bg-neutral-200",
+        )}>
           <motion.div
-            className="absolute top-0 left-0 h-full bg-neutral-900"
+            className={cn(
+              "absolute top-0 left-0 h-full",
+              isExhibition ? "bg-[#c9a86a]" : "bg-neutral-900",
+            )}
             style={{ width: progressWidth }}
           />
         </div>
