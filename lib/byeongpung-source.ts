@@ -230,7 +230,7 @@ function buildByeongpung(
   return {
     id: sequence,
     title: `${sequence}번째 병풍`,
-    theme: `${IMAGES_PER_BYEONGPUNG}명의 관람객이 함께 만든 병풍`,
+    theme: `${IMAGES_PER_BYEONGPUNG}명의 관람객이 함께 만든`,
     totalParticipants: group.length,
     completedAt: isComplete ? latest?.createdAt : undefined,
     thumbnailImage,

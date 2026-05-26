@@ -61,7 +61,7 @@ export default function ByeongpungDetailPage({ params }: PageProps) {
           <div className="flex flex-wrap items-center gap-6 text-xs text-neutral-500">
             {byeongpung.completedAt && (
               <span>
-                <span className="text-neutral-400">완료일</span> {byeongpung.completedAt}
+                <span className="text-neutral-400">완성된 시간<br></br></span> {byeongpung.completedAt}
               </span>
             )}
           </div>
@@ -91,7 +91,7 @@ export default function ByeongpungDetailPage({ params }: PageProps) {
               <div>
                 <p className="text-xs text-neutral-400 uppercase tracking-wider mb-1">이전</p>
                 <p className="text-sm font-medium text-neutral-900">
-                  {prevByeongpung.theme}
+                  {prevByeongpung.title}
                 </p>
               </div>
             </Link>
@@ -107,7 +107,7 @@ export default function ByeongpungDetailPage({ params }: PageProps) {
               <div>
                 <p className="text-xs text-neutral-400 uppercase tracking-wider mb-1">다음</p>
                 <p className="text-sm font-medium text-neutral-900">
-                  {nextByeongpung.theme}
+                  {nextByeongpung.title}
                 </p>
               </div>
               <ArrowRight className="w-5 h-5 text-neutral-400 group-hover:text-neutral-900 group-hover:translate-x-1 transition-all" />
