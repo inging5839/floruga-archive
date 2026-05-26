@@ -12,8 +12,10 @@ export default function HomePage() {
   const { inProgress, completed, loading, error } = useArchiveImages()
   const featured = inProgress
   const others = completed
-  const completedPanels = featured?.panels.filter((p) => p.status === "complete").length ?? 0
-  const totalParticipants = featured?.totalParticipants ?? 0
+  const totalParticipants = completed.reduce(
+    (sum, bp) => sum + bp.totalParticipants,
+    0,
+  )
 
   return (
     <main className="min-h-dvh min-h-screen bg-white">

@@ -231,6 +231,7 @@ function buildByeongpung(
     id: sequence,
     title: `${sequence}번째 병풍`,
     theme: `${IMAGES_PER_BYEONGPUNG}명의 관람객이 함께 만든`,
+    // 참여 인원/이미지 수는 인트로(제1폭)·결말(제6폭) 제외: 관람객 업로드(제2~5폭)만 집계
     totalParticipants: group.length,
     completedAt: isComplete ? latest?.createdAt : undefined,
     thumbnailImage,
