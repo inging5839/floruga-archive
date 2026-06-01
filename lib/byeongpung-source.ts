@@ -84,10 +84,20 @@ export interface ArchiveImage {
   createdAt: string
 }
 
+/** "I-1.png" 또는 "I-1_<timestamp>.png" 모두 제1폭으로 인식 */
+const FIRST_PANEL_STEM = FIRST_PANEL_FILENAME.replace(/\.[^.]+$/, "")
+
+function matchesFirstPanelFilename(filename?: string | null): boolean {
+  const name = filename?.trim()
+  if (!name) return false
+  if (name === FIRST_PANEL_FILENAME) return true
+  const stem = name.replace(/\.[^.]+$/, "")
+  return stem === FIRST_PANEL_STEM || stem.startsWith(`${FIRST_PANEL_STEM}_`)
+}
+
 function isFirstPanelRecord(row: ArchiveImage): boolean {
   if (row.id === FIRST_PANEL_D1_ID) return true
-  const filename = row.filename?.trim()
-  return filename === FIRST_PANEL_FILENAME
+  return matchesFirstPanelFilename(row.filename)
 }
 
 function isWaitPanelRecord(row: ArchiveImage): boolean {
@@ -103,10 +113,10 @@ function isFixedPanelRecord(row: ArchiveImage): boolean {
 }
 
 function resolveFirstPanelImage(rows: ArchiveImage[]): string {
-  const match =
-    rows.find((row) => row.id === FIRST_PANEL_D1_ID) ??
-    rows.find((row) => row.filename?.trim() === FIRST_PANEL_FILENAME)
-  return match?.imageUrl ?? FIRST_PANEL_IMAGE
+  // rows는 created_at ASC 정렬 → 가장 최근 Intro(I-1) 이미지를 제1폭으로 사용
+  const matches = rows.filter(isFirstPanelRecord)
+  const latest = matches[matches.length - 1]
+  return latest?.imageUrl ?? FIRST_PANEL_IMAGE
 }
 
 function resolveWaitPanelImage(rows: ArchiveImage[]): string | null {
