@@ -238,8 +238,9 @@ function buildByeongpung(
       id: 1,
       title: "제1폭",
       story: null,
-      image: firstPanelImage,
-      status: "complete",
+      // Intro(I-1) 이미지가 없으면 WAIT.png로 대체 (없을 때만 "제작 중" 텍스트)
+      image: firstPanelImage ?? waitPanelImage,
+      status: firstPanelImage ? "complete" : "waiting",
     },
     ...middle,
     lastPanel,
