@@ -3,13 +3,15 @@ import type { Byeongpung, Panel } from "./data"
 /** 한 병풍을 채우는 관람객 업로드 이미지 수 (2~5폭) */
 export const IMAGES_PER_BYEONGPUNG = 4
 
-/** 첫·마지막 폭 fallback (D1 조회 실패 시) */
-export const FIRST_PANEL_IMAGE =
-  process.env.NEXT_PUBLIC_BYEONGPUNG_FIRST_IMAGE ??
-  "/images/sample_result-1.png"
-export const LAST_PANEL_IMAGE =
-  process.env.NEXT_PUBLIC_BYEONGPUNG_LAST_IMAGE ??
-  "/images/sample_result-6.png"
+/**
+ * 첫·마지막 폭 fallback. 기본값은 null → D1에 이미지가 없으면 빈 폭(제작 중)으로 표시.
+ * 샘플 이미지는 더 이상 사용하지 않고 D1에서만 이미지를 가져온다.
+ * (필요 시 환경 변수로 정적 이미지를 지정할 수 있음)
+ */
+export const FIRST_PANEL_IMAGE: string | null =
+  process.env.NEXT_PUBLIC_BYEONGPUNG_FIRST_IMAGE ?? null
+export const LAST_PANEL_IMAGE: string | null =
+  process.env.NEXT_PUBLIC_BYEONGPUNG_LAST_IMAGE ?? null
 
 /** D1 archive_images에서 제1폭으로 쓸 고정 레코드 */
 export const FIRST_PANEL_D1_ID = Number(
@@ -38,28 +40,37 @@ const LAST_PANEL_SCENE_TO_FILENAME: Record<string, string> = {
   "4-3B": "E6-1.png",
 }
 
-function isEPanelRecord(row: ArchiveImage): boolean {
-  const filename = row.filename?.trim() ?? ""
-  return /^E\d+-1\.png$/i.test(filename)
+/**
+ * "E1-1.png" 또는 "E1-1_<timestamp>.png" → 기준 파일명 "E1-1.png" 반환.
+ * E 결말 이미지가 아니면 null.
+ */
+function eBaseFilename(filename?: string | null): string | null {
+  const name = filename?.trim() ?? ""
+  const m = name.match(/^(E\d+-1)(?:_.*)?\.png$/i)
+  return m ? `${m[1]}.png` : null
 }
 
-/** D1 rows에서 E 파일명 → imageUrl 맵 구성 */
+function isEPanelRecord(row: ArchiveImage): boolean {
+  return eBaseFilename(row.filename) !== null
+}
+
+/** D1 rows에서 E 기준 파일명 → imageUrl 맵 구성 (rows ASC 정렬 → 최신값 유지) */
 function buildEImageMap(rows: ArchiveImage[]): Map<string, string> {
   const map = new Map<string, string>()
   for (const row of rows) {
-    const filename = row.filename?.trim()
-    if (filename && isEPanelRecord(row)) {
-      map.set(filename, row.imageUrl)
+    const base = eBaseFilename(row.filename)
+    if (base) {
+      map.set(base, row.imageUrl)
     }
   }
   return map
 }
 
-/** group[3].sceneId 기반으로 제6폭 imageUrl 결정 */
+/** group[3].sceneId 기반으로 제6폭 imageUrl 결정 (없으면 null) */
 function resolveLastPanelImage(
   group: ArchiveImage[],
   eImageMap: Map<string, string>,
-): string {
+): string | null {
   const lastRow = group[IMAGES_PER_BYEONGPUNG - 1]
   const sceneId = lastRow?.sceneId?.trim()
   if (sceneId) {
@@ -112,7 +123,7 @@ function isFixedPanelRecord(row: ArchiveImage): boolean {
   )
 }
 
-function resolveFirstPanelImage(rows: ArchiveImage[]): string {
+function resolveFirstPanelImage(rows: ArchiveImage[]): string | null {
   // rows는 created_at ASC 정렬 → 가장 최근 Intro(I-1) 이미지를 제1폭으로 사용
   const matches = rows.filter(isFirstPanelRecord)
   const latest = matches[matches.length - 1]
@@ -184,7 +195,7 @@ export function groupArchiveImages(rows: ArchiveImage[]): {
 function buildByeongpung(
   group: ArchiveImage[],
   sequence: number,
-  firstPanelImage: string,
+  firstPanelImage: string | null,
   waitPanelImage: string | null,
   eImageMap: Map<string, string>,
 ): Byeongpung {
