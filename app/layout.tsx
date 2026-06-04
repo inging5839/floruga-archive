@@ -26,20 +26,12 @@ export const metadata: Metadata = {
   generator: 'v0.app',
   icons: {
     icon: [
-      {
-        url: '/floruga_favicon.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/floruga_favicon.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: 'floruga_favicon.png',
-        type: 'image/svg+xml',
-      },
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/floruga_favicon.png', type: 'image/png', sizes: '48x48' },
+      { url: '/floruga_favicon.png', type: 'image/png', sizes: '192x192' },
     ],
-    apple: '/apple-icon.png',
+    shortcut: '/floruga_favicon.png',
+    apple: '/floruga_favicon.png',
   },
 }
 
