@@ -4,8 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Dark gallery aesthetic - very dark charcoal as base */
-  --background: oklch(0.12 0.005 270);
+  --background: #15110f;
   --foreground: oklch(0.92 0.01 80);
   --card: oklch(0.15 0.005 270);
   --card-foreground: oklch(0.92 0.01 80);
@@ -122,8 +121,31 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply text-neutral-900;
   }
+}
+
+.font-shilla-culture {
+  font-family: var(--font-shilla-culture), var(--font-serif), serif;
+}
+
+/* 페이지 전체 배경 텍스처 */
+body.site-background {
+  background-color: #15110f;
+  background-image: url("/images/background-texture.png");
+  background-repeat: repeat;
+  background-size: 1500px auto;
+  background-position: top center;
+  color: #f5f0e8;
+}
+
+/* 병풍 패널 한지 배경 */
+.panel-hanji {
+  background-color: #f3ede3;
+  background-image: url("/images/background-texture.png");
+  background-repeat: repeat;
+  background-size: 800px auto;
+  background-position: center;
 }
 
 /* Grainy texture overlay for analog warmth */
@@ -139,13 +161,6 @@
   opacity: 0.03;
   pointer-events: none;
   z-index: 1;
-}
-
-/* Subtle hanji paper texture */
-.hanji-texture {
-  background-image: 
-    radial-gradient(circle at 20% 30%, rgba(255,250,240,0.02) 0%, transparent 50%),
-    radial-gradient(circle at 80% 70%, rgba(255,250,240,0.015) 0%, transparent 50%);
 }
 
 /* Custom scrollbar for gallery feel */
@@ -196,11 +211,10 @@
     line-height: 0.95;
   }
 
-  .expo-tland-hero-qr {
+  .expo-tland-hero-qr img {
     width: min(18rem, 38vw) !important;
-    height: min(13.5rem, 28vw) !important;
-    max-width: 38vw;
-    max-height: 28vw;
+    height: auto !important;
+    max-width: 40vw;
   }
 
   .expo-tland-page-title {

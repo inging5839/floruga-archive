@@ -2,8 +2,8 @@
 
 import { motion } from "framer-motion"
 import Link from "next/link"
-import Image from "next/image"
 import { ByeongpungViewer } from "@/components/byeongpung/viewer"
+import { HeroBanner } from "@/components/layout/hero-banner"
 import { SiteHeader } from "@/components/layout/site-header"
 import { useArchiveImages } from "@/hooks/use-archive-images"
 import { ArrowRight } from "lucide-react"
@@ -12,91 +12,41 @@ export default function HomePage() {
   const { inProgress, completed, loading, error } = useArchiveImages()
   const featured = inProgress
   const others = completed
-  const totalParticipants = completed.reduce(
-    (sum, bp) => sum + bp.totalParticipants,
-    0,
-  )
 
   return (
-    <main className="min-h-dvh min-h-screen bg-white">
+    <main className="min-h-dvh min-h-screen">
       <SiteHeader />
 
-      {/* Hero Title */}
-      <section className="px-6 lg:px-12 pt-12 lg:pt-20 pb-8 lg:pb-12 expo-tland-section-md">
-        <div className="flex items-center justify-between gap-4 md:gap-6">
-          <div>
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-[14vw] sm:text-4xl md:text-[3vw] lg:text-[6vw] font-black text-neutral-900 leading-none tracking-tighter expo-tland-hero-title"
-            >
-              병풍연화
-            </motion.h1>
-            <motion.h2
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.15, duration: 0.6 }}
-              className="mt-3 mx-1 lg:m-2 sm:mt-2 sm:text-lg md:text-2xl lg:text-3xl text-neutral-800 font-serif leading-none"
-            >
-              아카이브 갤러리
-            </motion.h2>
-          </div>
-          <div className="hidden md:flex flex-col items-center gap-2 md:gap-2.5 lg:gap-3 flex-shrink-0 max-w-[40vw] sm:max-w-none">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.3, duration: 0.5 }}
-              className="relative w-52 h-40 sm:w-60 sm:h-[11.5rem] md:w-72 md:h-56 lg:w-96 lg:h-72 xl:w-[28rem] xl:h-[21rem] flex-shrink-0 expo-tland-hero-qr"
-            >
-              <Image
-                src="/images/floruga2.png"
-                alt="병풍연화 마스코트 일러스트"
-                fill
-                className="object-contain"
-              />
-            </motion.div>
-          </div>
-        </div>
+      {/* Hero Banner */}
+      <section className="w-full">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.3, duration: 0.6 }}
-          className="mt-6 flex flex-col md:flex-row md:items-end md:justify-end gap-4"
+          transition={{ duration: 0.7 }}
         >
-          <div className="flex lg:items-center sm:items-start gap-6 lg:px-6 text-xs text-neutral-500">
-            <span>
-              완성된 병풍 <span className="text-neutral-900 font-medium">{completed.length}</span>개
-            </span>
-            {/* <span>
-              현재 병풍 채워진 칸 <span className="text-neutral-900 font-medium">{completedPanels}</span>/6
-            </span> */}
-            <span>
-              총 참여인원 <span className="text-neutral-900 font-medium">{totalParticipants}</span>명
-            </span>
-          </div>
+          <HeroBanner priority />
         </motion.div>
       </section>
 
       {/* Featured Byeongpung */}
-      <section className="md:py-6 lg:py-12 bg-neutral-50 border-t border-neutral-200 expo-tland-section">
+      <section className="md:py-6 lg:py-12 border-t border-stone-400/60 expo-tland-section">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.7 }}
         >
           <div className="px-6 lg:px-12 py-12 lg:py-20 expo-tland-section-lg">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl text-neutral-900 uppercase mb-8 lg:mb-14 font-black">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl text-stone-100 uppercase mb-8 lg:mb-14 font-black">
               제작중인 병풍
             </h2>
             {loading && !featured ? (
-              <div className="flex items-center justify-center py-32 text-sm text-neutral-500">
+              <div className="flex items-center justify-center py-32 text-sm text-stone-400">
                 병풍 데이터를 불러오는 중…
               </div>
             ) : featured ? (
               <ByeongpungViewer byeongpung={featured} />
             ) : (
-              <div className="flex items-center justify-center py-32 text-sm text-neutral-500">
+              <div className="flex items-center justify-center py-32 text-sm text-stone-400">
                 {error ?? "표시할 병풍이 없습니다"}
               </div>
             )}
@@ -106,9 +56,9 @@ export default function HomePage() {
 
       {/* Past Relays */}
       {others.length > 0 && (
-        <section className="border-t border-neutral-200 bg-neutral-50 expo-tland-section">
+        <section className="border-t border-stone-400/60 expo-tland-section">
           <div className="px-6 lg:px-12 py-12 lg:py-20 expo-tland-section-lg">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl text-neutral-900 uppercase mb-8 lg:mb-14 font-black">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl text-stone-100 uppercase mb-8 lg:mb-14 font-black">
               완성된 병풍
             </h2>
 
@@ -123,13 +73,13 @@ export default function HomePage() {
                 >
                   <div className="mb-6 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
                     <div>
-                      <p className="text-xs text-neutral-600 tracking-[0.08em]">
+                      <p className="text-xs text-stone-400 tracking-[0.08em]">
                         {bp.id}번째 이야기
                       </p>
                     </div>
                     <Link
                       href={`/byeongpung/${bp.id}`}
-                      className="text-xs text-neutral-600 hover:text-neutral-900 transition-colors flex items-center gap-1"
+                      className="text-xs text-stone-400 hover:text-stone-100 transition-colors flex items-center gap-1"
                     >
                       자세히 보기
                       <ArrowRight className="w-3 h-3" />
@@ -144,23 +94,23 @@ export default function HomePage() {
       )}
 
       {/* Footer */}
-      <footer className="px-6 lg:px-12 py-12 lg:py-16 border-t border-neutral-200 expo-tland-section-md">
+      <footer className="px-6 lg:px-12 py-12 lg:py-16 border-t border-stone-400/60 expo-tland-section-md">
         <div className="flex flex-col items-center gap-8">
           <Link
             href="/archive"
-            className="group flex items-center gap-3 px-8 py-4 border border-neutral-900 text-neutral-900 hover:bg-neutral-900 hover:text-white rounded-full transition-all duration-300"
+            className="group flex items-center gap-3 px-8 py-4 border border-stone-300 text-stone-100 hover:bg-stone-100 hover:text-stone-900 rounded-full transition-all duration-300"
           >
             <span className="text-sm tracking-wider uppercase">
-              모든 병풍 한 눈에 보기
+              모든 병풍 보러 가기
             </span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
 
-          <div className="flex items-center justify-between w-full pt-8 border-t border-neutral-100">
-            <p className="text-xs text-neutral-400">
+          <div className="flex items-center justify-between w-full pt-8 border-t border-stone-400/50">
+            <p className="text-xs text-stone-500">
               병풍연화
             </p>
-            <p className="text-xs text-neutral-400">
+            <p className="text-xs text-stone-500">
               팀 꽃충이
             </p>
           </div>

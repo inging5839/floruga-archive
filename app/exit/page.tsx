@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import Image from "next/image"
 import { AnimatePresence, motion } from "framer-motion"
 import { ByeongpungViewer } from "@/components/byeongpung/viewer"
+import { HeroBanner } from "@/components/layout/hero-banner"
 import { useArchiveImages } from "@/hooks/use-archive-images"
 
 const SLIDE_INTERVAL_MS = 10_000
@@ -30,19 +31,29 @@ export default function ExitPage() {
   const current = count > 0 ? slides[activeIndex] : null
 
   return (
-    <main className="relative h-dvh w-full overflow-hidden bg-[#15110f] text-stone-100">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_25%,rgba(214,188,150,0.18)_0%,transparent_65%)]" />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_85%_85%,rgba(255,221,178,0.08)_0%,transparent_60%)]" />
+    <main
+      className="relative h-dvh w-full overflow-hidden text-stone-100"
+      style={{
+        backgroundColor: "#15110f",
+        backgroundImage: "url('/images/background-texture.png')",
+        backgroundRepeat: "repeat",
+        backgroundSize: "1400px auto",
+        backgroundPosition: "top center",
+      }}
+    >
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_25%,rgba(214,188,150,0.14)_0%,transparent_65%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_85%_85%,rgba(255,221,178,0.06)_0%,transparent_60%)]" />
 
       <div className="relative z-10 flex h-full flex-col lg:flex-row">
         {/* 병풍 자동 슬라이드 영역 */}
         <section className="relative flex flex-1 flex-col px-6 pt-6 lg:px-8 lg:pt-8">
-          <div className="relative flex-1 flex flex-col items-stretch justify-center">
-            <div className="mb-3 lg:mb-5 flex items-end justify-between gap-6 w-full">
-              <h1 className="text-2xl lg:text-4xl xl:text-5xl font-serif tracking-wide text-stone-50">
-                지금까지 완성된 병풍
-              </h1>
-              <div className="shrink-0 min-h-[1em]">
+          <div className="relative flex-1 flex flex-col items-stretch justify-center gap-4 lg:gap-6">
+            <div className="-mx-6 lg:-mx-8 w-[calc(100%+3rem)] lg:w-[calc(100%+4rem)] overflow-hidden border-y border-stone-400/60">
+              <HeroBanner alt="병풍연화 배너" priority />
+            </div>
+
+            <div className="relative w-full mx-auto max-w-[920px]">
+              <div className="mb-2 lg:mb-3 text-center min-h-[1.25em]">
                 <AnimatePresence mode="wait">
                   {current && (
                     <motion.p
@@ -58,9 +69,7 @@ export default function ExitPage() {
                   )}
                 </AnimatePresence>
               </div>
-            </div>
 
-            <div className="relative w-full">
               <AnimatePresence mode="wait">
                 {current && (
                   <motion.div
@@ -69,7 +78,7 @@ export default function ExitPage() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -16 }}
                     transition={{ duration: 0.9, ease: "easeOut" }}
-                    className="w-full"
+                    className="w-full scale-[0.92] origin-top"
                   >
                     <ByeongpungViewer byeongpung={current} variant="exhibition" className="w-full" />
                   </motion.div>
@@ -106,7 +115,7 @@ export default function ExitPage() {
         </section>
 
         {/* QR / 안내 영역 */}
-        <aside className="flex w-full lg:w-[28rem] xl:w-[34rem] flex-col items-center justify-center gap-8 border-t lg:border-t-0 lg:border-l border-stone-700/60 bg-[#100c0a]/85 px-10 py-10 lg:px-14">
+        <aside className="flex w-full lg:w-[28rem] xl:w-[34rem] flex-col items-center justify-center gap-8 border-t lg:border-t-0 lg:border-l border-stone-400/60 bg-[#100c0a]/85 px-10 py-10 lg:px-14">
           <h2 className="text-center text-2xl lg:text-3xl xl:text-4xl font-serif leading-snug text-stone-50">
             디지털 전시관에서<br></br> 완성된 병풍을
             만나보세요

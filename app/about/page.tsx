@@ -2,85 +2,329 @@
 
 import { motion } from "framer-motion"
 import Link from "next/link"
+import Image from "next/image"
 import { SiteHeader } from "@/components/layout/site-header"
-import { ArrowLeft, ArrowRight } from "lucide-react"
+import { ArrowLeft, ArrowRight, Camera, Sparkles, PersonStanding, ScrollText } from "lucide-react"
+
+const STEPS = [
+  {
+    no: "01",
+    icon: Camera,
+    title: "이야기 속 인물이 되다",
+    desc: "전시장에 들어와 작품 설명을 들은 뒤, 자신의 얼굴을 촬영하면 이야기 속 인물로 다시 태어납니다.",
+  },
+  {
+    no: "02",
+    icon: PersonStanding,
+    title: "몸짓이 사건이 되다",
+    desc: "미디어월 앞에서 몸을 움직이면 그 행동이 이야기 속 사건으로 변환되어, 『심청전』과는 다른 새로운 장면을 만듭니다.",
+  },
+  {
+    no: "03",
+    icon: Sparkles,
+    title: "장면이 병풍이 되다",
+    desc: "체험이 끝나면 관람자의 얼굴과 행동이 반영된 동화 장면이 생성형 AI로 병풍 이미지가 되어 전시 공간에 기록됩니다.",
+  },
+  {
+    no: "04",
+    icon: ScrollText,
+    title: "이야기가 이어지다",
+    desc: "한 사람의 경험은 하나의 장면이 되고, 여러 관람객의 참여가 이어지며 하나의 새로운 이야기 병풍이 완성됩니다.",
+  },
+]
 
 export default function AboutPage() {
   return (
-    <main className="min-h-dvh min-h-screen bg-white">
+    <main className="min-h-dvh min-h-screen">
       <SiteHeader />
 
-      <section className="px-6 lg:px-12 pt-12 lg:pt-20 pb-10 lg:pb-14 expo-tland-section-md">
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-[12vw] lg:text-[7vw] font-black text-neutral-900 leading-none tracking-tighter expo-tland-page-title"
-        >
-          프로젝트 소개
-        </motion.h1>
-      </section>
+      {/* Hero */}
+      <section className="relative overflow-hidden border-b border-stone-400/60">
+        <div className="px-6 lg:px-12 pt-12 lg:pt-20 pb-12 lg:pb-20 expo-tland-section-md">
+          <div className="grid lg:grid-cols-[1.15fr_0.85fr] gap-10 lg:gap-16 items-center">
+            <div>
+              <motion.p
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="text-xs lg:text-sm tracking-[0.4em] uppercase text-amber-200/70 mb-5"
+              >
+                인터랙티브 XR 전시
+              </motion.p>
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.05 }}
+                className="font-shilla-culture font-bold text-[14vw] lg:text-[7vw] text-stone-50 leading-[0.95] tracking-tight expo-tland-page-title"
+              >
+                병풍연화
+              </motion.h1>
+              <motion.p
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.15 }}
+                className="mt-6 text-lg lg:text-2xl text-stone-200 font-serif leading-relaxed"
+              >
+                관람객의 몸짓이 이야기가 되고,<br className="hidden sm:block" />
+                그 이야기가 다시 병풍의 한 폭으로 남는다.
+              </motion.p>
+              <motion.p
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.25 }}
+                className="mt-6 max-w-xl text-sm lg:text-base text-stone-400 leading-relaxed"
+              >
+                《병풍연화》는 어린 시절 누구나 한 번쯤 접했던 전래동화와 책 병풍의 기억에서
+                출발해, 생성형 AI와 신체 기반 인터랙션으로 두 요소를 다시 연결하는 인터랙티브
+                XR 동화 전시입니다.
+              </motion.p>
+            </div>
 
-      <section className="px-6 lg:px-12 pb-14 lg:pb-20 expo-tland-section-md">
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1, duration: 0.6 }}
-          className="max-w-4xl"
-        >
-          <p className="text-base lg:text-lg text-neutral-700 leading-relaxed">
-            병풍연화는 여러 사람이 함께 하나의 병풍을 완성해가는 릴레이 인터랙티브 미디어아트 입니다.<br></br>
-            관객은 몸짓을 통해 자신만의 서사를 만들어갑니다.
-          </p>
-          {/* <p className="mt-6 text-base lg:text-lg text-neutral-700 leading-relaxed">
-            참여자는 현재 진행 중인 패널을 확인하고, 완성된 병풍의 흐름을 감상하며, 이전 작업을
-            아카이브에서 다시 살펴볼 수 있습니다. 병풍연화는 결과물뿐 아니라 함께 만드는 과정 자체를
-            전시합니다.
-          </p> */}
-        </motion.div>
-      </section>
-
-      <section className="border-t border-neutral-200 bg-neutral-50 expo-tland-section">
-        <div className="px-6 lg:px-12 py-12 lg:py-16 expo-tland-section-md">
-          <div className="grid md:grid-cols-3 gap-8 lg:gap-10">
-            <div>
-              <p className="text-xs text-neutral-500 tracking-widest uppercase mb-3">01</p>
-              <h2 className="text-xl text-neutral-900 font-semibold mb-3">연결된 서사</h2>
-              <p className="text-sm text-neutral-600 leading-relaxed">
-                각 패널은 독립적인 장면이면서 동시에 다음 장면으로 이어지는 흐름을 가집니다.
-              </p>
-            </div>
-            <div>
-              <p className="text-xs text-neutral-500 tracking-widest uppercase mb-3">02</p>
-              <h2 className="text-xl text-neutral-900 font-semibold mb-3">릴레이 방식</h2>
-              <p className="text-sm text-neutral-600 leading-relaxed">
-                여러 참여자가 순차적으로 작업해 공동 창작의 결과를 함께 완성합니다.
-              </p>
-            </div>
-            <div>
-              <p className="text-xs text-neutral-500 tracking-widest uppercase mb-3">03</p>
-              <h2 className="text-xl text-neutral-900 font-semibold mb-3">누적 아카이브</h2>
-              <p className="text-sm text-neutral-600 leading-relaxed">
-                완성된 작업은 기록으로 남아 다음 병풍 제작과 감상의 기반이 됩니다.
-              </p>
-            </div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.96 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              className="relative mx-auto w-full max-w-[360px]"
+            >
+              <div className="absolute -inset-4 rounded-2xl bg-[radial-gradient(circle_at_50%_30%,rgba(214,188,150,0.18)_0%,transparent_70%)] blur-xl" />
+              <div className="relative overflow-hidden rounded-xl border border-stone-400/60 shadow-[0_30px_70px_rgba(0,0,0,0.55)]">
+                <Image
+                  src="/images/poster-main.png"
+                  alt="병풍연화 포스터"
+                  width={745}
+                  height={1052}
+                  priority
+                  className="w-full h-auto object-cover"
+                />
+              </div>
+            </motion.div>
           </div>
+        </div>
+      </section>
 
-          <div className="mt-12 flex flex-wrap items-center gap-3">
+      {/* Concept */}
+      <section className="border-b border-stone-400/60 expo-tland-section">
+        <div className="px-6 lg:px-12 py-14 lg:py-24 expo-tland-section-lg">
+          <div className="grid lg:grid-cols-[0.4fr_0.6fr] gap-10 lg:gap-16">
+            <motion.h2
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.6 }}
+              className="font-serif text-3xl lg:text-5xl text-stone-100 font-bold leading-tight"
+            >
+              보는 이야기에서<br />
+              <span className="text-amber-200/90">바꾸는 이야기로</span>
+            </motion.h2>
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="space-y-6 text-base lg:text-lg text-stone-300 leading-relaxed"
+            >
+              <p>
+                전래동화는 익숙하지만 종종 어린이 콘텐츠로만 여겨지고, 병풍은 전통적 이미지로
+                남아 오늘의 관람 경험과는 멀어져 있습니다. 《병풍연화》는 이 두 요소를 다시
+                연결하며, 전래동화를 <span className="text-stone-100 font-medium">‘보는 이야기’</span>가
+                아니라 <span className="text-stone-100 font-medium">‘직접 개입하고 바꾸는 이야기’</span>로
+                재해석합니다.
+              </p>
+              <p>
+                작품은 전통 설화의 정서와 디지털 기술의 감각이 공존하는 세계를 지향합니다.
+                관람자는 단순한 감상자가 아니라 이야기의 빈칸을 채우는{" "}
+                <span className="text-stone-100 font-medium">공동 창작자</span>가 되며, 자신의
+                선택과 몸짓이 서사를 바꿀 수 있다는 경험을 하게 됩니다.
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Experience flow */}
+      <section className="border-b border-stone-400/60 expo-tland-section">
+        <div className="px-6 lg:px-12 py-14 lg:py-24 expo-tland-section-lg">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.6 }}
+            className="mb-10 lg:mb-16"
+          >
+            <p className="text-xs tracking-[0.3em] uppercase text-amber-200/70 mb-3">
+              Experience
+            </p>
+            <h2 className="font-serif text-3xl lg:text-5xl text-stone-100 font-bold">
+              관람의 흐름
+            </h2>
+          </motion.div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+            {STEPS.map((step, idx) => {
+              const Icon = step.icon
+              return (
+                <motion.div
+                  key={step.no}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.5, delay: Math.min(idx * 0.08, 0.32) }}
+                  className="group relative rounded-xl border border-stone-400/60 bg-stone-900/30 p-6 lg:p-7 hover:border-amber-200/40 transition-colors"
+                >
+                  <div className="flex items-center justify-between mb-5">
+                    <span className="font-serif text-3xl text-stone-700 group-hover:text-amber-200/50 transition-colors">
+                      {step.no}
+                    </span>
+                    <Icon className="w-6 h-6 text-amber-200/70" />
+                  </div>
+                  <h3 className="text-lg text-stone-100 font-semibold mb-3">
+                    {step.title}
+                  </h3>
+                  <p className="text-sm text-stone-400 leading-relaxed">{step.desc}</p>
+                </motion.div>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Gallery */}
+      <section className="border-b border-stone-400/60 expo-tland-section">
+        <div className="px-6 lg:px-12 py-14 lg:py-24 expo-tland-section-lg">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.6 }}
+            className="mb-10 lg:mb-16"
+          >
+            <p className="text-xs tracking-[0.3em] uppercase text-amber-200/70 mb-3">
+              Gallery
+            </p>
+            <h2 className="font-serif text-3xl lg:text-5xl text-stone-100 font-bold">
+              전시 풍경
+            </h2>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-4 lg:gap-6">
+            <motion.figure
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.6 }}
+              className="md:col-span-2 relative overflow-hidden rounded-xl border border-stone-400/60"
+            >
+              <Image
+                src="/images/exhibition-space.png"
+                alt="병풍연화 전시 공간 전경"
+                width={1024}
+                height={768}
+                className="w-full h-auto object-cover"
+              />
+              <figcaption className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/70 to-transparent px-5 py-4 text-sm text-stone-200">
+                미디어월과 병풍이 마주 보는 전시 공간
+              </figcaption>
+            </motion.figure>
+
+            <motion.figure
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.6, delay: 0.05 }}
+              className="relative overflow-hidden rounded-xl border border-stone-400/60"
+            >
+              <Image
+                src="/images/exhibition-mediawall.png"
+                alt="미디어월 앞에서 몸짓으로 이야기에 개입하는 관람자"
+                width={710}
+                height={400}
+                className="w-full h-full object-cover"
+              />
+              <figcaption className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/70 to-transparent px-5 py-4 text-sm text-stone-200">
+                몸짓으로 이야기에 개입하는 순간
+              </figcaption>
+            </motion.figure>
+
+            <motion.figure
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="relative overflow-hidden rounded-xl border border-stone-400/60"
+            >
+              <Image
+                src="/images/exhibition-byeongpung-1.png"
+                alt="완성된 이야기가 투사된 병풍"
+                width={1024}
+                height={576}
+                className="w-full h-full object-cover"
+              />
+              <figcaption className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/70 to-transparent px-5 py-4 text-sm text-stone-200">
+                여러 관람객의 이야기가 모인 병풍
+              </figcaption>
+            </motion.figure>
+
+            <motion.figure
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+              className="md:col-span-2 relative overflow-hidden rounded-xl border border-stone-400/60"
+            >
+              <Image
+                src="/images/exhibition-byeongpung-2.png"
+                alt="한 폭씩 채워지며 완성되는 이야기 병풍"
+                width={1024}
+                height={576}
+                className="w-full h-auto object-cover"
+              />
+              <figcaption className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/70 to-transparent px-5 py-4 text-sm text-stone-200">
+                한 폭씩 채워지며 완성되어 가는 이야기 병풍
+              </figcaption>
+            </motion.figure>
+          </div>
+        </div>
+      </section>
+
+      {/* Closing question */}
+      <section className="expo-tland-section">
+        <div className="px-6 lg:px-12 py-16 lg:py-28 expo-tland-section-lg">
+          <motion.blockquote
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.7 }}
+            className="max-w-4xl mx-auto text-center"
+          >
+            <span className="block font-serif text-5xl lg:text-7xl text-amber-200/40 leading-none mb-4">
+              “
+            </span>
+            <p className="font-serif text-2xl lg:text-4xl text-stone-100 leading-snug">
+              우리는 오래된 이야기를 어떻게 다시 읽고,<br className="hidden sm:block" />
+              어떻게 나의 이야기로 만들 수 있는가?
+            </p>
+          </motion.blockquote>
+
+          <div className="mt-14 flex flex-wrap items-center justify-center gap-3">
             <Link
               href="/"
-              className="inline-flex items-center gap-2 px-5 py-3 border border-neutral-900 text-neutral-900 rounded-full hover:bg-neutral-900 hover:text-white transition-colors"
+              className="inline-flex items-center gap-2 px-6 py-3 border border-stone-300 text-stone-100 rounded-full hover:bg-stone-100 hover:text-stone-900 transition-colors"
             >
               <ArrowLeft className="w-4 h-4" />
               병풍 전시관으로
             </Link>
             <Link
               href="/archive"
-              className="inline-flex items-center gap-2 px-5 py-3 border border-neutral-300 text-neutral-700 rounded-full hover:border-neutral-900 hover:text-neutral-900 transition-colors"
+              className="inline-flex items-center gap-2 px-6 py-3 border border-stone-600 text-stone-300 rounded-full hover:border-stone-300 hover:text-stone-100 transition-colors"
             >
-              전체보기
+              완성된 병풍 전체보기
               <ArrowRight className="w-4 h-4" />
             </Link>
+          </div>
+
+          <div className="mt-16 flex items-center justify-between border-t border-stone-400/50 pt-8 max-w-4xl mx-auto">
+            <p className="text-xs text-stone-500">병풍연화</p>
+            <p className="text-xs text-stone-500">팀 꽃충이</p>
           </div>
         </div>
       </section>

@@ -11,5 +11,9 @@ export default function TabletLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  return children
+  return (
+    <div className="min-h-[100dvh] bg-white text-neutral-900">
+      {children}
+    </div>
+  )
 }

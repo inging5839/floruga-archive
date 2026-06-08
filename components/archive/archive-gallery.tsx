@@ -35,7 +35,7 @@ export function ArchiveGallery({ byeongpungs }: ArchiveGalleryProps) {
           className="flex flex-col items-center justify-center py-24"
         >
           <div className="w-16 h-16 mb-6 opacity-30">
-            <svg viewBox="0 0 64 64" fill="none" className="w-full h-full text-neutral-400">
+            <svg viewBox="0 0 64 64" fill="none" className="w-full h-full text-stone-500">
               <rect x="4" y="12" width="8" height="40" rx="1" stroke="currentColor" strokeWidth="1.5" />
               <rect x="14" y="12" width="8" height="40" rx="1" stroke="currentColor" strokeWidth="1.5" />
               <rect x="24" y="12" width="8" height="40" rx="1" stroke="currentColor" strokeWidth="1.5" />
@@ -44,7 +44,7 @@ export function ArchiveGallery({ byeongpungs }: ArchiveGalleryProps) {
               <rect x="54" y="12" width="8" height="40" rx="1" stroke="currentColor" strokeWidth="1.5" />
             </svg>
           </div>
-          <p className="text-sm text-neutral-500 text-center">
+          <p className="text-sm text-stone-400 text-center">
             아직 완성된 병풍이 없습니다
             <br />
             <span className="text-xs">첫 번째 릴레이 병풍의 참여자가 되어보세요</span>

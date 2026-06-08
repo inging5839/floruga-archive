@@ -8,17 +8,17 @@ export default function ArchivePage() {
   const { completed, loading, error } = useArchiveImages()
 
   return (
-    <main className="min-h-dvh min-h-screen bg-white">
+    <main className="min-h-dvh min-h-screen">
       <SiteHeader />
 
       {/* Gallery */}
       <section className="px-6 lg:px-12 py-8 lg:py-12 expo-tland-section-md">
         {loading && completed.length === 0 ? (
-          <div className="flex items-center justify-center py-24 text-sm text-neutral-500">
+          <div className="flex items-center justify-center py-24 text-sm text-stone-400">
             병풍 데이터를 불러오는 중…
           </div>
         ) : error && completed.length === 0 ? (
-          <div className="flex items-center justify-center py-24 text-sm text-neutral-500">
+          <div className="flex items-center justify-center py-24 text-sm text-stone-400">
             {error}
           </div>
         ) : (
@@ -27,12 +27,12 @@ export default function ArchivePage() {
       </section>
 
       {/* Footer */}
-      <footer className="px-6 lg:px-12 py-12 lg:py-16 border-t border-neutral-200 expo-tland-section-md">
+      <footer className="px-6 lg:px-12 py-12 lg:py-16 border-t border-stone-400/60 expo-tland-section-md">
         <div className="flex items-center justify-between">
-          <p className="text-xs text-neutral-500">
+          <p className="text-xs text-stone-500">
             병풍연화
           </p>
-          <p className="text-xs text-neutral-500">
+          <p className="text-xs text-stone-500">
             팀 꽃충이
           </p>
         </div>

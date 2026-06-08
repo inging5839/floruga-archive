@@ -46,7 +46,7 @@ const steps = [
 
 export default function ExperiencePage() {
   return (
-    <main className="min-h-dvh min-h-screen bg-white">
+    <main className="min-h-dvh min-h-screen">
       <SiteHeader />
 
       <section className="px-6 lg:px-12 pt-12 lg:pt-20 pb-10 lg:pb-14 expo-tland-section-md">
@@ -54,7 +54,7 @@ export default function ExperiencePage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-[12vw] lg:text-[7vw] font-black text-neutral-900 leading-none tracking-tighter expo-tland-page-title"
+          className="text-[12vw] lg:text-[7vw] font-black text-stone-100 leading-none tracking-tighter expo-tland-page-title"
         >
           체험 안내
         </motion.h1>
@@ -62,7 +62,7 @@ export default function ExperiencePage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.5 }}
-          className="mt-6 max-w-4xl text-sm lg:text-base text-neutral-600 leading-relaxed"
+          className="mt-6 max-w-4xl text-sm lg:text-base text-stone-400 leading-relaxed"
         >
         </motion.p>
       </section>
@@ -76,35 +76,35 @@ export default function ExperiencePage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.5, delay: Math.min(i * 0.05, 0.25) }}
-              className="flex gap-6 lg:gap-10 border-b border-neutral-200 pb-8 lg:pb-12 last:border-0 last:pb-0"
+              className="flex gap-6 lg:gap-10 border-b border-stone-400/60 pb-8 lg:pb-12 last:border-0 last:pb-0"
             >
-              <span className="text-xs text-neutral-400 font-mono shrink-0 w-8 pt-1">{step.n}</span>
+              <span className="text-xs text-stone-500 font-mono shrink-0 w-8 pt-1">{step.n}</span>
               <div>
-                <h2 className="text-lg lg:text-xl font-semibold text-neutral-900 mb-3">{step.title}</h2>
-                <p className="text-sm lg:text-base text-neutral-600 leading-relaxed">{step.body}</p>
+                <h2 className="text-lg lg:text-xl font-semibold text-stone-100 mb-3">{step.title}</h2>
+                <p className="text-sm lg:text-base text-stone-400 leading-relaxed">{step.body}</p>
               </div>
             </motion.li>
           ))}
         </ol>
       </section>
 
-      <section className="border-t border-neutral-200 bg-neutral-50 expo-tland-section">
+      <section className="border-t border-stone-400/60 expo-tland-section">
         <div className="px-6 lg:px-12 py-12 lg:py-16 expo-tland-section-md">
-          <p className="text-xs text-neutral-500 mb-6 max-w-xl leading-relaxed">
+          <p className="text-xs text-stone-500 mb-6 max-w-xl leading-relaxed">
             체험 구성·소요 시간·대기 안내는 전시 일정에 따라 달라질 수 있습니다. 자세한 사항은 현장
             안내를 참고해 주세요.
           </p>
           <div className="flex flex-wrap items-center gap-3">
             <Link
               href="/"
-              className="inline-flex items-center gap-2 px-5 py-3 border border-neutral-900 text-neutral-900 rounded-full hover:bg-neutral-900 hover:text-white transition-colors"
+              className="inline-flex items-center gap-2 px-5 py-3 border border-stone-300 text-stone-100 rounded-full hover:bg-stone-100 hover:text-stone-900 transition-colors"
             >
               <ArrowLeft className="w-4 h-4" />
               병풍 전시관으로
             </Link>
             <Link
               href="/about"
-              className="inline-flex items-center gap-2 px-5 py-3 border border-neutral-300 text-neutral-700 rounded-full hover:border-neutral-900 hover:text-neutral-900 transition-colors"
+              className="inline-flex items-center gap-2 px-5 py-3 border border-stone-600 text-stone-300 rounded-full hover:border-stone-300 hover:text-stone-100 transition-colors"
             >
               프로젝트 소개
               <ArrowRight className="w-4 h-4" />

@@ -13,18 +13,25 @@ interface ArchiveCardProps {
 export function ArchiveCard({ byeongpung, index }: ArchiveCardProps) {
   const thumbnailImage = byeongpung.thumbnailImage || byeongpung.panels[0]?.image
   const isComplete = byeongpung.completedAt !== undefined
-  const completedPanels = byeongpung.panels.filter(p => p.status === 'complete').length
 
-  // Format date
-  const formatDate = (dateString?: string) => {
-    if (!dateString) return "진행 중"
-    const date = new Date(dateString)
-    return date.toLocaleDateString("ko-KR", {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric'
+  const formatCompletedAt = (dateString?: string) => {
+    if (!dateString) return null
+    const normalized = dateString.includes("T")
+      ? dateString
+      : dateString.replace(" ", "T")
+    const date = new Date(normalized)
+    if (Number.isNaN(date.getTime())) return dateString
+    return date.toLocaleString("ko-KR", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
     })
   }
+
+  const completedAtLabel = formatCompletedAt(byeongpung.completedAt)
 
   return (
     <motion.article
@@ -35,22 +42,19 @@ export function ArchiveCard({ byeongpung, index }: ArchiveCardProps) {
         duration: 0.5, 
         ease: "easeOut" 
       }}
-      className="group border border-neutral-200 p-4"
+      className="group border border-stone-400/60 p-4"
     >
       <Link
         href={isComplete ? `/byeongpung/${byeongpung.id}` : "#"}
         className={`block ${!isComplete ? 'cursor-not-allowed' : ''}`}
         onClick={(e) => !isComplete && e.preventDefault()}
       >
-        {/* Card Header - Date and Category */}
-        <div className="flex items-center justify-between mb-3">
-          <p className="text-xs text-neutral-500">
-            {formatDate(byeongpung.completedAt)}
-          </p>
-        </div>
+        <p className="mb-3 text-xs text-stone-400 tracking-[0.08em]">
+          {byeongpung.id}번째 이야기
+        </p>
 
         {/* Image */}
-        <div className="relative aspect-[4/5] mb-4 overflow-hidden bg-neutral-100">
+        <div className="relative aspect-[4/5] overflow-hidden bg-neutral-100">
           {thumbnailImage ? (
             <Image
               src={thumbnailImage}
@@ -62,29 +66,22 @@ export function ArchiveCard({ byeongpung, index }: ArchiveCardProps) {
           ) : (
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="text-center">
-                <div className="w-10 h-10 mx-auto mb-2 rounded-full border border-neutral-300 flex items-center justify-center">
-                  <svg className="w-5 h-5 text-neutral-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div className="w-10 h-10 mx-auto mb-2 rounded-full border border-stone-600 flex items-center justify-center">
+                  <svg className="w-5 h-5 text-stone-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                   </svg>
                 </div>
-                <p className="text-xs text-neutral-400">이야기를 기다리고 있어요...</p>
+                <p className="text-xs text-stone-500">이야기를 기다리고 있어요...</p>
               </div>
             </div>
           )}
         </div>
 
-        {/* Title
-        <h3 className="text-lg font-bold text-neutral-900 mb-2 group-hover:underline underline-offset-2">
-          {byeongpung.title}
-        </h3> */}
-
-        {/* Description */}
-        {/* <p className="text-sm text-neutral-600 leading-relaxed mb-4 line-clamp-3">
-          {byeongpung.theme}
-        </p> */}
-
-        {/* Footer - Author and Duration */}
-        
+        {completedAtLabel && (
+          <p className="mt-3 text-xs text-stone-400 leading-relaxed">
+            {completedAtLabel} 완성
+          </p>
+        )}
       </Link>
     </motion.article>
   )

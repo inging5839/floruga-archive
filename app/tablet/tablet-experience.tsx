@@ -172,7 +172,7 @@ export function TabletExperience() {
   const strength = intensity[0] ?? 0
 
   return (
-    <main className="min-h-[100dvh] bg-white">
+    <main className="min-h-[100dvh]">
       <header className="border-b border-neutral-200 shrink-0">
         <div className="px-5 sm:px-8 lg:px-12 py-4 flex items-center justify-between gap-4">
           <Link

@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { Noto_Serif_KR } from 'next/font/google'
+import localFont from 'next/font/local'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
@@ -18,6 +19,23 @@ const notoSerifKR = Noto_Serif_KR({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-noto-serif-kr",
+})
+
+const shillaCulture = localFont({
+  src: [
+    {
+      path: '../public/fonts/Shilla_Culture(M).ttf',
+      weight: '500',
+      style: 'normal',
+    },
+    {
+      path: '../public/fonts/Shilla_Culture(B).ttf',
+      weight: '700',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-shilla-culture',
+  display: 'swap',
 })
 
 export const metadata: Metadata = {
@@ -49,9 +67,9 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="ko" className="bg-white">
+    <html lang="ko" className={`bg-[#15110f] text-stone-100 ${shillaCulture.variable}`}>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${notoSerifKR.variable} font-sans antialiased bg-white min-h-dvh touch-manipulation`}
+        className={`${geistSans.variable} ${geistMono.variable} ${notoSerifKR.variable} font-sans antialiased site-background min-h-dvh touch-manipulation`}
       >
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}

@@ -30,8 +30,8 @@ export function ByeongpungPanel({
   const sidePanelWidth = 68 + Math.round(normalizedDepth * 8)
 
   const sharedMediaFrameClass = isExhibition
-    ? "relative block w-full max-w-full aspect-[9/16] max-h-[min(82vh,720px)] lg:max-h-[min(86vh,860px)] expo-tland-panel-media overflow-hidden border-[6px] border-white bg-stone-50 shadow-[0_22px_46px_rgba(0,0,0,0.55),inset_0_0_0_1px_rgba(255,228,170,0.55),inset_0_22px_24px_-18px_rgba(255,236,184,0.7),inset_0_-18px_22px_-20px_rgba(120,82,32,0.55),inset_20px_0_22px_-20px_rgba(255,224,158,0.55),inset_-20px_0_22px_-20px_rgba(255,224,158,0.55)]"
-    : "relative block w-full max-w-full aspect-[9/16] max-h-[min(68vh,540px)] lg:max-h-[min(72vh,580px)] expo-tland-panel-media overflow-hidden border-[6px] border-white bg-stone-100 shadow-[0_18px_40px_rgba(0,0,0,0.38),inset_0_0_0_1px_rgba(255,241,214,0.26),inset_0_20px_22px_-18px_rgba(255,229,186,0.62),inset_0_-16px_20px_-20px_rgba(80,62,38,0.38),inset_18px_0_20px_-20px_rgba(255,224,178,0.42),inset_-18px_0_20px_-20px_rgba(255,224,178,0.38)]"
+    ? "relative block w-full max-w-full aspect-[9/16] max-h-[min(82vh,720px)] lg:max-h-[min(86vh,860px)] expo-tland-panel-media overflow-hidden panel-hanji shadow-[0_18px_40px_rgba(0,0,0,0.28)]"
+    : "relative block w-full max-w-full aspect-[9/16] max-h-[min(68vh,540px)] lg:max-h-[min(72vh,580px)] expo-tland-panel-media overflow-hidden panel-hanji shadow-[0_14px_32px_rgba(0,0,0,0.18)]"
 
   return (
     <motion.div
@@ -41,14 +41,14 @@ export function ByeongpungPanel({
       aria-current={isActive ? "true" : undefined}
       className={cn(
         "relative flex-shrink-0",
-        "w-[75vw] md:w-[45vw] max-xl:border-r max-xl:border-neutral-300",
+        "w-[75vw] md:w-[45vw] max-xl:border-r max-xl:border-stone-600/40",
         "lg:w-auto lg:flex-1",
         "expo-tland-panel",
         "overflow-hidden",
         "py-0",
         isExhibition
           ? "border-r border-white/25 bg-transparent"
-          : "border-r border-white/50 bg-[linear-gradient(to_bottom,#fefdfb_0%,#f5efe4_50%,#fffefc_100%)] before:pointer-events-none before:absolute before:inset-0 before:bg-[radial-gradient(circle_at_50%_52%,rgba(211,186,150,0.28)_0%,rgba(211,186,150,0.16)_28%,rgba(211,186,150,0.06)_46%,transparent_72%)]",
+          : "border-r border-stone-600/40 panel-hanji",
         className,
       )}
     >
@@ -88,13 +88,10 @@ export function ByeongpungPanel({
                 className={cn(
                   sharedMediaFrameClass,
                   "cursor-pointer transition-all duration-300",
-                  isExhibition
-                    ? "before:pointer-events-none before:absolute before:inset-[4.5%] before:border-[5px] before:border-white/60"
-                    : "before:pointer-events-none before:absolute before:inset-[4.5%] before:border-[5px] before:border-white/70",
-                  "after:pointer-events-none after:absolute after:inset-0 after:bg-[radial-gradient(circle_at_50%_52%,transparent_48%,rgba(255,231,191,0.22)_68%,rgba(31,25,18,0.34)_100%)]",
-                  "hover:-translate-y-0.5 hover:shadow-[0_20px_42px_rgba(0,0,0,0.4)]",
-                  "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-200",
-                  isActive && "ring-1 ring-black/60",
+                  "after:pointer-events-none after:absolute after:inset-0 after:bg-[radial-gradient(circle_at_50%_52%,transparent_48%,rgba(255,231,191,0.12)_68%,rgba(31,25,18,0.2)_100%)]",
+                  "hover:-translate-y-0.5 hover:shadow-[0_20px_42px_rgba(0,0,0,0.28)]",
+                  "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-400",
+                  isActive && "ring-1 ring-black/40",
                 )}
                 aria-label={`${panel.title} 이미지 원본 보기`}
               >
@@ -112,10 +109,7 @@ export function ByeongpungPanel({
               <div
                 className={cn(
                   sharedMediaFrameClass,
-                  isExhibition
-                    ? "before:pointer-events-none before:absolute before:inset-[4.5%] before:!border-[5px] before:border-white/60"
-                    : "before:pointer-events-none before:absolute before:inset-[4.5%] before:!border-[5px] before:border-white/70",
-                  "after:pointer-events-none after:absolute after:inset-0 after:bg-[radial-gradient(circle_at_50%_52%,transparent_50%,rgba(255,231,191,0.16)_70%,rgba(31,25,18,0.26)_100%)]",
+                  "after:pointer-events-none after:absolute after:inset-0 after:bg-[radial-gradient(circle_at_50%_52%,transparent_50%,rgba(255,231,191,0.1)_70%,rgba(31,25,18,0.16)_100%)]",
                 )}
                 aria-label="제작 중"
               >

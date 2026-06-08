@@ -71,8 +71,8 @@ export function ByeongpungViewer({ byeongpung, className, title, variant = "defa
   return (
     <div className={cn("relative w-full", className)}>
       {title && (
-        <div className="border border-b-0 border-neutral-200 px-6 lg:px-12 py-4">
-          <h2 className="text-xs text-neutral-500 tracking-widest uppercase">
+        <div className="border border-b-0 border-stone-400/60 px-6 lg:px-12 py-4">
+          <h2 className="text-xs text-stone-400 tracking-widest uppercase">
             {title}
           </h2>
         </div>
@@ -94,8 +94,8 @@ export function ByeongpungViewer({ byeongpung, className, title, variant = "defa
             className={`
               h-1 rounded-full transition-all duration-300
               ${idx === activeIndex 
-                ? "bg-neutral-900 w-6" 
-                : "bg-neutral-300 w-2 hover:bg-neutral-400"
+                ? "bg-stone-100 w-6" 
+                : "bg-stone-600 w-2 hover:bg-stone-400"
               }
             `}
             aria-label={`${idx + 1}번째 패널`}
@@ -109,7 +109,7 @@ export function ByeongpungViewer({ byeongpung, className, title, variant = "defa
         onScroll={handleScroll}
         className={cn(
           "flex gap-0 overflow-x-auto hide-scrollbar snap-x snap-mandatory xl:snap-none scroll-smooth border",
-          isExhibition ? "border-white/30 bg-transparent" : "border-neutral-200 bg-stone-100",
+          isExhibition ? "border-white/30 bg-transparent" : "border-stone-400/60 panel-hanji",
           title && "border-t-0",
         )}
         style={{
@@ -128,7 +128,7 @@ export function ByeongpungViewer({ byeongpung, className, title, variant = "defa
               "snap-center shrink-0 min-w-0",
               isExhibition
                 ? "xl:border-r xl:border-white/25 xl:last:border-r-0"
-                : "xl:border-r xl:border-neutral-300 xl:last:border-r-0",
+                : "xl:border-r xl:border-stone-600/60 xl:last:border-r-0",
             )}
           />
         ))}
@@ -138,12 +138,12 @@ export function ByeongpungViewer({ byeongpung, className, title, variant = "defa
       <div className="hidden xl:block mt-6">
         <div className={cn(
           "relative h-px w-full max-w-md mx-auto",
-          isExhibition ? "bg-stone-700" : "bg-neutral-200",
+          isExhibition ? "bg-stone-700" : "bg-stone-700",
         )}>
           <motion.div
             className={cn(
               "absolute top-0 left-0 h-full",
-              isExhibition ? "bg-white" : "bg-neutral-900",
+              isExhibition ? "bg-white" : "bg-stone-200",
             )}
             style={{ width: progressWidth }}
           />
@@ -157,7 +157,7 @@ export function ByeongpungViewer({ byeongpung, className, title, variant = "defa
         transition={{ delay: 1.5, duration: 0.5 }}
         className="xl:hidden text-center mt-3"
       >
-        <p className="text-xs text-neutral-400 tracking-wider uppercase">
+        <p className="text-xs text-stone-500 tracking-wider uppercase">
           좌우로 밀어 감상해보세요
         </p>
       </motion.div>

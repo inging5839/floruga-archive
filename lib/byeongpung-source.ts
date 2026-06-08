@@ -216,22 +216,17 @@ function buildByeongpung(
 
   const isComplete = group.length >= IMAGES_PER_BYEONGPUNG
 
-  // 제6폭: 2~5폭이 모두 채워진 경우에만 E 이미지 표시
-  const lastPanel: Panel = isComplete
-    ? {
-        id: 6,
-        title: "제6폭",
-        story: null,
-        image: resolveLastPanelImage(group, eImageMap),
-        status: "complete",
-      }
-    : {
-        id: 6,
-        title: "제6폭",
-        story: null,
-        image: waitPanelImage,
-        status: "waiting",
-      }
+  // 제6폭: 2~5폭이 모두 채워진 뒤 E 결말 이미지가 도착하면 complete, 없으면 WAIT.png
+  const lastPanelImage = isComplete
+    ? resolveLastPanelImage(group, eImageMap)
+    : null
+  const lastPanel: Panel = {
+    id: 6,
+    title: "제6폭",
+    story: null,
+    image: lastPanelImage ?? waitPanelImage,
+    status: lastPanelImage ? "complete" : "waiting",
+  }
 
   const panels: Panel[] = [
     {

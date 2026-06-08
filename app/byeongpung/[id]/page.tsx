@@ -20,9 +20,9 @@ export default function ByeongpungDetailPage({ params }: PageProps) {
 
   if (loading && completed.length === 0) {
     return (
-      <main className="min-h-dvh min-h-screen bg-white">
+      <main className="min-h-dvh min-h-screen">
         <SiteHeader />
-        <div className="flex items-center justify-center py-32 text-sm text-neutral-500">
+        <div className="flex items-center justify-center py-32 text-sm text-stone-400">
           병풍 데이터를 불러오는 중…
         </div>
       </main>
@@ -42,7 +42,7 @@ export default function ByeongpungDetailPage({ params }: PageProps) {
   const completedPanels = byeongpung.panels.filter(p => p.status === "complete").length
 
   return (
-    <main className="min-h-dvh min-h-screen bg-white">
+    <main className="min-h-dvh min-h-screen">
       <SiteHeader />
 
       {/* Title Section */}
@@ -52,16 +52,16 @@ export default function ByeongpungDetailPage({ params }: PageProps) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <p className="text-xs text-neutral-500 tracking-widest uppercase mb-4">
+          <p className="text-xs text-stone-500 tracking-widest uppercase mb-4">
             {byeongpung.theme}
           </p>
-          <h1 className="text-4xl lg:text-6xl font-black text-neutral-900 leading-none tracking-tight mb-6 expo-tland-page-title">
+          <h1 className="text-4xl lg:text-6xl font-black text-stone-100 leading-none tracking-tight mb-6 expo-tland-page-title">
             {byeongpung.title}
           </h1>
-          <div className="flex flex-wrap items-center gap-6 text-xs text-neutral-500">
+          <div className="flex flex-wrap items-center gap-6 text-xs text-stone-400">
             {byeongpung.completedAt && (
               <span>
-                <span className="text-neutral-400">완성된 시간<br></br></span> {byeongpung.completedAt}
+                <span className="text-stone-500">완성된 시간<br></br></span> {byeongpung.completedAt}
               </span>
             )}
           </div>
@@ -80,17 +80,17 @@ export default function ByeongpungDetailPage({ params }: PageProps) {
       </section>
 
       {/* Navigation */}
-      <section className="px-6 lg:px-12 py-12 lg:py-16 border-t border-neutral-200 expo-tland-section-md">
+      <section className="px-6 lg:px-12 py-12 lg:py-16 border-t border-stone-400/60 expo-tland-section-md">
         <div className="flex items-stretch justify-between gap-4">
           {prevByeongpung ? (
             <Link
               href={`/byeongpung/${prevByeongpung.id}`}
-              className="group flex-1 flex items-center gap-4 p-6 border border-neutral-200 hover:border-neutral-900 rounded-lg transition-colors"
+              className="group flex-1 flex items-center gap-4 p-6 border border-stone-700 hover:border-stone-400 rounded-lg transition-colors"
             >
-              <ArrowLeft className="w-5 h-5 text-neutral-400 group-hover:text-neutral-900 group-hover:-translate-x-1 transition-all" />
+              <ArrowLeft className="w-5 h-5 text-stone-500 group-hover:text-stone-100 group-hover:-translate-x-1 transition-all" />
               <div>
-                <p className="text-xs text-neutral-400 uppercase tracking-wider mb-1">이전</p>
-                <p className="text-sm font-medium text-neutral-900">
+                <p className="text-xs text-stone-500 uppercase tracking-wider mb-1">이전</p>
+                <p className="text-sm font-medium text-stone-100">
                   {prevByeongpung.title}
                 </p>
               </div>
@@ -102,15 +102,15 @@ export default function ByeongpungDetailPage({ params }: PageProps) {
           {nextByeongpung ? (
             <Link
               href={`/byeongpung/${nextByeongpung.id}`}
-              className="group flex-1 flex items-center justify-end gap-4 p-6 border border-neutral-200 hover:border-neutral-900 rounded-lg transition-colors text-right"
+              className="group flex-1 flex items-center justify-end gap-4 p-6 border border-stone-700 hover:border-stone-400 rounded-lg transition-colors text-right"
             >
               <div>
-                <p className="text-xs text-neutral-400 uppercase tracking-wider mb-1">다음</p>
-                <p className="text-sm font-medium text-neutral-900">
+                <p className="text-xs text-stone-500 uppercase tracking-wider mb-1">다음</p>
+                <p className="text-sm font-medium text-stone-100">
                   {nextByeongpung.title}
                 </p>
               </div>
-              <ArrowRight className="w-5 h-5 text-neutral-400 group-hover:text-neutral-900 group-hover:translate-x-1 transition-all" />
+              <ArrowRight className="w-5 h-5 text-stone-500 group-hover:text-stone-100 group-hover:translate-x-1 transition-all" />
             </Link>
           ) : (
             <div className="flex-1" />
@@ -119,22 +119,22 @@ export default function ByeongpungDetailPage({ params }: PageProps) {
       </section>
 
       {/* Footer */}
-      <footer className="px-6 lg:px-12 py-12 lg:py-16 border-t border-neutral-200 expo-tland-section-md">
+      <footer className="px-6 lg:px-12 py-12 lg:py-16 border-t border-stone-400/60 expo-tland-section-md">
         <div className="flex flex-col items-center gap-8">
           <Link
             href="/archive"
-            className="group flex items-center gap-3 px-8 py-4 border border-neutral-900 text-neutral-900 hover:bg-neutral-900 hover:text-white rounded-full transition-all duration-300"
+            className="group flex items-center gap-3 px-8 py-4 border border-stone-300 text-stone-100 hover:bg-stone-100 hover:text-stone-900 rounded-full transition-all duration-300"
           >
             <span className="text-sm tracking-wider uppercase">
               전체보기로 돌아가기
             </span>
           </Link>
 
-          <div className="flex items-center justify-between w-full pt-8 border-t border-neutral-100">
-            <p className="text-xs text-neutral-400">
+          <div className="flex items-center justify-between w-full pt-8 border-t border-stone-400/50">
+            <p className="text-xs text-stone-500">
               병풍연화
             </p>
-            <p className="text-xs text-neutral-400">
+            <p className="text-xs text-stone-500">
               팀 꽃충이
             </p>
           </div>
