@@ -44,10 +44,10 @@ export default function ExitPage() {
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_25%,rgba(214,188,150,0.14)_0%,transparent_65%)]" />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_85%_85%,rgba(255,221,178,0.06)_0%,transparent_60%)]" />
 
-      <div className="relative z-10 flex h-full flex-col">
+      <div className="relative z-10 flex h-full flex-col portrait:pt-[6vh]">
         {/* Hero 배너 — 맨 위 전체폭 */}
-        <div className="w-full shrink-0 overflow-hidden border-b border-stone-400/60">
-          <HeroBanner alt="병풍연화 배너" priority />
+        <div className="w-full shrink-0 overflow-hidden border-y border-stone-400/60 portrait:border-t-0">
+          <HeroBanner alt="병풍연화 배너" priority portrait />
         </div>
 
         {/* 본문: 세로(9:16) → 세로 스택 / 가로(데스크톱) → 2단 */}
