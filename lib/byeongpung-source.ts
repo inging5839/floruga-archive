@@ -24,8 +24,15 @@ export const FIRST_PANEL_FILENAME =
 export const WAIT_PANEL_D1_ID = Number(
   process.env.NEXT_PUBLIC_BYEONGPUNG_WAIT_PANEL_D1_ID ?? "7",
 )
+/** WAIT 플레이스홀더 파일명 (대소문자 무시로 매칭) */
 export const WAIT_PANEL_FILENAME =
-  process.env.NEXT_PUBLIC_BYEONGPUNG_WAIT_PANEL_FILENAME ?? "WAIT.png"
+  process.env.NEXT_PUBLIC_BYEONGPUNG_WAIT_PANEL_FILENAME ?? "wait.png"
+/** D1에서 WAIT 레코드를 못 찾을 때 쓰는 정적 폴백 이미지 URL */
+export const WAIT_PANEL_FALLBACK_IMAGE =
+  process.env.NEXT_PUBLIC_BYEONGPUNG_WAIT_PANEL_IMAGE ??
+  "https://pub-00978e0e76914cb8af645671b24e18da.r2.dev/wait.png"
+
+const WAIT_PANEL_FILENAME_LC = WAIT_PANEL_FILENAME.trim().toLowerCase()
 
 /**
  * 제6폭: 5번째 칸(group[3])의 sceneId → E 이미지 파일명 매핑.
@@ -113,7 +120,7 @@ function isFirstPanelRecord(row: ArchiveImage): boolean {
 
 function isWaitPanelRecord(row: ArchiveImage): boolean {
   if (row.id === WAIT_PANEL_D1_ID) return true
-  return row.filename?.trim() === WAIT_PANEL_FILENAME
+  return row.filename?.trim().toLowerCase() === WAIT_PANEL_FILENAME_LC
 }
 
 /** I-1, WAIT, E*-1 처럼 고정·플레이스홀더 row인지 여부 */
@@ -133,8 +140,10 @@ function resolveFirstPanelImage(rows: ArchiveImage[]): string | null {
 function resolveWaitPanelImage(rows: ArchiveImage[]): string | null {
   const match =
     rows.find((row) => row.id === WAIT_PANEL_D1_ID) ??
-    rows.find((row) => row.filename?.trim() === WAIT_PANEL_FILENAME)
-  return match?.imageUrl ?? null
+    rows.find(
+      (row) => row.filename?.trim().toLowerCase() === WAIT_PANEL_FILENAME_LC,
+    )
+  return match?.imageUrl ?? WAIT_PANEL_FALLBACK_IMAGE
 }
 
 /**
