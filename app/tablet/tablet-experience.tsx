@@ -8,6 +8,10 @@ import { Camera, RefreshCw, Send, Sparkles } from "lucide-react"
 import { Slider } from "@/components/ui/slider"
 import { Label } from "@/components/ui/label"
 import { TABLET_CONTENT_CLASS } from "./tablet-classes"
+import {
+  captureWithBackgroundBlur,
+  preloadBackgroundBlurModel,
+} from "@/lib/tablet-background-blur"
 
 const WEIGHT_EXAMPLES = [
   { src: "/images/tablet_input_example_youngjun.png", label: "관람객 A" },
@@ -28,6 +32,7 @@ export function TabletExperience() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [stream, setStream] = useState<MediaStream | null>(null)
   const [capturedUrl, setCapturedUrl] = useState<string | null>(null)
+  const [isCapturing, setIsCapturing] = useState(false)
   const [cameraError, setCameraError] = useState<string | null>(null)
   const [intensity, setIntensity] = useState([100])
   const [submitStatus, setSubmitStatus] = useState<
@@ -47,6 +52,10 @@ export function TabletExperience() {
       prev?.getTracks().forEach((t) => t.stop())
       return null
     })
+  }, [])
+
+  useEffect(() => {
+    preloadBackgroundBlurModel()
   }, [])
 
   useEffect(() => {
@@ -90,24 +99,34 @@ export function TabletExperience() {
     void video.play().catch(() => {})
   }, [stream, capturedUrl])
 
-  const capture = useCallback(() => {
+  const capture = useCallback(async () => {
     const video = videoRef.current
-    const canvas = canvasRef.current
-    if (!video || !canvas || video.readyState < 2) return
+    if (!video || video.readyState < 2 || isCapturing) return
     const w = video.videoWidth
     const h = video.videoHeight
     if (!w || !h) return
-    canvas.width = w
-    canvas.height = h
-    const ctx = canvas.getContext("2d")
-    if (!ctx) return
-    ctx.save()
-    ctx.translate(w, 0)
-    ctx.scale(-1, 1)
-    ctx.drawImage(video, 0, 0, w, h)
-    ctx.restore()
-    setCapturedUrl(canvas.toDataURL("image/jpeg", 0.92))
-  }, [])
+
+    setIsCapturing(true)
+    try {
+      const dataUrl = await captureWithBackgroundBlur(video, w, h)
+      setCapturedUrl(dataUrl)
+    } catch {
+      const canvas = canvasRef.current
+      if (!canvas) return
+      canvas.width = w
+      canvas.height = h
+      const ctx = canvas.getContext("2d")
+      if (!ctx) return
+      ctx.save()
+      ctx.translate(w, 0)
+      ctx.scale(-1, 1)
+      ctx.drawImage(video, 0, 0, w, h)
+      ctx.restore()
+      setCapturedUrl(canvas.toDataURL("image/jpeg", 0.92))
+    } finally {
+      setIsCapturing(false)
+    }
+  }, [isCapturing])
 
   const retake = useCallback(() => {
     setCapturedUrl(null)
@@ -216,6 +235,9 @@ export function TabletExperience() {
                 <h2 className="text-base sm:text-lg font-bold text-neutral-900 tracking-tight">
                   얼굴 촬영
                 </h2>
+                <p className="mt-1 text-[11px] sm:text-xs text-neutral-500 leading-snug">
+                  카메라에 가장 가까운 분만 선명하게 남기고, 뒤쪽 배경은 자동으로 흐리게 처리됩니다.
+                </p>
               </div>
 
               <div className="relative aspect-[4/3] w-full flex-1 min-h-[200px] max-h-[min(48vh,380px)] lg:max-h-[min(52vh,340px)] mx-auto overflow-hidden rounded-lg border border-neutral-200 bg-neutral-100">
@@ -231,13 +253,21 @@ export function TabletExperience() {
                     className="absolute inset-0 h-full w-full object-cover"
                   />
                 ) : stream ? (
-                  <video
-                    ref={videoRef}
-                    className="absolute inset-0 h-full w-full object-cover scale-x-[-1]"
-                    playsInline
-                    muted
-                    autoPlay
-                  />
+                  <>
+                    <video
+                      ref={videoRef}
+                      className="absolute inset-0 h-full w-full object-cover scale-x-[-1]"
+                      playsInline
+                      muted
+                      autoPlay
+                    />
+                    {isCapturing && (
+                      <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-2 bg-white/70 text-neutral-800">
+                        <div className="h-9 w-9 border-2 border-neutral-300 border-t-neutral-800 rounded-full animate-spin" />
+                        <span className="text-xs sm:text-sm">배경 처리 중…</span>
+                      </div>
+                    )}
+                  </>
                 ) : (
                   <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 text-neutral-500">
                     <div className="h-9 w-9 border-2 border-neutral-300 border-t-neutral-800 rounded-full animate-spin" />
@@ -252,12 +282,12 @@ export function TabletExperience() {
                 {!capturedUrl ? (
                   <button
                     type="button"
-                    onClick={capture}
-                    disabled={!stream || !!cameraError}
+                    onClick={() => void capture()}
+                    disabled={!stream || !!cameraError || isCapturing}
                     className="w-full inline-flex items-center justify-center gap-2 min-h-[48px] rounded-full border border-neutral-900 bg-neutral-900 text-white text-sm sm:text-base font-medium tracking-wide hover:bg-neutral-800 transition-colors disabled:opacity-40 disabled:pointer-events-none touch-manipulation"
                   >
                     <Camera className="w-5 h-5 shrink-0" aria-hidden />
-                    얼굴 촬영
+                    {isCapturing ? "처리 중…" : "얼굴 촬영"}
                   </button>
                 ) : (
                   <button
