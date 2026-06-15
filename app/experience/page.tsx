@@ -96,14 +96,14 @@ export default function ExperiencePage() {
           </p>
           <div className="flex flex-wrap items-center gap-3">
             <Link
-              href="/"
+              href="/recent"
               className="inline-flex items-center gap-2 px-5 py-3 border border-stone-300 text-stone-100 rounded-full hover:bg-stone-100 hover:text-stone-900 transition-colors"
             >
               <ArrowLeft className="w-4 h-4" />
-              병풍 전시관으로
+              최근 제작된 병풍
             </Link>
             <Link
-              href="/about"
+              href="/"
               className="inline-flex items-center gap-2 px-5 py-3 border border-stone-600 text-stone-300 rounded-full hover:border-stone-300 hover:text-stone-100 transition-colors"
             >
               프로젝트 소개

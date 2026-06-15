@@ -3,8 +3,7 @@
 import { motion } from "framer-motion"
 import Link from "next/link"
 import Image from "next/image"
-import { SiteHeader } from "@/components/layout/site-header"
-import { ArrowLeft, ArrowRight, Camera, Sparkles, PersonStanding, ScrollText } from "lucide-react"
+import { ArrowRight, Camera, Sparkles, PersonStanding, ScrollText } from "lucide-react"
 
 const STEPS = [
   {
@@ -33,45 +32,38 @@ const STEPS = [
   },
 ]
 
-export default function AboutPage() {
+export function ProjectIntro() {
   return (
-    <main className="min-h-dvh min-h-screen">
-      <SiteHeader />
-
-      {/* Hero */}
-      <section className="relative overflow-hidden border-b border-stone-400/60">
-        <div className="px-6 lg:px-12 pt-12 lg:pt-20 pb-12 lg:pb-20 expo-tland-section-md">
+    <>
+      {/* Intro */}
+      <section className="border-b border-stone-400/60 expo-tland-section">
+        <div className="px-6 lg:px-12 py-14 lg:py-20 expo-tland-section-lg">
           <div className="grid lg:grid-cols-[1.15fr_0.85fr] gap-10 lg:gap-16 items-center">
             <div>
               <motion.p
                 initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.5 }}
                 className="text-xs lg:text-sm tracking-[0.4em] uppercase text-amber-200/70 mb-5"
               >
                 인터랙티브 XR 전시
               </motion.p>
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.05 }}
-                className="font-shilla-culture font-bold text-[14vw] lg:text-[7vw] text-stone-50 leading-[0.95] tracking-tight expo-tland-page-title"
-              >
-                병풍연화
-              </motion.h1>
               <motion.p
                 initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.15 }}
-                className="mt-6 text-lg lg:text-2xl text-stone-200 font-serif leading-relaxed"
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.6, delay: 0.05 }}
+                className="text-lg lg:text-2xl text-stone-200 font-serif leading-relaxed"
               >
                 관람객의 몸짓이 이야기가 되고,<br className="hidden sm:block" />
                 그 이야기가 다시 병풍의 한 폭으로 남는다.
               </motion.p>
               <motion.p
                 initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.6, delay: 0.15 }}
                 className="mt-6 max-w-xl text-sm lg:text-base text-stone-400 leading-relaxed"
               >
                 《병풍연화》는 어린 시절 누구나 한 번쯤 접했던 전래동화와 책 병풍의 기억에서
@@ -82,8 +74,9 @@ export default function AboutPage() {
 
             <motion.div
               initial={{ opacity: 0, scale: 0.96 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.7, delay: 0.1 }}
               className="relative mx-auto w-full max-w-[360px]"
             >
               <div className="absolute -inset-4 rounded-2xl bg-[radial-gradient(circle_at_50%_30%,rgba(214,188,150,0.18)_0%,transparent_70%)] blur-xl" />
@@ -93,7 +86,6 @@ export default function AboutPage() {
                   alt="병풍연화 포스터"
                   width={745}
                   height={1052}
-                  priority
                   className="w-full h-auto object-cover"
                 />
               </div>
@@ -286,7 +278,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Closing question */}
+      {/* Closing */}
       <section className="expo-tland-section">
         <div className="px-6 lg:px-12 py-16 lg:py-28 expo-tland-section-lg">
           <motion.blockquote
@@ -307,17 +299,17 @@ export default function AboutPage() {
 
           <div className="mt-14 flex flex-wrap items-center justify-center gap-3">
             <Link
-              href="/"
+              href="/recent"
               className="inline-flex items-center gap-2 px-6 py-3 border border-stone-300 text-stone-100 rounded-full hover:bg-stone-100 hover:text-stone-900 transition-colors"
             >
-              <ArrowLeft className="w-4 h-4" />
-              병풍 전시관으로
+              최근 제작된 병풍 보기
+              <ArrowRight className="w-4 h-4" />
             </Link>
             <Link
               href="/archive"
               className="inline-flex items-center gap-2 px-6 py-3 border border-stone-600 text-stone-300 rounded-full hover:border-stone-300 hover:text-stone-100 transition-colors"
             >
-              완성된 병풍 전체보기
+              모든 병풍 전체보기
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -328,6 +320,6 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-    </main>
+    </>
   )
 }
