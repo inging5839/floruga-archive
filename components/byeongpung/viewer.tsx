@@ -108,7 +108,7 @@ export function ByeongpungViewer({ byeongpung, className, title, variant = "defa
         ref={containerRef}
         onScroll={handleScroll}
         className={cn(
-          "flex gap-0 overflow-x-auto hide-scrollbar snap-x snap-mandatory xl:snap-none scroll-smooth border",
+          "flex items-stretch gap-0 overflow-x-auto hide-scrollbar snap-x snap-mandatory xl:snap-none scroll-smooth border",
           isExhibition ? "border-white/30 bg-transparent" : "border-stone-400/60 panel-hanji",
           title && "border-t-0",
         )}

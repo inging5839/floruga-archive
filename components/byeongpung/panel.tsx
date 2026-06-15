@@ -27,6 +27,7 @@ export function ByeongpungPanel({
   const [lightboxOpen, setLightboxOpen] = useState(false)
   const isComplete = panel.status === "complete"
   const showImage = Boolean(panel.image)
+  const storyText = panel.story?.trim() ?? ""
   const isExhibition = variant === "exhibition"
   const normalizedDepth = (index + 1) / Math.max(totalPanels, 1)
   const sidePanelOpacity = 0.12 + normalizedDepth * 0.06
@@ -36,6 +37,25 @@ export function ByeongpungPanel({
     ? "relative block w-full max-w-full aspect-[9/16] max-h-[min(82vh,720px)] lg:max-h-[min(86vh,860px)] expo-tland-panel-media overflow-hidden panel-hanji shadow-[0_18px_40px_rgba(0,0,0,0.28)]"
     : "relative block w-full max-w-full aspect-[9/16] max-h-[min(68vh,540px)] lg:max-h-[min(72vh,580px)] expo-tland-panel-media overflow-hidden panel-hanji shadow-[0_14px_32px_rgba(0,0,0,0.18)]"
 
+  const sharedStoryAreaClass = "expo-tland-panel-story"
+
+  function PanelStoryCaption() {
+    return (
+      <div className={sharedStoryAreaClass}>
+        <div className="expo-tland-panel-story-frame">
+          <div className="expo-tland-panel-story-rule" aria-hidden="true" />
+          {storyText ? (
+            <p className="expo-tland-panel-story-text">{storyText}</p>
+          ) : (
+            <p className="expo-tland-panel-story-text" aria-hidden="true">
+              &nbsp;
+            </p>
+          )}
+        </div>
+      </div>
+    )
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -43,10 +63,10 @@ export function ByeongpungPanel({
       transition={{ delay: index * 0.06, duration: 0.4, ease: "easeOut" }}
       aria-current={isActive ? "true" : undefined}
       className={cn(
-        "relative flex-shrink-0",
+        "expo-tland-panel relative flex h-full min-h-0 flex-shrink-0 flex-col self-stretch",
+        isExhibition && "is-exhibition",
         "w-[75vw] md:w-[45vw] max-xl:border-r max-xl:border-stone-600/40",
         "lg:w-auto lg:flex-1",
-        "expo-tland-panel",
         "overflow-hidden",
         "py-0",
         isExhibition
@@ -56,10 +76,10 @@ export function ByeongpungPanel({
       )}
     >
       {showImage ? (
-        <div className="relative h-full flex flex-col">
+        <div className="relative flex min-h-0 flex-1 flex-col">
           <div
             className={cn(
-              "relative flex-1 flex items-center justify-center overflow-hidden",
+              "relative flex min-h-0 flex-1 items-start justify-center overflow-hidden",
               isExhibition ? "p-2 lg:p-4" : "p-8 lg:p-10",
             )}
           >
@@ -112,6 +132,7 @@ export function ByeongpungPanel({
               />
             </button>
           </div>
+          <PanelStoryCaption />
           <ImageLightbox
             image={{ src: panel.image!, alt: panel.title }}
             open={lightboxOpen}
@@ -119,8 +140,8 @@ export function ByeongpungPanel({
           />
         </div>
       ) : (
-        <div className="h-full flex flex-col">
-          <div className="flex-1 flex items-center justify-center px-3">
+        <div className="flex min-h-0 flex-1 flex-col">
+          <div className="flex min-h-0 flex-1 items-center justify-center px-3">
             <div className="text-center">
               <div className="w-10 h-10 mx-auto mb-3 opacity-30">
                 <svg viewBox="0 0 24 24" fill="none" className="w-full h-full text-neutral-500">
@@ -130,6 +151,7 @@ export function ByeongpungPanel({
               <p className="text-xs text-neutral-400">제작 중</p>
             </div>
           </div>
+          <PanelStoryCaption />
         </div>
       )}
     </motion.div>

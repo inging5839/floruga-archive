@@ -3,6 +3,7 @@ CREATE TABLE IF NOT EXISTS archive_images (
   image_url TEXT NOT NULL UNIQUE,
   filename TEXT,
   scene_id TEXT,
+  story_text TEXT,
   created_at TEXT NOT NULL DEFAULT (datetime('now'))
 );
 
