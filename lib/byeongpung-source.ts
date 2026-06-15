@@ -201,6 +201,23 @@ export function groupArchiveImages(rows: ArchiveImage[]): {
   return { inProgress, completed: completed.reverse() }
 }
 
+/** 제2~5폭 중 하나를 병풍 id 기반으로 의사 랜덤 선택 (폴링 시 썸네일이 바뀌지 않도록) */
+export function pickMiddlePanelThumbnail(
+  middle: Panel[],
+  seed: number,
+): string | null {
+  const complete = middle
+    .filter((p) => p.status === "complete" && p.image)
+    .map((p) => p.image as string)
+  const candidates =
+    complete.length > 0
+      ? complete
+      : middle.filter((p) => p.image).map((p) => p.image as string)
+  if (candidates.length === 0) return null
+  const index = ((seed * 9301 + 49297) % 233280) % candidates.length
+  return candidates[index]
+}
+
 function buildByeongpung(
   group: ArchiveImage[],
   sequence: number,
@@ -250,8 +267,7 @@ function buildByeongpung(
     lastPanel,
   ]
   const latest = group[group.length - 1]
-  const thumbnailImage =
-    [...group].reverse().find((row) => row.imageUrl)?.imageUrl ?? null
+  const thumbnailImage = pickMiddlePanelThumbnail(middle, sequence)
 
   return {
     id: sequence,

@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
 import type { Byeongpung } from "@/lib/data"
+import { pickMiddlePanelThumbnail } from "@/lib/byeongpung-source"
 import { formatKoreaDateTime } from "@/lib/datetime"
 
 interface ArchiveCardProps {
@@ -12,7 +13,10 @@ interface ArchiveCardProps {
 }
 
 export function ArchiveCard({ byeongpung, index }: ArchiveCardProps) {
-  const thumbnailImage = byeongpung.thumbnailImage || byeongpung.panels[0]?.image
+  const middlePanels = byeongpung.panels.filter((p) => p.id >= 2 && p.id <= 5)
+  const thumbnailImage =
+    byeongpung.thumbnailImage ??
+    pickMiddlePanelThumbnail(middlePanels, byeongpung.id)
   const isComplete = byeongpung.completedAt !== undefined
 
   const completedAtLabel = formatKoreaDateTime(byeongpung.completedAt)
