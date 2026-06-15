@@ -198,82 +198,30 @@ export function ProjectIntro() {
             </h2>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-4 lg:gap-6">
-            <motion.figure
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.6 }}
-              className="md:col-span-2 relative overflow-hidden rounded-xl border border-stone-400/60"
-            >
-              <Image
-                src="/images/exhibition-space.png"
-                alt="병풍연화 전시 공간 전경"
-                width={1024}
-                height={768}
-                className="w-full h-auto object-cover"
-              />
-              <figcaption className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/70 to-transparent px-5 py-4 text-sm text-stone-200">
-                미디어월과 병풍이 마주 보는 전시 공간
-              </figcaption>
-            </motion.figure>
-
-            <motion.figure
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.6, delay: 0.05 }}
-              className="relative overflow-hidden rounded-xl border border-stone-400/60"
-            >
-              <Image
-                src="/images/exhibition-mediawall.png"
-                alt="미디어월 앞에서 몸짓으로 이야기에 개입하는 관람자"
-                width={710}
-                height={400}
-                className="w-full h-full object-cover"
-              />
-              <figcaption className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/70 to-transparent px-5 py-4 text-sm text-stone-200">
-                몸짓으로 이야기에 개입하는 순간
-              </figcaption>
-            </motion.figure>
-
-            <motion.figure
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="relative overflow-hidden rounded-xl border border-stone-400/60"
-            >
-              <Image
-                src="/images/exhibition-byeongpung-1.png"
-                alt="완성된 이야기가 투사된 병풍"
-                width={1024}
-                height={576}
-                className="w-full h-full object-cover"
-              />
-              <figcaption className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/70 to-transparent px-5 py-4 text-sm text-stone-200">
-                여러 관람객의 이야기가 모인 병풍
-              </figcaption>
-            </motion.figure>
-
-            <motion.figure
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.6, delay: 0.15 }}
-              className="md:col-span-2 relative overflow-hidden rounded-xl border border-stone-400/60"
-            >
-              <Image
-                src="/images/exhibition-byeongpung-2.png"
-                alt="한 폭씩 채워지며 완성되는 이야기 병풍"
-                width={1024}
-                height={576}
-                className="w-full h-auto object-cover"
-              />
-              <figcaption className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/70 to-transparent px-5 py-4 text-sm text-stone-200">
-                한 폭씩 채워지며 완성되어 가는 이야기 병풍
-              </figcaption>
-            </motion.figure>
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:gap-6">
+            {[
+              { src: "/images/project_img_01.jpg", alt: "병풍연화 전시 풍경 1" },
+              { src: "/images/project_img_02.jpg", alt: "병풍연화 전시 풍경 2" },
+              { src: "/images/project_img_03.jpg", alt: "병풍연화 전시 풍경 3" },
+              { src: "/images/project_img_04.jpg", alt: "병풍연화 전시 풍경 4" },
+            ].map((image, idx) => (
+              <motion.figure
+                key={image.src}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.6, delay: Math.min(idx * 0.05, 0.15) }}
+                className="relative aspect-[4/3] overflow-hidden rounded-xl border border-stone-400/60"
+              >
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  fill
+                  sizes="(max-width: 768px) 50vw, 40vw"
+                  className="object-cover"
+                />
+              </motion.figure>
+            ))}
           </div>
         </div>
       </section>
