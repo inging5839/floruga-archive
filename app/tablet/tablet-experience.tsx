@@ -107,9 +107,13 @@ export function TabletExperience() {
     if (!w || !h) return
 
     setIsCapturing(true)
+    setSubmitError(null)
     try {
-      const dataUrl = await captureWithBackgroundBlur(video, w, h)
-      setCapturedUrl(dataUrl)
+      const result = await captureWithBackgroundBlur(video, w, h)
+      setCapturedUrl(result.dataUrl)
+      if (!result.blurred && result.error) {
+        console.warn("Background blur skipped:", result.error)
+      }
     } catch {
       const canvas = canvasRef.current
       if (!canvas) return
@@ -236,7 +240,7 @@ export function TabletExperience() {
                   얼굴 촬영
                 </h2>
                 <p className="mt-1 text-[11px] sm:text-xs text-neutral-500 leading-snug">
-                  카메라에 가장 가까운 분만 선명하게 남기고, 뒤쪽 배경은 자동으로 흐리게 처리됩니다.
+                  가장 가까운 얼굴만 선명하게 남기고, 몸·의자·배경·뒤쪽 사람은 자동으로 흐리게 처리됩니다.
                 </p>
               </div>
 
