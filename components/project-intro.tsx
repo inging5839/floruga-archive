@@ -1,9 +1,11 @@
 "use client"
 
+import { useState } from "react"
 import { motion } from "framer-motion"
 import Link from "next/link"
 import Image from "next/image"
 import { ArrowRight, Camera, Sparkles, PersonStanding, ScrollText } from "lucide-react"
+import { ImageLightbox } from "@/components/ui/image-lightbox"
 
 const STEPS = [
   {
@@ -32,14 +34,64 @@ const STEPS = [
   },
 ]
 
+const GALLERY_IMAGES = [
+  { src: "/images/project_img_01.jpg", alt: "병풍연화 전시 풍경 1" },
+  { src: "/images/project_img_02.jpg", alt: "병풍연화 전시 풍경 2" },
+  { src: "/images/project_img_03.jpg", alt: "병풍연화 전시 풍경 3" },
+  { src: "/images/project_img_04.jpg", alt: "병풍연화 전시 풍경 4" },
+] as const
+
+function ExhibitionGallery() {
+  const [selected, setSelected] = useState<(typeof GALLERY_IMAGES)[number] | null>(
+    null,
+  )
+
+  return (
+    <>
+      <div className="mx-auto grid max-w-3xl grid-cols-2 gap-3 sm:gap-4 lg:gap-6">
+        {GALLERY_IMAGES.map((image, idx) => (
+          <motion.button
+            key={image.src}
+            type="button"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.6, delay: Math.min(idx * 0.05, 0.15) }}
+            onClick={() => setSelected(image)}
+            className="group relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-stone-400/60 cursor-zoom-in focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-stone-300"
+            aria-label={`${image.alt} 확대 보기`}
+          >
+            <Image
+              src={image.src}
+              alt={image.alt}
+              fill
+              sizes="(max-width: 768px) 50vw, 40vw"
+              className="object-cover transition-transform duration-300 group-hover:scale-105"
+            />
+          </motion.button>
+        ))}
+      </div>
+
+      <ImageLightbox
+        image={selected}
+        open={selected !== null}
+        onOpenChange={(open) => {
+          if (!open) setSelected(null)
+        }}
+        fit="cover"
+      />
+    </>
+  )
+}
+
 export function ProjectIntro() {
   return (
     <>
       {/* Intro */}
       <section className="border-b border-stone-400/60 expo-tland-section">
         <div className="px-6 lg:px-12 py-14 lg:py-20 expo-tland-section-lg">
-          <div className="grid lg:grid-cols-[1.15fr_0.85fr] gap-10 lg:gap-16 items-center">
-            <div>
+          <div className="mx-auto flex max-w-4xl flex-col items-center justify-center gap-10 lg:max-w-5xl lg:flex-row lg:gap-14">
+            <div className="w-full max-w-lg text-center lg:text-left">
               <motion.p
                 initial={{ opacity: 0, y: 12 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -64,7 +116,7 @@ export function ProjectIntro() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.6, delay: 0.15 }}
-                className="mt-6 max-w-xl text-sm lg:text-base text-stone-400 leading-relaxed"
+                className="mt-6 mx-auto lg:mx-0 text-sm lg:text-base text-stone-400 leading-relaxed"
               >
                 《병풍연화》는 어린 시절 누구나 한 번쯤 접했던 전래동화와 책 병풍의 기억에서
                 출발해, 생성형 AI와 신체 기반 인터랙션으로 두 요소를 다시 연결하는 인터랙티브
@@ -77,7 +129,7 @@ export function ProjectIntro() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.7, delay: 0.1 }}
-              className="relative mx-auto w-full max-w-[360px]"
+              className="relative w-full max-w-[280px] shrink-0 sm:max-w-[300px] lg:max-w-[320px]"
             >
               <div className="absolute -inset-4 rounded-2xl bg-[radial-gradient(circle_at_50%_30%,rgba(214,188,150,0.18)_0%,transparent_70%)] blur-xl" />
               <div className="relative overflow-hidden rounded-xl border border-stone-400/60 shadow-[0_30px_70px_rgba(0,0,0,0.55)]">
@@ -97,7 +149,7 @@ export function ProjectIntro() {
       {/* Concept */}
       <section className="border-b border-stone-400/60 expo-tland-section">
         <div className="px-6 lg:px-12 py-14 lg:py-24 expo-tland-section-lg">
-          <div className="grid lg:grid-cols-[0.4fr_0.6fr] gap-10 lg:gap-16">
+          <div className="mx-auto flex max-w-3xl flex-col items-center gap-10 lg:gap-14 text-center">
             <motion.h2
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -141,7 +193,7 @@ export function ProjectIntro() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.6 }}
-            className="mb-10 lg:mb-16"
+            className="mb-10 lg:mb-16 text-center"
           >
             <p className="text-xs tracking-[0.3em] uppercase text-amber-200/70 mb-3">
               Experience
@@ -151,7 +203,7 @@ export function ProjectIntro() {
             </h2>
           </motion.div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+          <div className="mx-auto grid max-w-5xl sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
             {STEPS.map((step, idx) => {
               const Icon = step.icon
               return (
@@ -188,7 +240,7 @@ export function ProjectIntro() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.6 }}
-            className="mb-10 lg:mb-16"
+            className="mb-10 lg:mb-16 text-center"
           >
             <p className="text-xs tracking-[0.3em] uppercase text-amber-200/70 mb-3">
               Gallery
@@ -198,31 +250,7 @@ export function ProjectIntro() {
             </h2>
           </motion.div>
 
-          <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:gap-6">
-            {[
-              { src: "/images/project_img_01.jpg", alt: "병풍연화 전시 풍경 1" },
-              { src: "/images/project_img_02.jpg", alt: "병풍연화 전시 풍경 2" },
-              { src: "/images/project_img_03.jpg", alt: "병풍연화 전시 풍경 3" },
-              { src: "/images/project_img_04.jpg", alt: "병풍연화 전시 풍경 4" },
-            ].map((image, idx) => (
-              <motion.figure
-                key={image.src}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.6, delay: Math.min(idx * 0.05, 0.15) }}
-                className="relative aspect-[4/3] overflow-hidden rounded-xl border border-stone-400/60"
-              >
-                <Image
-                  src={image.src}
-                  alt={image.alt}
-                  fill
-                  sizes="(max-width: 768px) 50vw, 40vw"
-                  className="object-cover"
-                />
-              </motion.figure>
-            ))}
-          </div>
+          <ExhibitionGallery />
         </div>
       </section>
 

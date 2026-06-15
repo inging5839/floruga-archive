@@ -1,8 +1,10 @@
 "use client"
 
+import { useState } from "react"
 import { motion } from "framer-motion"
 import Image from "next/image"
 import type { Panel } from "@/lib/data"
+import { ImageLightbox } from "@/components/ui/image-lightbox"
 import { cn } from "@/lib/utils"
 
 interface ByeongpungPanelProps {
@@ -22,6 +24,7 @@ export function ByeongpungPanel({
   className,
   variant = "default",
 }: ByeongpungPanelProps) {
+  const [lightboxOpen, setLightboxOpen] = useState(false)
   const isComplete = panel.status === "complete"
   const showImage = Boolean(panel.image)
   const isExhibition = variant === "exhibition"
@@ -80,50 +83,40 @@ export function ByeongpungPanel({
               style={{ width: `${sidePanelWidth}%`, opacity: sidePanelOpacity }}
               aria-hidden="true"
             />
-            {isComplete ? (
-              <a
-                href={panel.image!}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={cn(
-                  sharedMediaFrameClass,
-                  "cursor-pointer transition-all duration-300",
-                  "after:pointer-events-none after:absolute after:inset-0 after:bg-[radial-gradient(circle_at_50%_52%,transparent_48%,rgba(255,231,191,0.12)_68%,rgba(31,25,18,0.2)_100%)]",
+            <button
+              type="button"
+              onClick={() => setLightboxOpen(true)}
+              className={cn(
+                sharedMediaFrameClass,
+                "cursor-zoom-in text-left transition-all duration-300",
+                "after:pointer-events-none after:absolute after:inset-0 after:bg-[radial-gradient(circle_at_50%_52%,transparent_48%,rgba(255,231,191,0.12)_68%,rgba(31,25,18,0.2)_100%)]",
+                isComplete &&
                   "hover:-translate-y-0.5 hover:shadow-[0_20px_42px_rgba(0,0,0,0.28)]",
-                  "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-400",
-                  isActive && "ring-1 ring-black/40",
-                )}
-                aria-label={`${panel.title} 이미지 원본 보기`}
-              >
-                <Image
-                  src={panel.image!}
-                  alt={panel.title}
-                  fill
-                  className="object-cover pointer-events-none"
-                  sizes="(max-width: 768px) 75vw, (max-width: 1024px) 40vw, 16vw"
-                  priority={index < 2}
-                  draggable={false}
-                />
-              </a>
-            ) : (
-              <div
+                "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-400",
+                isActive && isComplete && "ring-1 ring-black/40",
+                !isComplete && "opacity-95",
+              )}
+              aria-label={`${panel.title} 이미지 확대 보기`}
+            >
+              <Image
+                src={panel.image!}
+                alt={panel.title}
+                fill
                 className={cn(
-                  sharedMediaFrameClass,
-                  "after:pointer-events-none after:absolute after:inset-0 after:bg-[radial-gradient(circle_at_50%_52%,transparent_50%,rgba(255,231,191,0.1)_70%,rgba(31,25,18,0.16)_100%)]",
+                  "object-cover pointer-events-none",
+                  !isComplete && "opacity-90",
                 )}
-                aria-label="제작 중"
-              >
-                <Image
-                  src={panel.image!}
-                  alt="제작 중"
-                  fill
-                  className="object-cover opacity-90"
-                  sizes="(max-width: 768px) 75vw, (max-width: 1024px) 40vw, 16vw"
-                  draggable={false}
-                />
-              </div>
-            )}
+                sizes="(max-width: 768px) 75vw, (max-width: 1024px) 40vw, 16vw"
+                priority={index < 2}
+                draggable={false}
+              />
+            </button>
           </div>
+          <ImageLightbox
+            image={{ src: panel.image!, alt: panel.title }}
+            open={lightboxOpen}
+            onOpenChange={setLightboxOpen}
+          />
         </div>
       ) : (
         <div className="h-full flex flex-col">
