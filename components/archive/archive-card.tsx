@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
 import type { Byeongpung } from "@/lib/data"
+import { formatKoreaDateTime } from "@/lib/datetime"
 
 interface ArchiveCardProps {
   byeongpung: Byeongpung
@@ -14,24 +15,7 @@ export function ArchiveCard({ byeongpung, index }: ArchiveCardProps) {
   const thumbnailImage = byeongpung.thumbnailImage || byeongpung.panels[0]?.image
   const isComplete = byeongpung.completedAt !== undefined
 
-  const formatCompletedAt = (dateString?: string) => {
-    if (!dateString) return null
-    const normalized = dateString.includes("T")
-      ? dateString
-      : dateString.replace(" ", "T")
-    const date = new Date(normalized)
-    if (Number.isNaN(date.getTime())) return dateString
-    return date.toLocaleString("ko-KR", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-      hour: "numeric",
-      minute: "2-digit",
-      hour12: true,
-    })
-  }
-
-  const completedAtLabel = formatCompletedAt(byeongpung.completedAt)
+  const completedAtLabel = formatKoreaDateTime(byeongpung.completedAt)
 
   return (
     <motion.article

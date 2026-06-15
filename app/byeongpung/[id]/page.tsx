@@ -7,6 +7,7 @@ import { notFound } from "next/navigation"
 import { ByeongpungViewer } from "@/components/byeongpung/viewer"
 import { SiteHeader } from "@/components/layout/site-header"
 import { useArchiveImages } from "@/hooks/use-archive-images"
+import { formatKoreaDateTime } from "@/lib/datetime"
 import { ArrowLeft, ArrowRight } from "lucide-react"
 
 interface PageProps {
@@ -39,7 +40,7 @@ export default function ByeongpungDetailPage({ params }: PageProps) {
   const nextByeongpung =
     currentIndex < completed.length - 1 ? completed[currentIndex + 1] : null
 
-  const completedPanels = byeongpung.panels.filter(p => p.status === "complete").length
+  const completedAtLabel = formatKoreaDateTime(byeongpung.completedAt)
 
   return (
     <main className="min-h-dvh min-h-screen">
@@ -59,9 +60,9 @@ export default function ByeongpungDetailPage({ params }: PageProps) {
             {byeongpung.title}
           </h1>
           <div className="flex flex-wrap items-center gap-6 text-xs text-stone-400">
-            {byeongpung.completedAt && (
+            {completedAtLabel && (
               <span>
-                <span className="text-stone-500">완성된 시간<br></br></span> {byeongpung.completedAt}
+                <span className="text-stone-500">완성된 시간<br></br></span> {completedAtLabel}
               </span>
             )}
           </div>
