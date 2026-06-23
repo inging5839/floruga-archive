@@ -62,17 +62,22 @@ function isEPanelRecord(row: ArchiveImage): boolean {
   return eBaseFilename(row.filename) !== null
 }
 
-/** D1 rows에서 E 기준 파일명 → { imageUrl, storyText } 맵 구성 */
-function buildEImageMap(
-  rows: ArchiveImage[],
-): Map<string, { imageUrl: string; storyText: string | null }> {
-  const map = new Map<string, { imageUrl: string; storyText: string | null }>()
+type EImageEntry = {
+  imageUrl: string
+  storyText: string | null
+  rowId: number
+}
+
+/** D1 rows에서 E 기준 파일명 → { imageUrl, storyText, rowId } 맵 구성 */
+function buildEImageMap(rows: ArchiveImage[]): Map<string, EImageEntry> {
+  const map = new Map<string, EImageEntry>()
   for (const row of rows) {
     const base = eBaseFilename(row.filename)
     if (base) {
       map.set(base, {
         imageUrl: row.imageUrl,
         storyText: resolveStoryText(row.sceneId, row.filename, row.storyText),
+        rowId: row.id,
       })
     }
   }
@@ -82,8 +87,8 @@ function buildEImageMap(
 /** group[3].sceneId 기반으로 제6폭 imageUrl·story 결정 */
 function resolveLastPanel(
   group: ArchiveImage[],
-  eImageMap: Map<string, { imageUrl: string; storyText: string | null }>,
-): { imageUrl: string | null; story: string | null } {
+  eImageMap: Map<string, EImageEntry>,
+): { imageUrl: string | null; story: string | null; rowId: number | null } {
   const lastRow = group[IMAGES_PER_BYEONGPUNG - 1]
   const sceneId = lastRow?.sceneId?.trim()
   if (sceneId) {
@@ -94,13 +99,14 @@ function resolveLastPanel(
         return {
           imageUrl: entry.imageUrl,
           story: entry.storyText,
+          rowId: entry.rowId,
         }
       }
     }
     const story = resolveStoryText(sceneId, null, null)
-    return { imageUrl: LAST_PANEL_IMAGE, story }
+    return { imageUrl: LAST_PANEL_IMAGE, story, rowId: null }
   }
-  return { imageUrl: LAST_PANEL_IMAGE, story: null }
+  return { imageUrl: LAST_PANEL_IMAGE, story: null, rowId: null }
 }
 
 export const ARCHIVE_POLL_INTERVAL_MS = Number(
@@ -151,6 +157,12 @@ function resolveFirstPanelImage(rows: ArchiveImage[]): string | null {
   return latest?.imageUrl ?? FIRST_PANEL_IMAGE
 }
 
+function resolveFirstPanelRowId(rows: ArchiveImage[]): number | null {
+  const matches = rows.filter(isFirstPanelRecord)
+  const latest = matches[matches.length - 1]
+  return latest?.id ?? null
+}
+
 function resolveFirstPanelStory(rows: ArchiveImage[]): string | null {
   const matches = rows.filter(isFirstPanelRecord)
   const latest = matches[matches.length - 1]
@@ -180,6 +192,7 @@ export function groupArchiveImages(rows: ArchiveImage[]): {
 } {
   const firstPanelImage = resolveFirstPanelImage(rows)
   const firstPanelStory = resolveFirstPanelStory(rows)
+  const firstPanelRowId = resolveFirstPanelRowId(rows)
   const waitPanelImage = resolveWaitPanelImage(rows)
   const eImageMap = buildEImageMap(rows)
   const participantRows = rows.filter((row) => !isFixedPanelRecord(row))
@@ -203,6 +216,7 @@ export function groupArchiveImages(rows: ArchiveImage[]): {
       idx + 1,
       firstPanelImage,
       firstPanelStory,
+      firstPanelRowId,
       waitPanelImage,
       eImageMap,
     )
@@ -220,6 +234,7 @@ export function groupArchiveImages(rows: ArchiveImage[]): {
       groups.length + 1,
       firstPanelImage,
       firstPanelStory,
+      firstPanelRowId,
       waitPanelImage,
       eImageMap,
     )
@@ -250,8 +265,9 @@ function buildByeongpung(
   sequence: number,
   firstPanelImage: string | null,
   firstPanelStory: string | null,
+  firstPanelRowId: number | null,
   waitPanelImage: string | null,
-  eImageMap: Map<string, { imageUrl: string; storyText: string | null }>,
+  eImageMap: Map<string, EImageEntry>,
 ): Byeongpung {
   const middle: Panel[] = Array.from({ length: IMAGES_PER_BYEONGPUNG }).map(
     (_, i) => {
@@ -266,6 +282,9 @@ function buildByeongpung(
         status: row ? "complete" : "waiting",
         author: row?.sceneId ? `Scene ${row.sceneId}` : undefined,
         createdAt: row?.createdAt,
+        rowId: row?.id ?? null,
+        sceneId: row?.sceneId ?? null,
+        isShared: false,
       }
     },
   )
@@ -275,7 +294,11 @@ function buildByeongpung(
   // 제6폭: 2~5폭이 모두 채워진 뒤 E 결말 이미지가 도착하면 complete, 없으면 WAIT.png
   const lastPanelData = isComplete
     ? resolveLastPanel(group, eImageMap)
-    : { imageUrl: null as string | null, story: null as string | null }
+    : {
+        imageUrl: null as string | null,
+        story: null as string | null,
+        rowId: null as number | null,
+      }
   const lastPanelImage = lastPanelData.imageUrl
   const lastPanelStory =
     lastPanelData.story ??
@@ -292,6 +315,9 @@ function buildByeongpung(
     story: lastPanelStory,
     image: lastPanelImage ?? waitPanelImage,
     status: lastPanelImage ? "complete" : "waiting",
+    rowId: lastPanelData.rowId ?? null,
+    sceneId: group[IMAGES_PER_BYEONGPUNG - 1]?.sceneId ?? null,
+    isShared: true,
   }
 
   const panels: Panel[] = [
@@ -302,6 +328,9 @@ function buildByeongpung(
       // Intro(I-1) 이미지가 없으면 WAIT.png로 대체 (없을 때만 "제작 중" 텍스트)
       image: firstPanelImage ?? waitPanelImage,
       status: firstPanelImage ? "complete" : "waiting",
+      rowId: firstPanelRowId,
+      sceneId: "Intro",
+      isShared: true,
     },
     ...middle,
     lastPanel,
