@@ -125,10 +125,18 @@ export interface ArchiveImage {
 /** "I-1.png" 또는 "I-1_<timestamp>.png" 모두 제1폭으로 인식 */
 const FIRST_PANEL_STEM = FIRST_PANEL_FILENAME.replace(/\.[^.]+$/, "")
 
+/**
+ * Intro 이미지(제1폭) 파일명 패턴.
+ * I-1, I-2 등 "I-<숫자>" 접두사 + 선택적 "_<timestamp>" 를 모두 제1폭으로 인식한다.
+ * (서버가 촬영 시 I-1 또는 I-2 를 랜덤으로 전송)
+ */
+const INTRO_FILENAME_RE = /^I-\d+(?:_.*)?\.[^.]+$/i
+
 function matchesFirstPanelFilename(filename?: string | null): boolean {
   const name = filename?.trim()
   if (!name) return false
   if (name === FIRST_PANEL_FILENAME) return true
+  if (INTRO_FILENAME_RE.test(name)) return true
   const stem = name.replace(/\.[^.]+$/, "")
   return stem === FIRST_PANEL_STEM || stem.startsWith(`${FIRST_PANEL_STEM}_`)
 }
