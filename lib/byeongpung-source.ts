@@ -174,10 +174,12 @@ function resolveFirstPanelRowId(rows: ArchiveImage[]): number | null {
 function resolveFirstPanelStory(rows: ArchiveImage[]): string | null {
   const matches = rows.filter(isFirstPanelRecord)
   const latest = matches[matches.length - 1]
+  // 인트로 이미지(레코드)가 없으면 스토리도 표시하지 않는다.
+  if (!latest) return null
   return resolveStoryText(
-    latest?.sceneId ?? "Intro",
-    latest?.filename,
-    latest?.storyText,
+    latest.sceneId ?? "Intro",
+    latest.filename,
+    latest.storyText,
   )
 }
 
@@ -332,8 +334,9 @@ function buildByeongpung(
     {
       id: 1,
       title: "제1폭",
-      story: firstPanelStory,
-      // Intro(I-1) 이미지가 없으면 WAIT.png로 대체 (없을 때만 "제작 중" 텍스트)
+      // 인트로 이미지가 있을 때만 스토리 표시 (이미지 없으면 스토리도 숨김)
+      story: firstPanelImage ? firstPanelStory : null,
+      // Intro(I-1/I-2) 이미지가 없으면 WAIT.png로 대체 (없을 때만 "제작 중" 텍스트)
       image: firstPanelImage ?? waitPanelImage,
       status: firstPanelImage ? "complete" : "waiting",
       rowId: firstPanelRowId,
