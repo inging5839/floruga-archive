@@ -158,29 +158,40 @@ function isFixedPanelRecord(row: ArchiveImage): boolean {
   )
 }
 
-function resolveFirstPanelImage(rows: ArchiveImage[]): string | null {
-  // rows는 created_at ASC 정렬 → 가장 최근 Intro(I-1) 이미지를 제1폭으로 사용
-  const matches = rows.filter(isFirstPanelRecord)
-  const latest = matches[matches.length - 1]
-  return latest?.imageUrl ?? FIRST_PANEL_IMAGE
+type IntroPanel = {
+  image: string | null
+  story: string | null
+  rowId: number | null
 }
 
-function resolveFirstPanelRowId(rows: ArchiveImage[]): number | null {
-  const matches = rows.filter(isFirstPanelRecord)
-  const latest = matches[matches.length - 1]
-  return latest?.id ?? null
+/**
+ * 인트로(제1폭) 레코드들을 도착 순서대로(created_at ASC, id ASC) 모은다.
+ * 각 병풍은 자신의 순번에 해당하는 인트로를 제1폭으로 쓴다.
+ */
+function resolveIntroRecords(rows: ArchiveImage[]): ArchiveImage[] {
+  return rows
+    .filter(isFirstPanelRecord)
+    .sort((a, b) => {
+      const t = a.createdAt.localeCompare(b.createdAt)
+      return t !== 0 ? t : a.id - b.id
+    })
 }
 
-function resolveFirstPanelStory(rows: ArchiveImage[]): string | null {
-  const matches = rows.filter(isFirstPanelRecord)
-  const latest = matches[matches.length - 1]
-  // 인트로 이미지(레코드)가 없으면 스토리도 표시하지 않는다.
-  if (!latest) return null
-  return resolveStoryText(
-    latest.sceneId ?? "Intro",
-    latest.filename,
-    latest.storyText,
-  )
+/** 인트로 레코드(없으면 null) → 제1폭 {image, story, rowId} */
+function introPanelFrom(record: ArchiveImage | undefined | null): IntroPanel {
+  if (!record) {
+    // 해당 순번의 인트로가 아직 없으면 폴백(보통 null → 빈 폭/WAIT 처리)
+    return { image: FIRST_PANEL_IMAGE, story: null, rowId: null }
+  }
+  return {
+    image: record.imageUrl ?? FIRST_PANEL_IMAGE,
+    story: resolveStoryText(
+      record.sceneId ?? "Intro",
+      record.filename,
+      record.storyText,
+    ),
+    rowId: record.id ?? null,
+  }
 }
 
 function resolveWaitPanelImage(rows: ArchiveImage[]): string | null {
@@ -200,9 +211,7 @@ export function groupArchiveImages(rows: ArchiveImage[]): {
   inProgress: Byeongpung | null
   completed: Byeongpung[]
 } {
-  const firstPanelImage = resolveFirstPanelImage(rows)
-  const firstPanelStory = resolveFirstPanelStory(rows)
-  const firstPanelRowId = resolveFirstPanelRowId(rows)
+  const introRecords = resolveIntroRecords(rows)
   const waitPanelImage = resolveWaitPanelImage(rows)
   const eImageMap = buildEImageMap(rows)
   const participantRows = rows.filter((row) => !isFixedPanelRecord(row))
@@ -221,12 +230,14 @@ export function groupArchiveImages(rows: ArchiveImage[]): {
   let inProgress: Byeongpung | null = null
 
   groups.forEach((group, idx) => {
+    // 각 병풍은 순번(idx)에 해당하는 인트로를 제1폭으로 사용 (병풍마다 다른 인트로)
+    const intro = introPanelFrom(introRecords[idx])
     const byeongpung = buildByeongpung(
       group,
       idx + 1,
-      firstPanelImage,
-      firstPanelStory,
-      firstPanelRowId,
+      intro.image,
+      intro.story,
+      intro.rowId,
       waitPanelImage,
       eImageMap,
     )
@@ -239,12 +250,13 @@ export function groupArchiveImages(rows: ArchiveImage[]): {
 
   // 모든 그룹이 완성됐다면 새 빈 병풍을 다음 슬롯으로 보여준다
   if (!inProgress) {
+    const intro = introPanelFrom(introRecords[groups.length])
     inProgress = buildByeongpung(
       [],
       groups.length + 1,
-      firstPanelImage,
-      firstPanelStory,
-      firstPanelRowId,
+      intro.image,
+      intro.story,
+      intro.rowId,
       waitPanelImage,
       eImageMap,
     )
