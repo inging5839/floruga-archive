@@ -1,3 +1,12 @@
+import {
+  PREVIOUS_EXHIBITION_LAST_IMAGE_ID,
+  parseArchiveCollection,
+} from "@/lib/archive-collection"
+import {
+  WAIT_PANEL_D1_ID,
+  WAIT_PANEL_FILENAME,
+} from "@/lib/byeongpung-source"
+
 export const runtime = "nodejs"
 
 type ArchiveImagePayload = {
@@ -93,19 +102,45 @@ export async function POST(request: Request) {
   }
 }
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
+    const collection = parseArchiveCollection(new URL(request.url).searchParams.get("collection"))
+    const isPrevious = collection === "previous"
+
+    // 이전 전시는 현재 확정한 마지막 행에서 고정한다.
+    // WAIT·결말 폭은 새 전시 병풍을 조립하는 데도 필요한 공용 이미지다.
+    const whereClause = isPrevious
+      ? `
+          WHERE id <= ?
+        `
+      : `
+          WHERE (
+            id > ?
+            OR id = ?
+            OR LOWER(filename) = LOWER(?)
+            OR LOWER(filename) LIKE 'e%-1%.png'
+          )
+        `
+    const params = isPrevious
+      ? [PREVIOUS_EXHIBITION_LAST_IMAGE_ID]
+      : [
+          PREVIOUS_EXHIBITION_LAST_IMAGE_ID,
+          WAIT_PANEL_D1_ID,
+          WAIT_PANEL_FILENAME,
+        ]
+
     const result = await queryD1(`
       SELECT id, image_url AS imageUrl, filename, scene_id AS sceneId,
              story_text AS storyText, created_at AS createdAt
       FROM archive_images
+      ${whereClause}
       ORDER BY created_at ASC, id ASC
-      LIMIT 500
-    `)
+      LIMIT 2000
+    `, params)
 
     const rows = result.result?.[0]?.results ?? result.result?.results ?? []
 
-    return Response.json({ images: rows })
+    return Response.json({ images: rows, collection })
   } catch (error) {
     console.error("Failed to fetch archive images", error)
 

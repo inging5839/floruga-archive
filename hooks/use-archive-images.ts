@@ -7,6 +7,7 @@ import {
   type ArchiveImage,
 } from "@/lib/byeongpung-source"
 import type { Byeongpung } from "@/lib/data"
+import type { ArchiveCollection } from "@/lib/archive-collection"
 
 interface ArchiveResponse {
   images?: ArchiveImage[]
@@ -32,7 +33,10 @@ const INITIAL_STATE: State = {
 /**
  * D1의 archive_images를 주기적으로 폴링해서 병풍 단위로 묶어 반환.
  */
-export function useArchiveImages(intervalMs: number = ARCHIVE_POLL_INTERVAL_MS) {
+export function useArchiveImages(
+  collection: ArchiveCollection = "current",
+  intervalMs: number = ARCHIVE_POLL_INTERVAL_MS,
+) {
   const [state, setState] = useState<State>(INITIAL_STATE)
 
   useEffect(() => {
@@ -40,7 +44,9 @@ export function useArchiveImages(intervalMs: number = ARCHIVE_POLL_INTERVAL_MS) 
 
     const fetchOnce = async () => {
       try {
-        const res = await fetch("/api/archive-images", { cache: "no-store" })
+        const res = await fetch(`/api/archive-images?collection=${collection}`, {
+          cache: "no-store",
+        })
         const body = (await res.json().catch(() => ({}))) as ArchiveResponse
         if (cancelled) return
 
@@ -77,7 +83,7 @@ export function useArchiveImages(intervalMs: number = ARCHIVE_POLL_INTERVAL_MS) 
       cancelled = true
       window.clearInterval(id)
     }
-  }, [intervalMs])
+  }, [collection, intervalMs])
 
   return state
 }

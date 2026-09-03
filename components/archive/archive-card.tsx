@@ -10,14 +10,22 @@ import { formatKoreaDateTime } from "@/lib/datetime"
 interface ArchiveCardProps {
   byeongpung: Byeongpung
   index: number
+  detailBasePath?: string
+  allowIncomplete?: boolean
 }
 
-export function ArchiveCard({ byeongpung, index }: ArchiveCardProps) {
+export function ArchiveCard({
+  byeongpung,
+  index,
+  detailBasePath = "/byeongpung",
+  allowIncomplete = false,
+}: ArchiveCardProps) {
   const middlePanels = byeongpung.panels.filter((p) => p.id >= 2 && p.id <= 5)
   const thumbnailImage =
     byeongpung.thumbnailImage ??
     pickMiddlePanelThumbnail(middlePanels, byeongpung.id)
   const isComplete = byeongpung.completedAt !== undefined
+  const isAvailable = isComplete || allowIncomplete
 
   const completedAtLabel = formatKoreaDateTime(byeongpung.completedAt)
 
@@ -33,9 +41,9 @@ export function ArchiveCard({ byeongpung, index }: ArchiveCardProps) {
       className="group border border-stone-400/60 p-4"
     >
       <Link
-        href={isComplete ? `/byeongpung/${byeongpung.id}` : "#"}
-        className={`block ${!isComplete ? 'cursor-not-allowed' : ''}`}
-        onClick={(e) => !isComplete && e.preventDefault()}
+        href={isAvailable ? `${detailBasePath}/${byeongpung.id}` : "#"}
+        className={`block ${!isAvailable ? 'cursor-not-allowed' : ''}`}
+        onClick={(e) => !isAvailable && e.preventDefault()}
       >
         <p className="mb-3 text-xs text-stone-400 tracking-[0.08em]">
           {byeongpung.id}번째 이야기
@@ -68,6 +76,11 @@ export function ArchiveCard({ byeongpung, index }: ArchiveCardProps) {
         {completedAtLabel && (
           <p className="mt-3 text-xs text-stone-400 leading-relaxed">
             {completedAtLabel} 완성
+          </p>
+        )}
+        {!completedAtLabel && allowIncomplete && (
+          <p className="mt-3 text-xs text-stone-400 leading-relaxed">
+            미완성 기록 · 이미지 {byeongpung.totalParticipants}장
           </p>
         )}
       </Link>

@@ -29,6 +29,13 @@ export function SiteHeader() {
             <Link href="/archive" className={getLinkClass(pathname, "/archive")}>
               모든 병풍 한 눈에 보기
             </Link>
+            <span> | </span>
+            <Link
+              href="/previous-exhibition"
+              className={getLinkClass(pathname, "/previous-exhibition")}
+            >
+              이전 전시
+            </Link>
           </nav>
 
           <div className="md:hidden flex items-center gap-3 flex-wrap justify-end">
@@ -37,6 +44,12 @@ export function SiteHeader() {
             </Link>
             <Link href="/archive" className={getLinkClass(pathname, "/archive")}>
               전체보기
+            </Link>
+            <Link
+              href="/previous-exhibition"
+              className={getLinkClass(pathname, "/previous-exhibition")}
+            >
+              이전 전시
             </Link>
           </div>
         </div>

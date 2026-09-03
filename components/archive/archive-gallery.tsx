@@ -6,9 +6,19 @@ import type { Byeongpung } from "@/lib/data"
 
 interface ArchiveGalleryProps {
   byeongpungs: Byeongpung[]
+  detailBasePath?: string
+  allowIncomplete?: boolean
+  emptyTitle?: string
+  emptyDescription?: string
 }
 
-export function ArchiveGallery({ byeongpungs }: ArchiveGalleryProps) {
+export function ArchiveGallery({
+  byeongpungs,
+  detailBasePath,
+  allowIncomplete = false,
+  emptyTitle = "아직 완성된 병풍이 없습니다",
+  emptyDescription = "첫 번째 릴레이 병풍의 참여자가 되어보세요",
+}: ArchiveGalleryProps) {
   return (
     <div>
       {/* Gallery Grid - 3 columns like the magazine layout */}
@@ -23,6 +33,8 @@ export function ArchiveGallery({ byeongpungs }: ArchiveGalleryProps) {
             key={byeongpung.id}
             byeongpung={byeongpung}
             index={index}
+            detailBasePath={detailBasePath}
+            allowIncomplete={allowIncomplete}
           />
         ))}
       </motion.div>
@@ -45,9 +57,9 @@ export function ArchiveGallery({ byeongpungs }: ArchiveGalleryProps) {
             </svg>
           </div>
           <p className="text-sm text-stone-400 text-center">
-            아직 완성된 병풍이 없습니다
+            {emptyTitle}
             <br />
-            <span className="text-xs">첫 번째 릴레이 병풍의 참여자가 되어보세요</span>
+            <span className="text-xs">{emptyDescription}</span>
           </p>
         </motion.div>
       )}
