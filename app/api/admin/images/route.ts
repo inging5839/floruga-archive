@@ -1,7 +1,7 @@
 import {
   insertImage,
   isAdminAuthorized,
-  listAllImages,
+  listCurrentImages,
   uploadToR2,
 } from "@/lib/admin-store"
 
@@ -31,7 +31,7 @@ export async function GET(request: Request) {
     return Response.json({ error: "Unauthorized" }, { status: 401 })
   }
   try {
-    const images = await listAllImages()
+    const images = await listCurrentImages()
     return Response.json({ images })
   } catch (error) {
     console.error("Admin list failed", error)

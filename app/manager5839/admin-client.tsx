@@ -177,7 +177,10 @@ function Dashboard({
         <div>
           <h1 className="text-xl font-semibold text-neutral-900">병풍 패널 관리</h1>
           <p className="text-xs text-neutral-700 mt-1">
-            실제 아카이브와 동일한 구성 · D1/R2 동기화 · 총 {rows.length}개 이미지
+            새 전시 이미지 전용 · D1/R2 동기화 · 총 {rows.length}개 이미지
+          </p>
+          <p className="text-[11px] text-emerald-800 mt-1">
+            이전 전시 기록은 이 화면에서 제외되며 수정·삭제되지 않습니다.
           </p>
         </div>
         <div className="flex items-center gap-2">

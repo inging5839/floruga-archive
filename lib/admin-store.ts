@@ -3,6 +3,7 @@ import {
   PutObjectCommand,
   S3Client,
 } from "@aws-sdk/client-s3"
+import { PREVIOUS_EXHIBITION_LAST_IMAGE_ID } from "@/lib/archive-collection"
 
 /**
  * 관리자 페이지(/manager5839) 전용 서버 헬퍼.
@@ -72,18 +73,22 @@ export interface AdminImageRow {
   createdAt: string
 }
 
-export async function listAllImages(): Promise<AdminImageRow[]> {
-  const result = await queryD1(`
-    SELECT id, image_url AS imageUrl, filename, scene_id AS sceneId,
-           story_text AS storyText, created_at AS createdAt
-    FROM archive_images
-    ORDER BY created_at DESC, id DESC
-    LIMIT 1000
-  `)
+export async function listCurrentImages(): Promise<AdminImageRow[]> {
+  const result = await queryD1(
+    `
+      SELECT id, image_url AS imageUrl, filename, scene_id AS sceneId,
+             story_text AS storyText, created_at AS createdAt
+      FROM archive_images
+      WHERE id > ?
+      ORDER BY created_at DESC, id DESC
+      LIMIT 1000
+    `,
+    [PREVIOUS_EXHIBITION_LAST_IMAGE_ID],
+  )
   return result.result?.[0]?.results ?? result.result?.results ?? []
 }
 
-export async function getImageById(
+export async function getCurrentImageById(
   id: number,
 ): Promise<AdminImageRow | null> {
   const result = await queryD1(
@@ -91,10 +96,10 @@ export async function getImageById(
       SELECT id, image_url AS imageUrl, filename, scene_id AS sceneId,
              story_text AS storyText, created_at AS createdAt
       FROM archive_images
-      WHERE id = ?
+      WHERE id = ? AND id > ?
       LIMIT 1
     `,
-    [id],
+    [id, PREVIOUS_EXHIBITION_LAST_IMAGE_ID],
   )
   const rows: AdminImageRow[] =
     result.result?.[0]?.results ?? result.result?.results ?? []

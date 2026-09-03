@@ -1,7 +1,7 @@
 import {
   deleteFromR2,
   deleteImageRow,
-  getImageById,
+  getCurrentImageById,
   isAdminAuthorized,
   r2KeyFromPublicUrl,
   updateImageRow,
@@ -44,9 +44,12 @@ export async function PATCH(
   }
 
   try {
-    const row = await getImageById(id)
+    const row = await getCurrentImageById(id)
     if (!row) {
-      return Response.json({ error: "존재하지 않는 레코드" }, { status: 404 })
+      return Response.json(
+        { error: "새 전시의 관리 가능한 레코드가 아닙니다." },
+        { status: 404 },
+      )
     }
 
     const form = await request.formData()
@@ -129,9 +132,12 @@ export async function DELETE(
   }
 
   try {
-    const row = await getImageById(id)
+    const row = await getCurrentImageById(id)
     if (!row) {
-      return Response.json({ error: "존재하지 않는 레코드" }, { status: 404 })
+      return Response.json(
+        { error: "새 전시의 관리 가능한 레코드가 아닙니다." },
+        { status: 404 },
+      )
     }
 
     // 1) R2 오브젝트 삭제 (실패해도 D1 삭제는 진행)
